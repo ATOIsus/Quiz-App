@@ -17,6 +17,7 @@ option2 = []
 option3 = []
 score = 0
 
+
 for i in ques:
             
     if len(i) == 3 or len(i) == 4:
@@ -39,14 +40,24 @@ for i in ques:
 
 
 
+def chk_ans(ans, k):
+    global score
+    if choice[ans - 1] == anser[k]:
+        score += 1
+    else:
+        print()
+        print(f"Wrong! The right answer was:  {anser[k]}")
+        print()
 
-for k in range(len(ques)):
+
+
+for l in range(len(ques)):
     
-    choice = [anser[k], option1[k], option2[k], option3[k]]    
+    choice = [anser[l], option1[l], option2[l], option3[l]]
     random.shuffle(choice)
 
     print()
-    print(question_str[k])
+    print(question_str[l])
     print()
 
     print('1) ' + choice[0])
@@ -55,14 +66,9 @@ for k in range(len(ques)):
     print('4) ' + choice[3])
     print()
 
-    ans = int(input('Enter the answer: '))
+    answer = int(input('Enter the answer: '))
 
-    if choice[ans-1] == anser[k]:
-        score += 1
-    else:
-        print()
-        print(f"Wrong! The right answer was:  {anser[k]}")
-        print()
+    chk_ans(answer, l)
 
 
 
