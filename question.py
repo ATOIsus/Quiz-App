@@ -61,7 +61,7 @@ for k in range(len(ques)):
         score += 1
     else:
         print()
-        print(f"Wrong! The right answer was {anser[k]}")
+        print(f"Wrong! The right answer was:  {anser[k]}")
         print()
 
 
