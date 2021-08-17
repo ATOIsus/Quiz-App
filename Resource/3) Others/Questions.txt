@@ -1,0 +1,111 @@
+Politics = (['When did Nepal join UN? ', ' 1955 ', '1984  ', ' 1948 ', ' 1976'],
+       ['In which script is Nepali written? ', ' Devanagari ', ' Brahmi ', ' Kharoshti ', ' Urdu'],
+       ['When was Tribhuvan University set up? ', ' 1959 ', ' 1952 ', ' 1944 ', ' 1937'],
+       ['Who was Nepal’s king in 1911-1955? ', ' Tribhuvan ', ' Birendra ', ' Mahendra ', ' Devendra'],
+       ['What is freedom of religion? ', 'You can practice any religion', ' Cannot practice a religion.   ',
+        ' You must choose a religion. ', ' You can’t choose the time you practice your religion.  ',
+        ' No one can practice a religion.'],
+       ['Who is in charge of the executive branch? ', ' The President.  ', ' The Prime Minister. ',
+        ' The Speaker of the House.  ', ' The Chief Justice.'],
+       ['Who vetoes bills? ', ' The President ', ' The Vice President ', ' The Senate ',
+        ' The House of Representatives'],
+       ['We elect a President for how many years? ', ' Four (4).  ', ' Two (2).  ', ' Eight (8).  ', ' Ten (10).'],
+       ['The idea of self-government is in the first three words of the Constitution. What are these words? ',
+        ' We the People. ', ' Congress shall make. ', ' We the British. ', ' We the Colonists.'],
+       ['What is the “rule of law”?  ', ' Everyone must follow the law. ',
+        ' Government does not have to follow the law. ', ' All laws must be the same in every state. ',
+        ' Everyone but the President must follow the law.'],
+       ['How old do citizens have to be to vote for President? ', ' Eighteen (18) or older  ',
+        ' Sixteen (16) or older.  ', ' Twenty-one (21) or older. ', ' Thirty-five (35) or older.'],
+       ['What does the judicial branch do? ', ' All of the above. ', ' Reviews laws. ', ' Resolves disputes. ',
+        ' Decides if a law goes against the Constitution.'],
+       ['What is an amendment? ', ' An addition (to the Constitution). ', ' The Preamble to the Constitution. ',
+        ' An introduction. ', ' The beginning of the Declaration of Independence.'],
+       ['What is the supreme law of the land? ', ' The Constitution. ', ' The local law. ',
+        ' The Emancipation Proclamation. ', ' The Declaration of Independence.'],
+       ['What is one right or freedom granted by the First Amendment? ', ' Speech. ', ' To vote. ', ' To bear arms. ',
+        ' Trial by jury.'], ['What did the Emancipation Proclamation do?  ', ' Freed slaves in most Southern states.  ',
+                             ' Ended World War I. ', ' Gave women the right to vote. ',
+                             ' Gave the United States independence from Great Britain.'],
+       ['How many amendments does the Constitution have?  ', ' 27  ', ' 18 ', ' 25 ', ' 17  '],
+       ['How many justices are on the Supreme Court? ', ' 9 ', ' 5 ', ' 12 ', ' 3'],
+       ['What does the President’s Cabinet do? ', ' Advises the president ', ' Selects the Vice President ',
+        ' Runs the government when the President travels ', ' Negotiates treaties with foreign nations'],
+       ['Name one branch or part of the government. ', ' Legislative.  ', ' State government.  ', ' Parliament. ',
+        ' United Nations.'])
+
+
+
+
+
+
+
+
+
+
+
+Science = ([ "Can you hear the sound behind you if you are travelling at the speed of sound ?", 
+          "Yes", "No"],
+                
+        [ "What quantity is velocity ?", 
+	  "Vector" , "Scalar" ,  "Both", "None"],
+
+        ["Water flows through a horizontal pipe at a constant volumetric rate. At a location where the cross sectional area decreases, the velocity of the fluid :",
+         "Increases",  "Decreases" , "Stays the same"],
+
+        ["The word atom is from a Greek word meaning :",
+         "Indivisible", "Small",  "Unseen",  "Visible"],
+
+        ["Electric power is less expensive at night because :",
+         "There is less demand at night.", "More hydroelectric generation is brought on line at night.", "Pollution control is less stringent at night.",
+         "Power plants are more efficient at night."],
+
+        ["Seawater (i.e. saltwater) freezes at :",
+         "At a slightly lower temperature than fresh water." ,"The same temperature as fresh water.", "At a slightly higher temperature than fresh water." ,
+         "Seawater does not freeze."],
+
+        ["Nitrous oxide, commonly called laughing gas, has been a matter of concern to environmentalists recently because :",
+         "It is a greenhouse gas.", "It is thought to cause cancer at low concentrations.", "It produces photochemical smog." , "None of the above"],
+
+        ["Ozone in the upper atmosphere is produced from :",
+         "Photochemical reactions", "Lightning", "Electrical appliances on Earth", "Model fractals"],
+
+        ["The radioactive element most commonly detected in humans is :",
+         "Potassium-40","Cobalt-60", "Iodine-131", "Plutonium-238"],
+
+        ["Most commercial nuclear power plants worldwide are cooled by :",
+         "Water", "Sodium", "Mercury", "Helium"],
+
+        ["Spent fuel from a nuclear power plant cools down and loses most of its radioactivity through decay. In the first year, spent fuel loses about what percentage of its radioactivity ?",
+         "80 percent", "50 percent", "10 percent", "100 percent"],
+
+        ["What range of frequencies are usually referred to as audio frequencies for humans ?",
+         "20 to 20,000 Hertz", "0 to 20 Hertz", "200 to 200,000 Hertz", "10,000 to 30,000 Hertz"],
+
+        ["A device used to measure the amount of moisture in the atmosphere is called a :",
+         "Hygrometer", "Hydrometer", "Anemometer", "Barometer"],
+
+        ["The most suitable motor oil for use in a car in cold weather is :",
+          "A low viscosity oil", "A high viscosity oil", "A medium viscosity oil "],
+
+        ["The first animal launched into orbit was a :",
+         "Dog", "Mouse", "Monkey", "Chimpanzee"],
+
+        ["Thermal insulation is used to :",
+         "Reduce the flow of heat." ,"Stop the flow of heat.", "Absorb heat.", "reverse the heat flow direction."],
+
+        ["The most abundant organic molecule on the surface of the Earth is :",
+         "Cellulose", "Chitin", "DNA", "Hemoglobin"],
+
+        ["The sun makes up approximately what percent of matter in our solar system ?",
+         "99%", "17%", "50%", "85%"],
+
+        ["The image formed in a compound microscope is :",
+         "Inverted", "Erect"],
+
+        ["Which colour of light is deviated least : ",
+         "Red", "Blue", "Green", "Orange"]
+         )
+
+
+
