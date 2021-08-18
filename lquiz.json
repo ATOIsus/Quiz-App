@@ -1,0 +1,49 @@
+{
+   "questions" : [
+   "1.Which of the following is the use of id() function in python?",
+   "2.All keywords in Python are in",
+   "3.Which one of the following has the highest precedence in the expression?",
+   "4.What is the return type of function id?",
+   "5.Which of the following data types is not supported in python ?",
+   "6.Which Of The Following Keywords Mark The Beginning Of The Class Definition?",
+   "7.Select the reserved keyword in python-",	
+   "8.The format function, when applied on a string returns :",
+   "9.Which statement is correct....?",
+   "10.What is the maximum possible length of an identifier?",
+   "11.Which one of the following is not a python's predefined data type?",
+   "12.What will be the output of 7^10 in python?",
+   "13.19 % 2 in python",
+   "14.Which of the following has more precedance?",
+   "15.Which is the special symbol used in python to add comments ? ",
+   "16.which options are correct to create an empty set in python? ",
+   "17.How to create a frame in python? ",
+   "18.Tkinter tool in python provides the ",
+   "19.Numpy in the python provides the",
+   "20.list is[1,3,2]. What is list*2 ? "
+   ],
+
+   "options" : [
+   ["Every object doesn’t have a unique id", "Id returns the identity of the object", "All of the mentioned", "None of the mentioned"],
+   ["UPPER CASE", "lower case", "Capitalized", "None of the mentioned"],
+   ["Addition", "Multiplication", "Exponential", "Parentheses"],
+   ["float", "bool", "dict", "int"],
+   ["String", "Numbers", "Slice", "List"],
+   ["return", "class", "def", "All of the above"],
+   ["else", "raise", "import", "All of the above"],
+   ["list", "bool", "int", "str"],
+   ["List is mutable & Tuple is immutable", "List is immutable & Tuple is mutable", "Both are Mutable", "Both are Immutable"],
+   ["32 characters", "63 characters", "79 characters", "31 Characters"],
+   ["List", "Dictionary", "Tuple", "Class"],
+   ["13", "15", "2", "None of these"],
+   ["2", "17", "21", "None of these"],
+   ["/", "+", "()", "-" ],
+   ["$", "//", "/*...*/", "#" ],
+   ["{}", "()", "[]", "set()"],
+   ["Frame=new.window()", "Frame=frame.new()", "Frame=frame()", "Frame=window.new()"],
+   ["Database", "OS Commands", "GUI", "All of the above"],
+   ["Function", "Lambda function", "Type casting", "Array"],
+   ["[2,6,4]", "[1,3,2,3,2,1]", "[1,3,2,1,3]", "[1,3,2,1,3,2]"]
+   ],
+
+   "answer" : [ 2 ,4 ,4 ,4 ,3 ,2 ,4 ,4 ,1 ,4 ,4 ,1 ,4 ,3 ,4 ,4 ,3 ,3 ,4 ,4 ]
+}
