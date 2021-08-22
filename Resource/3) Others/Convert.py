@@ -4,14 +4,14 @@
 
 all = []
 
-for i in range(20):
+for i in range(1, 21):
 
-    a = input(f"Enter {i} : ")
+    inp = input(f"Enter {i} : ")
 
-    b = a.replace('a)', ',')
-    c = b.replace('b)', ',')
-    d = c.replace('c)', ',')
-    e = d.replace('d)', ',')
+    b = inp.replace('A.', ',')
+    c = b.replace('B.', ',')
+    d = c.replace('C.', ',')
+    e = d.replace('D.', ',')
 
     list_1 = e.split(",")
     all.append(list_1)

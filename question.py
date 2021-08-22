@@ -30,11 +30,11 @@ try:
     for i in ques:
 
         if len(i) == 3:  # If there are only 2 options.
-            option2.append('Both')
-            option3.append('Neither')
+            option2.append(' Both')
+            option3.append(' Neither')
 
         elif len(i) == 4:  # If there are 3 options.
-            option3.append('None')
+            option3.append(' None')
 
         for j in range(len(i)) :
             if j == 0:
