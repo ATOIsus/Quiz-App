@@ -10,7 +10,7 @@ option2 = []   # List of all option.
 option3 = []   # List of all option.
 score = 0      # The number of correct answers.
 ques = []      # List of all MCQs.
-
+question_no = 1  # The indexing for the question in the final program.
 
 try:
     ''' To unpickle the MCQs '''
@@ -71,11 +71,12 @@ try:
 
     for l in range(len(ques)):
 
+
         choice = [anser[l], option1[l], option2[l], option3[l]]
         random.shuffle(choice)
 
         print()
-        print(question[l])
+        print(f'{question_no})  {question[l]}')
         print()
 
         print('1) ' + choice[0])
@@ -87,6 +88,8 @@ try:
         answer = int(input('Enter the answer number: '))
 
         chk_ans(answer, l)  # Function is called.
+
+        question_no += 1
 
     print(f'Your score is {score} out of {len(ques)}')  # Final score.
 

@@ -2,36 +2,19 @@
 
 import pickle
 
-ques = (['Which of the following is the use of id() function in python? ', ' Id returns the identity of the object ',
-        ' Every object doesn’t have a unique id ', ' All of the mentioned ', ' None of the mentioned'],
-       ['All keywords in Python are in ', ' None of the mentioned ', ' lower case ', ' Capitalized ', ' UPPER CASE'],
-       ['Which one of the following has the highest precedence in the expression? ', ' Parentheses ',
-        ' Multiplication ', ' Exponential ', ' Addition'],
-       ['What is the return type of function id? ', ' int ', ' bool ', ' dict ', ' float'],
-       ['Which of the following data types is not supported in python ? ', ' Slice ', ' Numbers ', ' String ',
-        ' List'],
-       ['Which Of The Following Keywords Mark The Beginning Of The Class Definition? ', ' class ', ' return ', ' def ',
-        ' All of the above'],
-       ['Select the reserved keyword in python: ', ' All of the above ', ' raise ', ' import ', ' else'],
-       ['The format function when applied on a string returns : ', ' str ', ' bool ', ' int ', ' list'],
-       ['Which statement is correct....? ', ' List is mutable & Tuple is immutable ',
-        ' List is immutable & Tuple is mutable ', ' Both are Mutable. ', ' Both are Immutable'],
-       ['What is the maximum possible length of an identifier? ', ' 31 Characters ', ' 63 characters ',
-        ' 79 characters ', ' 32 characters'],
-       ["Which one of the following is not a python's predefined data type? ", ' Class ', ' Dictionary ', ' Tuple ',
-        ' List'], ['What will be the output of 7^10 in python? ', ' 13 ', ' 15 ', ' 2 ', ' None of these'],
-       ['19 % 2 in python ', ' None of these  ', ' 17 ', ' 21 ', ' 2'],
-       ['Which of the following has more precedence? ', ' ()  ', ' + ', ' / ', ' –'],
-       ['Which is the special symbol used in python to add comments ? ', ' "#"  ', '  "//"  ', '  "/*...*/"  ',
-        '  "$" '],
-       ['Which options are correct to create an empty set in python? ', ' set()  ', '  ()  ', '  []  ', '  {}'],
-       ['How to create a frame in python? ', ' Frame = frame()  ', ' Frame = frame.new() ', ' Frame = new.window()   ',
-        ' Frame = window.new()'],
-       ['Tkinter tool in python provides the ', ' GUI ', ' OS Commands  ', ' Database  ', ' All of the above'],
-       ['Numpy in the python provides the ', ' Array ', ' Lambda function  ', ' Type casting  ', ' Function'],
-       ['Is list mutable ? ', ' Yes ', ' No '])
+ques = (['Is Python case sensitive when dealing with identifiers? ', ' Yes ', ' No ', ' Machine dependent ', ' None of the mentioned'],
+        ['What is the maximum possible length of an identifier? ', ' none of the mentioned ', ' 63 characters ', ' 79 characters ', ' 31 characters '],
+        ['Which of the following is an invalid variable? ', ' 1st_string ', ' my_string_1 ', ' foo ', ' _'],
+        ['Why are local variable names beginning with an underscore discouraged? ', ' They are used to indicate a private variables of a class ', ' They confuse the interpreter ', ' They are used to indicate global variables ', ' They slow down execution'],
+        ['Which of the following is invalid? ', ' None of the mentioned ', ' __a = 1 ', ' __str__ = 1 ', ' _a = 1'],
+        ['Which of the following is not a keyword? ', ' eval ', ' assert ', ' nonlocal ', ' pass'],
+        ['All keywords in Python are in _________ ', ' None of the mentioned ', ' UPPER CASE ', ' Capitalized ', ' Lower case '],
+        ['Which of the following is true for variable names in Python? ', ' Unlimited length ', ' All private members must have leading and trailing underscores ', ' Underscore and ampersand are the only two special characters allowed ', ' None of the mentioned'],
+        ['Which of the following is an invalid statement? ', ' a b c = 1000 2000 3000 ', ' abc = 1', '000', '000 ', ' a', 'b', 'c = 1000', ' 2000', ' 3000 ', ' a_b_c = 1', '000', '000'], ['Which of the following cannot be a variable? ', ' in ', ' __init__ ', ' it ', ' on'], ['What is the output of print 0.1 + 0.2 == 0.3? ', ' False ', ' True ', ' Machine dependent ', ' Error'],
+        ['Which of the following is not a complex number? ', ' k = 2 + 3l ', ' k = complex(2', ' 3) ', ' k = 2 + 3j ', ' k = 2 + 3J'], ['What is the type of inf? ', ' Float ', ' Integer ', ' Boolean ', ' Complex'], ['What does ~4 evaluate to? ', ' -5 ', ' -4 ', ' -3 ', ' +3'], ['What does ~~~~~~5 evaluate to? ', ' +5 ', ' -11 ', ' +11 ', ' -5'], ['Which of the following is incorrect? ', ' x = 03964 ', ' x = 0x4f5 ', ' x = 19023 ', ' x = 0b101'], ['What is the result of cmp(3', ' 1)? ', ' 1 ', ' 0 ', ' True ', ' False'], ['What is the result of round(0.5) – round(-0.5)? ', ' 2.0 ', ' 1.0 ', ' 0.0 ', ' None of the mentioned'], ['Which of these about a set is not true? ', ' Immutable data type ', ' Allows duplicate values ', ' Data type with unordered values ', ' Mutable data type'],
+        ['Which of the following statements is used to create an empty set? ', ' set() ', ' { } ', ' [ ] ', ' ( )'])
 
-file = open('Lab.txt', 'ab')
+file = open('Programming.txt', 'ab')
 
 
 pickle.dump(ques, file)
