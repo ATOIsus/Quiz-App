@@ -9,9 +9,7 @@ root.geometry('500x550')
 # root.resizable(False, False)
 
 
-
 # region Create Database & Table.
-
 
 # Creating the table
 
