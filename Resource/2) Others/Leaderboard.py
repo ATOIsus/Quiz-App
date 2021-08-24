@@ -12,6 +12,9 @@ global quiz_topic
 global score
 global PlayerID
 global db_score
+global username_var
+global password_var
+
 
 # region Create Database & Table.
 
@@ -195,6 +198,31 @@ delete_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
 
 
 
+def signin_fun():
+
+    global username_var
+    global password_var
+    global PlayerID
+
+    conn4 = sqlite3.connect('Player Database.db')
+    c4 = conn4.cursor()
+
+    c4.execute("SELECT ROWID, Username, Password FROM information")
+    records = c4.fetchall()
+
+    for record in records:
+
+        if username_var == str(record[1]) and password_var == str(record[2]):
+            PlayerID = record[0]
+            print(PlayerID)
+
+        else:
+            messagebox.showerror('Error', 'Wrong Username or Password')
+
+    conn4.commit()
+    conn4.close()
+
+
 # endregion
 
 
@@ -207,21 +235,24 @@ delete_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
 
 def update_fun():
 
+    global db_score
     global score
     score = int(input("Enter the score: "))
 
     if score > db_score :
 
-        conn4 = sqlite3.connect('Player Database.db')
-        c4 = conn4.cursor()
+        conn5 = sqlite3.connect('Player Database.db')
+        c5 = conn5.cursor()
 
-        c4.execute(f"UPDATE information SET {quiz_topic} = ? where ROWID = ?", (score, PlayerID))
+        c5.execute(f"UPDATE information SET {quiz_topic} = ? where ROWID = ?", (score, PlayerID))
 
-        conn4.commit()
-        conn4.close()
+        conn5.commit()
+        conn5.close()
 
     else:
         pass
+
+
 
 
 # endregion
