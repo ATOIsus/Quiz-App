@@ -128,11 +128,11 @@ submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 def query_fun():
 
-    conn2 = sqlite3.connect('Player Database.db')
-    c2 = conn2.cursor()
-
     global quiz_topic
     quiz_topic = input("Enter the subject:  ")
+
+    conn2 = sqlite3.connect('Player Database.db')
+    c2 = conn2.cursor()
 
     c2.execute(f"SELECT ROWID, Name, Username, {quiz_topic}  FROM information")
     rows = c2.fetchall()
@@ -143,7 +143,7 @@ def query_fun():
     tv = ttk.Treeview(frm, column=(1, 2, 3, 4), show="headings", height=5)
     tv.pack()
 
-    tv.heading(1, text="Row ID")
+    tv.heading(1, text="Player ID")
     tv.heading(2, text="Name")
     tv.heading(3, text="Username")
     tv.heading(4, text=f"{quiz_topic}")
@@ -202,19 +202,27 @@ def signin_fun():
 
     global username_var
     global password_var
+    global quiz_topic
     global PlayerID
+    global db_score
+
+    quiz_topic   = input("Enter the subject: ")
+    username_var = input("Enter Username: ")
+    password_var = input("Enter Password: ")
 
     conn4 = sqlite3.connect('Player Database.db')
     c4 = conn4.cursor()
 
-    c4.execute("SELECT ROWID, Username, Password FROM information")
+    c4.execute(f"SELECT ROWID, Username, Password, {quiz_topic} FROM information")
     records = c4.fetchall()
 
     for record in records:
 
         if username_var == str(record[1]) and password_var == str(record[2]):
             PlayerID = record[0]
-            print(PlayerID)
+            db_score = record[3]
+            print(f'PlayerID {PlayerID}')
+            print(f'Db_score {db_score}')
 
         else:
             messagebox.showerror('Error', 'Wrong Username or Password')
@@ -223,8 +231,11 @@ def signin_fun():
     conn4.close()
 
 
-# endregion
+signin_btn = Button(root, text="Sign In", command=signin_fun)
+signin_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
 
+
+# endregion
 
 
 
@@ -237,6 +248,7 @@ def update_fun():
 
     global db_score
     global score
+
     score = int(input("Enter the score: "))
 
     if score > db_score :
@@ -253,6 +265,8 @@ def update_fun():
         pass
 
 
+update_btn = Button(root, text="Update", command=update_fun)
+update_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
 
 
 # endregion
