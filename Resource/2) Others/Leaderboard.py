@@ -8,6 +8,10 @@ root.title('Database')
 root.geometry('500x550')
 # root.resizable(False, False)
 
+global quiz_topic
+global score
+global PlayerID
+global db_score
 
 # region Create Database & Table.
 
@@ -16,7 +20,6 @@ root.geometry('500x550')
 conn = sqlite3.connect('Player Database.db')
 
 c = conn.cursor()
-
 
 c.execute(""" CREATE TABLE IF NOT EXISTS
           information
@@ -34,11 +37,11 @@ c.execute(""" CREATE TABLE IF NOT EXISTS
           GK integer
           )""")
 
-
 conn.commit()
 conn.close()
 
 # endregion
+
 
 
 # region Entry.
@@ -55,6 +58,7 @@ password_ent.grid(row=3, column=1)
 # endregion
 
 
+
 # region Labels.
 
 name_lbl = Label(root, text="Name")
@@ -69,7 +73,10 @@ password_lbl.grid(row=3, column=0)
 # endregion
 
 
+
 # region Submit Function.
+
+
 
 def submit_fun():
 
@@ -111,18 +118,21 @@ submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 # endregion
 
 
+
 # region Query Function.
+
+
 
 def query_fun():
 
+    conn2 = sqlite3.connect('Player Database.db')
+    c2 = conn2.cursor()
 
-    conn4 = sqlite3.connect('Player Database.db')
-    c4 = conn4.cursor()
-
+    global quiz_topic
     quiz_topic = input("Enter the subject:  ")
 
-    c4.execute(f"SELECT ROWID, Name, Username, {quiz_topic}  FROM information")
-    rows = c4.fetchall()
+    c2.execute(f"SELECT ROWID, Name, Username, {quiz_topic}  FROM information")
+    rows = c2.fetchall()
 
     frm = Frame(root)
     frm.grid(padx=20)
@@ -133,20 +143,21 @@ def query_fun():
     tv.heading(1, text="Row ID")
     tv.heading(2, text="Name")
     tv.heading(3, text="Username")
-    tv.heading(4, text="Score")
+    tv.heading(4, text=f"{quiz_topic}")
 
 
     for i in rows:
         tv.insert("", "end", values=i)
 
-    conn4.commit()
-    conn4.close()
+    conn2.commit()
+    conn2.close()
 
 
 query_btn = Button(root, text="Show Records", command=query_fun)
 query_btn.grid(row=7, column=0, columnspan=2, padx=10, pady=10, ipadx=100)
 
 # endregion
+
 
 
 # region Delete Function.
@@ -180,8 +191,40 @@ delete_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
 
 
 
+# region Sign In.
 
 
+
+# endregion
+
+
+
+
+
+# region Update Function.
+
+
+
+def update_fun():
+
+    global score
+    score = int(input("Enter the score: "))
+
+    if score > db_score :
+
+        conn4 = sqlite3.connect('Player Database.db')
+        c4 = conn4.cursor()
+
+        c4.execute(f"UPDATE information SET {quiz_topic} = ? where ROWID = ?", (score, PlayerID))
+
+        conn4.commit()
+        conn4.close()
+
+    else:
+        pass
+
+
+# endregion
 
 
 
