@@ -23,7 +23,7 @@ class sign:
 
         lbl2 = Label(frame, text="Password", font=("arial", 15, "bold"), fg="green", bg="white")
         lbl2.place(x=60, y=160)
-        self.entry2 = Entry(frame, font=("arial,15"), bg="light green")
+        self.entry2 = Entry(frame, font=("arial,15"), bg="light green",show="*")
         self.entry2.place(x=60, y=190, width="300", height="30")
 
         btn=Button(frame,text="sign in",bd=4,bg="green",fg="white",font=("arial",15),command=self.signn)
