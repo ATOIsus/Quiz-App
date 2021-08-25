@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
+from PIL import Image, ImageTk
 import sqlite3
 
 root = Tk()
@@ -139,24 +140,30 @@ def query_fun():
                     LIMIT 10;""")
     rows = c2.fetchall()
 
-    frm = Frame(root)
-    frm.grid(padx=20)
+    img = Image.open('bg.jpg')
+    resized_img = img.resize((200, 200), Image.ANTIALIAS)
+    converted_img = ImageTk.PhotoImage(resized_img)
+
+    lbl_img = Label(root, text = "Background", image = converted_img)
+    lbl_img.grid(row=14, column=1)
+
+    frm = LabelFrame(root, text="Leaderboard", font = ("Futura" , 15) , labelanchor = 'n',  relief="raised", bd = 12)
+    frm.grid(row=9, column=1, ipadx = 50, ipady = 50)
 
     style = ttk.Style()
     style.theme_use("vista")
     style.configure("Treeview",
                     background = "Black",
                     foreground = "Gold",
-                    fieldbackground = "Blue"
-                    )
+                    fieldbackground = "Blue")
 
     tv = ttk.Treeview(frm, column=(1, 2, 3, 4), show="headings", height=10)
-    tv.pack()
+    tv.grid()
 
-    tv.column(1, width=20, stretch=False)
+    tv.column(1, width=20,  stretch=False)
     tv.column(2, width=100, stretch=False)
     tv.column(3, width=130, stretch=False)
-    tv.column(4, width=80, stretch=False)
+    tv.column(4, width=80,  stretch=False)
 
     tv.heading(1, text="ID")
     tv.heading(2, text="Name")
@@ -181,10 +188,10 @@ query_btn.grid(row=7, column=0, columnspan=2, padx=10, pady=10, ipadx=100)
 # region Delete Function.
 
 delete_lbl = Label(root, text="Player ID")
-delete_lbl.grid(row=9, column=0, pady=5)
+delete_lbl.grid(row=12, column=0, pady=5)
 
 delete_ent = Entry(root, width=30)
-delete_ent.grid(row=9, column=1, pady=5)
+delete_ent.grid(row=12, column=1, pady=5)
 
 
 def delete_fun():
@@ -250,7 +257,7 @@ def signin_fun():
 
 
 signin_btn = Button(root, text="Sign In", command=signin_fun)
-signin_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
+signin_btn.grid(row=13, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
 
 
 # endregion
@@ -284,7 +291,7 @@ def update_fun():
 
 
 update_btn = Button(root, text="Update", command=update_fun)
-update_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
+update_btn.grid(row=15, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
 
 
 # endregion
