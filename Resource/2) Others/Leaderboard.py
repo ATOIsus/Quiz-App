@@ -8,7 +8,7 @@ import sqlite3
 
 root = Tk()
 root.title('Database')
-root.geometry('500x550')
+root.geometry('700x700')
 # root.resizable(False, False)
 
 
@@ -21,8 +21,8 @@ global db_score
 global username_var
 global password_var
 
-img = Image.open('bg.jpg')
-resized_img = img.resize((380, 380), Image.ANTIALIAS)
+img = Image.open('Images/bg.jpg')
+resized_img = img.resize((600, 600), Image.ANTIALIAS)
 converted_img = ImageTk.PhotoImage(resized_img)
 
 # endregion
@@ -152,38 +152,45 @@ def query_fun():
                     LIMIT 10;""")
     rows = c2.fetchall()
 
-    frm = LabelFrame(root, text="Leaderboard", font = ("Futura" , 20), fg = "gold", labelanchor = 'n',  relief="raised", bd = 12, bg = 'black', height = 400, width = 400)
-    frm.grid(row=9, column=1)
+    root.wm_attributes('-transparentcolor', '#AE9152')
 
-    lbl_img = Label(frm, text = "Background", image = converted_img)
-    lbl_img.grid()
+    frm = LabelFrame(root, text="Leaderboard", font = ("Futura" , 25), fg = "gold", labelanchor = 'n',  relief="raised",
+                     bd = 15, bg = '#AE9152', height = 600, width = 600)
+    frm.grid(row=9, column=0)
+
+    lbl_img = Label(frm, image = converted_img)
+    lbl_img.grid(padx = 50, pady = 50)
 
     style = ttk.Style()
-    style.theme_use("vista")
+    style.theme_use("clam")
     style.configure("Treeview",
-                    background = "Black",
-                    foreground = "Gold",
-                    fieldbackground = "Blue")
+                    background="orange",
+                    font=("Futura", 15))
+    style.map('Treeview', background=[('selected', 'Black')], foreground =[('selected', 'red')])
+
+    style.configure("Treeview.Heading", background = "black", foreground = "gold", font=("Futura", 15))
+    # style.map('Treeview.Heading', background = [('selected', 'white')])
+
 
     tv = ttk.Treeview(lbl_img, column=(1, 2, 3, 4), show="headings", height=10)
-    tv.grid(padx = 20, pady = 30)
+    tv.grid(padx = 10, pady = 10)
 
-    tv.column(1, width=20,  stretch=False)
-    tv.column(2, width=100, stretch=False)
-    tv.column(3, width=130, stretch=False)
-    tv.column(4, width=80,  stretch=False)
+    tv.column(1, width=50,  stretch=False)
+    tv.column(2, width=185, stretch=False)
+    tv.column(3, width=200, stretch=False)
+    tv.column(4, width=120, stretch=False)
 
     tv.heading(1, text="ID")
     tv.heading(2, text="Name")
     tv.heading(3, text="Username")
     tv.heading(4, text=f"{quiz_topic}")
 
-
     for i in rows:
         tv.insert("", "end", values=i)
 
     conn2.commit()
     conn2.close()
+
 
 
 query_btn = Button(root, text="Show Records", command=query_fun)
