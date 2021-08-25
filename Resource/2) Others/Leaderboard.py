@@ -4,10 +4,15 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import sqlite3
 
+
+
 root = Tk()
 root.title('Database')
 root.geometry('500x550')
 # root.resizable(False, False)
+
+
+# region Global variables.
 
 global quiz_topic
 global score
@@ -15,6 +20,12 @@ global PlayerID
 global db_score
 global username_var
 global password_var
+
+img = Image.open('bg.jpg')
+resized_img = img.resize((380, 380), Image.ANTIALIAS)
+converted_img = ImageTk.PhotoImage(resized_img)
+
+# endregion
 
 
 # region Create Database & Table.
@@ -129,6 +140,7 @@ submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 def query_fun():
 
+    global converted_img
     global quiz_topic
     quiz_topic = input("Enter the subject:  ")
 
@@ -140,15 +152,11 @@ def query_fun():
                     LIMIT 10;""")
     rows = c2.fetchall()
 
-    img = Image.open('bg.jpg')
-    resized_img = img.resize((200, 200), Image.ANTIALIAS)
-    converted_img = ImageTk.PhotoImage(resized_img)
+    frm = LabelFrame(root, text="Leaderboard", font = ("Futura" , 20), fg = "gold", labelanchor = 'n',  relief="raised", bd = 12, bg = 'black', height = 400, width = 400)
+    frm.grid(row=9, column=1)
 
-    lbl_img = Label(root, text = "Background", image = converted_img)
-    lbl_img.grid(row=14, column=1)
-
-    frm = LabelFrame(root, text="Leaderboard", font = ("Futura" , 15) , labelanchor = 'n',  relief="raised", bd = 12)
-    frm.grid(row=9, column=1, ipadx = 50, ipady = 50)
+    lbl_img = Label(frm, text = "Background", image = converted_img)
+    lbl_img.grid()
 
     style = ttk.Style()
     style.theme_use("vista")
@@ -157,8 +165,8 @@ def query_fun():
                     foreground = "Gold",
                     fieldbackground = "Blue")
 
-    tv = ttk.Treeview(frm, column=(1, 2, 3, 4), show="headings", height=10)
-    tv.grid()
+    tv = ttk.Treeview(lbl_img, column=(1, 2, 3, 4), show="headings", height=10)
+    tv.grid(padx = 20, pady = 30)
 
     tv.column(1, width=20,  stretch=False)
     tv.column(2, width=100, stretch=False)
