@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
-import sqlite3
 from tkinter import ttk
+import sqlite3
 
 root = Tk()
 root.title('Database')
@@ -142,10 +142,23 @@ def query_fun():
     frm = Frame(root)
     frm.grid(padx=20)
 
-    tv = ttk.Treeview(frm, column=(1, 2, 3, 4), show="headings", height=5)
+    style = ttk.Style()
+    style.theme_use("vista")
+    style.configure("Treeview",
+                    background = "Black",
+                    foreground = "Gold",
+                    fieldbackground = "Blue"
+                    )
+
+    tv = ttk.Treeview(frm, column=(1, 2, 3, 4), show="headings", height=10)
     tv.pack()
 
-    tv.heading(1, text="Player ID")
+    tv.column(1, width=20, stretch=False)
+    tv.column(2, width=100, stretch=False)
+    tv.column(3, width=130, stretch=False)
+    tv.column(4, width=80, stretch=False)
+
+    tv.heading(1, text="ID")
     tv.heading(2, text="Name")
     tv.heading(3, text="Username")
     tv.heading(4, text=f"{quiz_topic}")
@@ -218,6 +231,7 @@ def signin_fun():
     c4.execute(f"SELECT ROWID, Username, Password, {quiz_topic} FROM information")
     records = c4.fetchall()
 
+
     for record in records:
 
         if username_var == str(record[1]) and password_var == str(record[2]):
@@ -225,9 +239,11 @@ def signin_fun():
             db_score = record[3]
             print(f'PlayerID {PlayerID}')
             print(f'Db_score {db_score}')
-
+            break
         else:
-            messagebox.showerror('Error', 'Wrong Username or Password')
+            pass
+    else:
+        messagebox.showerror('Error', 'Wrong Username or Password')
 
     conn4.commit()
     conn4.close()
