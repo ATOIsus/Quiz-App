@@ -134,7 +134,9 @@ def query_fun():
     conn2 = sqlite3.connect('Player Database.db')
     c2 = conn2.cursor()
 
-    c2.execute(f"SELECT ROWID, Name, Username, {quiz_topic}  FROM information")
+    c2.execute(f"""SELECT ROWID, Name, Username, {quiz_topic}  FROM information 
+                    ORDER BY {quiz_topic} DESC
+                    LIMIT 10;""")
     rows = c2.fetchall()
 
     frm = Frame(root)
