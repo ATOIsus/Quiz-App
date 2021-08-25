@@ -21,9 +21,14 @@ global db_score
 global username_var
 global password_var
 
-img = Image.open('Images/bg.jpg')
-resized_img = img.resize((600, 600), Image.ANTIALIAS)
+img = Image.open('Images/lava.jpg')
+resized_img = img.resize((655, 450), Image.ANTIALIAS)
 converted_img = ImageTk.PhotoImage(resized_img)
+
+img1 = Image.open('Images/lines.jpg')
+resized_img1 = img1.resize((610, 400), Image.ANTIALIAS)
+converted_img1 = ImageTk.PhotoImage(resized_img1)
+
 
 # endregion
 
@@ -141,6 +146,8 @@ submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 def query_fun():
 
     global converted_img
+    global converted_img1
+
     global quiz_topic
     quiz_topic = input("Enter the subject:  ")
 
@@ -154,31 +161,35 @@ def query_fun():
 
     root.wm_attributes('-transparentcolor', '#AE9152')
 
-    frm = LabelFrame(root, text="Leaderboard", font = ("Futura" , 25), fg = "gold", labelanchor = 'n',  relief="raised",
-                     bd = 15, bg = '#AE9152', height = 600, width = 600)
-    frm.grid(row=9, column=0)
+    frm = LabelFrame(root, text="Leaderboard", font=('Helvetica', 34, 'bold italic'), fg = "gold", labelanchor = 'n',  relief="raised",
+                     bd = 15, bg = '#AE9152', height = 550, width = 750)
+    frm.grid(row=9, column=1)
 
-    lbl_img = Label(frm, image = converted_img)
-    lbl_img.grid(padx = 50, pady = 50)
+    lbl_img = Label(frm, image = converted_img, height = 450, width = 655, bd = 0)
+    lbl_img.place(x = 30, y = 10)
+
+    lbl_img1 = Label(lbl_img, image = converted_img1, height = 400, width = 610, bd = 0)
+    lbl_img1.place(x = 23, y = 25)
 
     style = ttk.Style()
     style.theme_use("clam")
     style.configure("Treeview",
+                    rowheight = 30,
                     background="orange",
-                    font=("Futura", 15))
+                    font=('Helvetica', 14, 'bold italic'))
     style.map('Treeview', background=[('selected', 'Black')], foreground =[('selected', 'red')])
 
-    style.configure("Treeview.Heading", background = "black", foreground = "gold", font=("Futura", 15))
-    # style.map('Treeview.Heading', background = [('selected', 'white')])
+    style.configure("Treeview.Heading", background = "black", foreground = "gold", font=('Helvetica', 14, 'bold italic'))
+    style.map('Treeview.Heading', background = [('selected', 'red')])
 
 
-    tv = ttk.Treeview(lbl_img, column=(1, 2, 3, 4), show="headings", height=10)
-    tv.grid(padx = 10, pady = 10)
+    tv = ttk.Treeview(lbl_img1, column=(1, 2, 3, 4), show="headings", height=10)
+    tv.place(x = 13, y = 33)
 
     tv.column(1, width=50,  stretch=False)
-    tv.column(2, width=185, stretch=False)
-    tv.column(3, width=200, stretch=False)
-    tv.column(4, width=120, stretch=False)
+    tv.column(2, width=190, stretch=False)
+    tv.column(3, width=205, stretch=False)
+    tv.column(4, width=135, stretch=False)
 
     tv.heading(1, text="ID")
     tv.heading(2, text="Name")
@@ -190,7 +201,6 @@ def query_fun():
 
     conn2.commit()
     conn2.close()
-
 
 
 query_btn = Button(root, text="Show Records", command=query_fun)
