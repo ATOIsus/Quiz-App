@@ -1,4 +1,67 @@
 from tkinter import *
+import random
+
+mathQuestions = [
+    "This is Math Question #1",
+    "This is Math Question #2",
+    "This is Math Question #3",
+    "This is Math Question #4",
+    "This is Math Question #5",
+    "This is Math Question #6",
+    "This is Math Question #7",
+    "This is Math Question #8",
+    "This is Math Question #9",
+    "This is Math Question #10",
+]
+mathAnswers = [
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+]
+sportsQuestions = [
+    "This is Sports Question #1",
+    "This is Sports Question #2",
+    "This is Sports Question #3",
+    "This is Sports Question #4",
+    "This is Sports Question #5",
+    "This is Sports Question #6",
+    "This is Sports Question #7",
+    "This is Sports Question #8",
+    "This is Sports Question #9",
+    "This is Sports Question #10",
+]
+sportsAnswers = [
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+]
+
+indexes = []
+
+
+def gen():
+    global indexes
+    while (len(indexes)) < 5:
+        x = random.randint(0, 9)
+        if x in indexes:
+            continue
+        else:
+            indexes.append(x)
+    print(indexes)
 
 
 def startButtonClick():
@@ -8,12 +71,143 @@ def startButtonClick():
     startButton.destroy()
 
 
+def mathClick():
+    mathButton.destroy()
+    sportsButton.destroy()
+    gen()
+    labelQuestion1 = Label(
+        root,
+        text=mathQuestions[indexes[0]],
+        font=("Berlin Sans FB", 16),
+        width=500,
+        justify="center",
+        wraplength=400,
+        background="#66b3ff",
+    )
+    labelQuestion1.pack(pady=(100, 50), padx=(90, 100))
+    radiovar = IntVar()
+    radiovar.set(-1)
+    r1 = Radiobutton(
+        root,
+        text=mathAnswers[indexes[0]][0],
+        font=("Times", 11),
+        value=0,
+        variable=radiovar,
+        bg="#66b3ff"
+    )
+    r1.pack()
+
+    radiovar = IntVar()
+    radiovar.set(-1)
+    r2 = Radiobutton(
+        root,
+        text=mathAnswers[indexes[0]][1],
+        font=("Times", 11),
+        value=1,
+        variable=radiovar,
+        bg="#66b3ff"
+    )
+    r2.pack()
+
+    radiovar = IntVar()
+    radiovar.set(-1)
+    r3 = Radiobutton(
+        root,
+        text=mathAnswers[indexes[0]][2],
+        font=("Times", 11),
+        value=2,
+        variable=radiovar,
+        bg="#66b3ff"
+    )
+    r3.pack()
+
+    radiovar = IntVar()
+    radiovar.set(-1)
+    r4 = Radiobutton(
+        root,
+        text=mathAnswers[indexes[0]][3],
+        font=("Times", 11),
+        value=3,
+        variable=radiovar,
+        bg="#66b3ff"
+    )
+    r4.pack()
+
+
+def sportsClick():
+    mathButton.destroy()
+    sportsButton.destroy()
+    gen()
+    labelQuestion2 = Label(
+        root,
+        text=sportsQuestions[indexes[0]],
+        font=("Berlin Sans FB", 16),
+        width=500,
+        justify="center",
+        wraplength=400,
+        background="#66b3ff",
+    )
+    labelQuestion2.pack(pady=(100, 50), padx=(90, 100))
+    radiovar = IntVar()
+    radiovar.set(-1)
+    r1 = Radiobutton(
+        root,
+        text=sportsAnswers[indexes[0]][0],
+        font=("Times", 11),
+        value=0,
+        variable=radiovar,
+        bg="#66b3ff"
+    )
+    r1.pack()
+
+    radiovar = IntVar()
+    radiovar.set(-1)
+    r2 = Radiobutton(
+        root,
+        text=sportsAnswers[indexes[0]][1],
+        font=("Times", 11),
+        value=1,
+        variable=radiovar,
+        bg="#66b3ff"
+    )
+    r2.pack()
+
+    radiovar = IntVar()
+    radiovar.set(-1)
+    r3 = Radiobutton(
+        root,
+        text=sportsAnswers[indexes[0]][2],
+        font=("Times", 11),
+        value=2,
+        variable=radiovar,
+        bg="#66b3ff"
+    )
+    r3.pack()
+
+    radiovar = IntVar()
+    radiovar.set(-1)
+    r4 = Radiobutton(
+        root,
+        text=sportsAnswers[indexes[0]][3],
+        font=("Times", 11),
+        value=3,
+        variable=radiovar,
+        bg="#66b3ff"
+    )
+    r4.pack()
+
+
+def scienceClick():
+    mathButton.destroy()
+    sportsButton.destroy()
+    scienceButton.destroy()
+
+
 root = Tk()
 root.title("Quiz")
 root.geometry("700x600")
 root.config(background="#66b3ff")
 root.resizable(False, False)
-
 
 img1 = PhotoImage(file="quiz.png")
 labelImage = Label(
@@ -23,15 +217,13 @@ labelImage = Label(
 )
 labelImage.pack(pady=(100, 0))
 
-
 labelText = Label(
     root,
     text="Quiz",
     font=("Corbel", 23, "bold"),
-    background="#66b3ff",
+    bg="#66b3ff",
 )
 labelText.pack(pady=(5, 50))
-
 
 img2 = PhotoImage(file="start-button.png")
 startButton = Button(
@@ -44,7 +236,6 @@ startButton = Button(
 )
 startButton.pack(pady=(5, 50))
 
-
 labelRule = Label(
     root,
     text="""
@@ -56,10 +247,45 @@ labelRule = Label(
     """,
     width=100,
     font=("Cambria", 13),
-    background="#ff9933",
-    foreground="#000000",
+    bg="#ff9933",
+    fg="#000000",
 )
 labelRule.pack()
+
+img3 = PhotoImage(file="math.png")
+mathButton = Button(
+    root,
+    image=img3,
+    bg="#66b3ff",
+    relief="raised",
+    border=0,
+    command=mathClick,
+)
+mathButton.pack(pady=(90, 5), padx=(5, 400))
+
+
+img4 = PhotoImage(file="sports.png")
+sportsButton = Button(
+    root,
+    image=img4,
+    bg="#66b3ff",
+    relief="raised",
+    border=0,
+    command=sportsClick,
+)
+sportsButton.pack(pady=(50, 115), padx=(1, 400))
+
+
+img5 = PhotoImage(file="science.png")
+scienceButton = Button(
+    root,
+    image=img5,
+    bg="#66b3ff",
+    relief="raised",
+    border=0,
+    command=scienceClick,
+)
+scienceButton.pack(pady=(1, 110), padx=(1, 400))
 
 
 root.mainloop()
