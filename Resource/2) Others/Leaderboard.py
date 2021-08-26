@@ -175,7 +175,8 @@ def query_fun():
     style.theme_use("clam")
     style.configure("Treeview",
                     rowheight = 30,
-                    background="orange",
+                    background="black",
+                    foreground = "#FFD700",
                     font=('Helvetica', 14, 'bold italic'))
     style.map('Treeview', background=[('selected', 'Black')], foreground =[('selected', 'red')])
 
