@@ -25,6 +25,7 @@ mathAnswers = [
     ["1", "2", "3", "4"],
     ["1", "2", "3", "4"],
 ]
+
 sportsQuestions = [
     "This is Sports Question #1",
     "This is Sports Question #2",
@@ -50,6 +51,7 @@ sportsAnswers = [
     ["1", "2", "3", "4"],
 ]
 
+
 indexes = []
 
 
@@ -74,13 +76,18 @@ def startButtonClick():
 def mathClick():
     mathButton.destroy()
     sportsButton.destroy()
+    scienceButton.destroy()
+    gkButton.destroy()
+    labButton.destroy()
+    architectureButton.destroy()
+    programmingButton.destroy()
+    politicsButton.destroy()
     gen()
     labelQuestion1 = Label(
         root,
         text=mathQuestions[indexes[0]],
         font=("Berlin Sans FB", 16),
         width=500,
-        justify="center",
         wraplength=400,
         background="#66b3ff",
     )
@@ -137,6 +144,12 @@ def mathClick():
 def sportsClick():
     mathButton.destroy()
     sportsButton.destroy()
+    scienceButton.destroy()
+    gkButton.destroy()
+    labButton.destroy()
+    architectureButton.destroy()
+    programmingButton.destroy()
+    politicsButton.destroy()
     gen()
     labelQuestion2 = Label(
         root,
@@ -201,6 +214,66 @@ def scienceClick():
     mathButton.destroy()
     sportsButton.destroy()
     scienceButton.destroy()
+    gkButton.destroy()
+    labButton.destroy()
+    architectureButton.destroy()
+    programmingButton.destroy()
+    politicsButton.destroy()
+
+
+def gkClick():
+    mathButton.destroy()
+    sportsButton.destroy()
+    scienceButton.destroy()
+    gkButton.destroy()
+    labButton.destroy()
+    architectureButton.destroy()
+    programmingButton.destroy()
+    politicsButton.destroy()
+
+
+def labClick():
+    mathButton.destroy()
+    sportsButton.destroy()
+    scienceButton.destroy()
+    gkButton.destroy()
+    labButton.destroy()
+    architectureButton.destroy()
+    programmingButton.destroy()
+    politicsButton.destroy()
+
+
+def architectureClick():
+    mathButton.destroy()
+    sportsButton.destroy()
+    scienceButton.destroy()
+    gkButton.destroy()
+    labButton.destroy()
+    architectureButton.destroy()
+    programmingButton.destroy()
+    politicsButton.destroy()
+
+
+def programmingClick():
+    mathButton.destroy()
+    sportsButton.destroy()
+    scienceButton.destroy()
+    gkButton.destroy()
+    labButton.destroy()
+    programmingButton.destroy()
+    architectureButton.destroy()
+    politicsButton.destroy()
+
+
+def politicsClick():
+    mathButton.destroy()
+    sportsButton.destroy()
+    scienceButton.destroy()
+    gkButton.destroy()
+    labButton.destroy()
+    politicsButton.destroy()
+    architectureButton.destroy()
+    programmingButton.destroy()
 
 
 root = Tk()
@@ -209,11 +282,12 @@ root.geometry("700x600")
 root.config(background="#66b3ff")
 root.resizable(False, False)
 
+
 img1 = PhotoImage(file="quiz.png")
 labelImage = Label(
     root,
     image=img1,
-    background="#66b3ff",
+    bg="#66b3ff",
 )
 labelImage.pack(pady=(100, 0))
 
@@ -285,7 +359,66 @@ scienceButton = Button(
     border=0,
     command=scienceClick,
 )
-scienceButton.pack(pady=(1, 110), padx=(1, 400))
+scienceButton.pack(pady=(50, 120), padx=(1, 400))
+
+
+img6 = PhotoImage(file="gk.png")
+gkButton = Button(
+    root,
+    image=img6,
+    bg="#66b3ff",
+    relief="raised",
+    border=0,
+    command=gkClick,
+)
+gkButton.pack()
+
+
+img7 = PhotoImage(file="lab.png")
+labButton = Button(
+    root,
+    image=img7,
+    bg="#66b3ff",
+    relief="raised",
+    border=0,
+    command=labClick,
+)
+labButton.pack()
+
+
+img8 = PhotoImage(file="architecture.png")
+architectureButton = Button(
+    root,
+    image=img8,
+    bg="#66b3ff",
+    relief="raised",
+    border=0,
+    command=architectureClick,
+)
+architectureButton.pack()
+
+
+img9 = PhotoImage(file="programming.png")
+programmingButton = Button(
+    root,
+    image=img9,
+    bg="#66b3ff",
+    relief="raised",
+    border=0,
+    command=programmingClick,
+)
+programmingButton.pack()
+
+img10 = PhotoImage(file="politics.png")
+politicsButton = Button(
+    root,
+    image=img10,
+    bg="#66b3ff",
+    relief="raised",
+    border=0,
+    command=politicsClick,
+)
+politicsButton.pack()
 
 
 root.mainloop()
