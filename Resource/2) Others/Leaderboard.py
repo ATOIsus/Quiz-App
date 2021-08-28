@@ -1,19 +1,20 @@
-from tkinter import *
-from tkinter import messagebox
-from tkinter import ttk
-from PIL import Image, ImageTk
-import sqlite3
+from tkinter import *              # To use basic functions and methods of tkinter.
+from tkinter import messagebox     # To show popup messagebox.
+from tkinter import ttk            # For the table to display the data from the database.
+from PIL import Image, ImageTk     # To display images.
+import sqlite3                     # To connect to the database.
 
 
 root = Tk()
 root.title('Database')
 root.geometry('750x600')
-# root.resizable(False, False)
+root.resizable(False, False)
 
 
-try:
+try:     # Exception Handling.
 
     # region Images.
+    # Images to be used.
 
     img = Image.open('Images/lava.jpg')
     resized_img = img.resize((650, 440), Image.ANTIALIAS)
@@ -34,6 +35,8 @@ try:
 
     def query_fun():
 
+        """ Shows the data of 10 users in descending order with the highest score in the selected topic. """
+
         global converted_img
         global converted_img1
 
@@ -47,7 +50,7 @@ try:
                         LIMIT 10;""")
         rows = cur.fetchall()
 
-        root.wm_attributes('-transparentcolor', '#AE9152')
+        root.wm_attributes('-transparentcolor', '#AE9152')  # To make the background transparent.
 
         frm = LabelFrame(root, text="Leaderboard", font=('Helvetica', 34, 'bold italic'), fg = "gold", labelanchor = 'n',  relief="raised",
                          bd = 15, bg = '#AE9152', height = 550, width = 750)
@@ -59,7 +62,7 @@ try:
         lbl_img1 = Label(lbl_img, image = converted_img1, height = 400, width = 610, bd = 0)
         lbl_img1.place(x = 23, y = 25)
 
-        style = ttk.Style()
+        style = ttk.Style()  # Styling the table.
         style.theme_use("clam")
         style.configure("Treeview",
                         rowheight = 30,
@@ -72,7 +75,7 @@ try:
         style.map('Treeview.Heading', background = [('selected', 'red')])
 
 
-        tv = ttk.Treeview(lbl_img1, column=(1, 2, 3, 4), show="headings", height=10)
+        tv = ttk.Treeview(lbl_img1, column=(1, 2, 3, 4), show="headings", height=10)  # The table.
         tv.place(x = 13, y = 33)
 
         tv.column(1, width=50,  stretch=False)

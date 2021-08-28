@@ -1,6 +1,6 @@
-from tkinter import *
-from tkinter import messagebox
-import sqlite3
+from tkinter import *             # To use basic functions and methods of tkinter.
+from tkinter import messagebox    # To show popup messagebox.
+import sqlite3                    # To connect to the database.
 
 
 root = Tk()
@@ -8,6 +8,8 @@ root.title('Update')
 root.geometry('220x100')
 root.resizable(False, False)
 
+
+# Global variables to be used in multiple functions.
 
 global username_var
 global password_var
@@ -17,11 +19,13 @@ global db_score
 
 
 
-try:
+try:  # Exception Handling.
 
     # region Sign In.
 
     def signin_fun():
+
+        """ Checks if the provided username & password is same to that stored in the database. """
 
         global username_var
         global password_var
@@ -45,8 +49,8 @@ try:
             for record in records:
 
                 if username_var == str(record[1]) and password_var == str(record[2]):
-                    PlayerID = record[0]
-                    db_score = record[3]
+                    PlayerID = record[0]    # ROWID
+                    db_score = record[3]    # quiz_topic
                     print(f'PlayerID {PlayerID}')
                     print(f'Db_score {db_score}')
                     break
@@ -74,6 +78,8 @@ try:
 
 
     def update_fun():
+
+        """ Updates the score if it is greater than that stored in the database of a selected topic. """
 
         global db_score
 
