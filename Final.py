@@ -1,40 +1,44 @@
-import random                     # To shuffle choices.
-import pickle                     # To unpickle the MCQ.
-from tkinter import messagebox    # To display error message.
-import sqlite3                    # To connect to the database.
-
+import random  # To shuffle choices.
+import pickle  # To unpickle the MCQ.
+from tkinter import *  # To use basic functions and methods of tkinter.
+from tkinter import messagebox  # To show popup messagebox.
+from tkinter import ttk  # For the table to display the data from the database.
+from PIL import Image, ImageTk  # To display images.
+import sqlite3  # To connect to the database.
 
 # region Global Variables.
 
-question = []    # List of all questions.
-anser = []       # List of all answers.
+question = []  # List of all questions.
+anser = []  # List of all answers.
 
-option1 = []     # List of all option.
-option2 = []     # List of all option.
-option3 = []     # List of all option.
+option1 = []  # List of all option.
+option2 = []  # List of all option.
+option3 = []  # List of all option.
 
-score = 0        # The number of correct answers.
-ques = []        # List of all MCQs (Questions and Choices).
+score = 0  # The number of correct answers.
+ques = []  # List of all MCQs (Questions and Choices).
 
 question_no = 1  # The indexing for the question in the final program.
 
-global quiz_topic    # The topic that is selected.
+global quiz_topic  # The topic that is selected.
 
 global username_var  # The username inserted during signing in.
 global password_var  # The password inserted during signing in.
-global PlayerID      # The ROWID of the player. (Retrieved while signing in)
-global db_score      # The score in the database of the selected topic. (Retrieved while signing in)
+global PlayerID  # The ROWID of the player. (Retrieved while signing in)
+global db_score  # The score in the database of the selected topic. (Retrieved while signing in)
+
+global correct_user  # Used in Sign in function. Is a bool value.
+
+global query_fun  # For Leaderboard Function.
+
 
 # endregion
 
 
-
-# region Sign In.
-
+# region Sign In Function.
 
 
 def signin_fun():
-
     """ Checks if the provided username & password is same to that stored in the database. """
 
     global quiz_topic
@@ -42,6 +46,7 @@ def signin_fun():
     global password_var
     global PlayerID
     global db_score
+    global correct_user
 
     try:
 
@@ -54,14 +59,16 @@ def signin_fun():
         cur.execute(f"SELECT ROWID, Username, Password, {quiz_topic} FROM information")
         records = cur.fetchall()
 
+        correct_user = False
 
         for record in records:
 
             if username_var == str(record[1]) and password_var == str(record[2]):
-                PlayerID = record[0]    # ROWID
-                db_score = record[3]    # quiz_topic
+                PlayerID = record[0]  # ROWID
+                db_score = record[3]  # quiz_topic
                 print(f'PlayerID {PlayerID}')
                 print(f'Db_score {db_score}')
+                correct_user = True
                 break
             else:
                 pass
@@ -71,16 +78,14 @@ def signin_fun():
         conn.commit()
         conn.close()
 
-    except BaseException as er:
-        messagebox.showerror("Error While Signing In", str(type(er))[6:-1] + " : " + str(er))
-
+    except BaseException as er1:
+        messagebox.showerror("Error While Signing In", str(type(er1))[6:-1] + " : " + str(er1))
 
 
 # endregion
 
 
 # region Update Function
-
 
 
 def update_fun():
@@ -106,8 +111,9 @@ def update_fun():
         else:
             pass
 
-    except BaseException as er1:
-        messagebox.showerror("Error in Update Function!", str(type(er1))[6:-1] + " : " + str(er1))
+    except BaseException as er2:
+        messagebox.showerror("Error in Update Function!", str(type(er2))[6:-1] + " : " + str(er2))
+
 
 # endregion
 
@@ -122,11 +128,10 @@ try:
 
     ques = list(pickle.load(file))  # Tuple converted into list.
 
-    random.shuffle(ques)            # Question shuffled every time teh text file is opened.
+    random.shuffle(ques)  # Question shuffled every time teh text file is opened.
 
-except BaseException as er2:
-    messagebox.showerror("Error while database!", str(type(er2))[6:-1] + " : " + str(er2))
-
+except BaseException as er3:
+    messagebox.showerror("Error while database!", str(type(er3))[6:-1] + " : " + str(er3))
 
 try:
     ''' Question, answer and options are separated into different lists. '''
@@ -140,7 +145,7 @@ try:
         elif len(i) == 4:  # If there are 3 options.
             option3.append(' None')
 
-        for j in range(len(i)) :
+        for j in range(len(i)):
             if j == 0:
                 question.append(str(i[0]))
             elif j == 1:
@@ -152,20 +157,17 @@ try:
             elif j == 4:
                 option3.append(str(i[4]))
 
-except BaseException as er3:
-    messagebox.showerror("Error in separation of MCQs", str(type(er3))[6:-1] + " : " + str(er3))
+except BaseException as er4:
+    messagebox.showerror("Error in separation of MCQs", str(type(er4))[6:-1] + " : " + str(er4))
+
 
 # endregion
 
 
-# region Displaying MCQs.
-
-
-signin_fun()
+# region Check Answer Function.
 
 
 def chk_ans(ans, k):
-
     """ Question and choices are displayed; the answer is checked and scored. """
 
     global score
@@ -176,40 +178,138 @@ def chk_ans(ans, k):
             print()
             print(f"Wrong! The right answer was:  {anser[k]}")
             print()
-    except BaseException as er4:
-        messagebox.showerror("Error in chk_ans function!", str(type(er4))[6:-1] + " : " + str(er4))
+    except BaseException as er5:
+        messagebox.showerror("Error in chk_ans function!", str(type(er5))[6:-1] + " : " + str(er5))
 
 
-try:
+# endregion
 
 
-    for l in range(len(ques)):
+
+# region Leaderboard.
 
 
-        choice = [anser[l], option1[l], option2[l], option3[l]]
-        random.shuffle(choice)
 
-        print()
-        print(f'{question_no})  {question[l]}')
-        print()
+def query_fun():
+    """ Shows the data of 10 users in descending order with the highest score in the selected topic. """
 
-        print('1) ' + choice[0])
-        print('2) ' + choice[1])
-        print('3) ' + choice[2])
-        print('4) ' + choice[3])
-        print()
+    # region Defining Canvas.
 
-        answer = int(input('Enter the answer number: '))
+    root = Toplevel()
+    root.title('Database')
+    root.geometry('750x600')
+    root.resizable(False, False)
 
-        chk_ans(answer, l)  # Function is called.
+    # endregion
 
-        question_no += 1
+    global quiz_topic
 
-    print(f'Your score is {score} out of {len(ques)}')  # Final score.
-    update_fun()
+    conn = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+    cur = conn.cursor()
 
-except BaseException as er5:
-    messagebox.showerror("Error while Displaying Questions!", str(type(er5))[6:-1] + " : " + str(er5))
+    cur.execute(f"""SELECT ROWID, Name, Username, {quiz_topic}  FROM information 
+                        ORDER BY {quiz_topic} DESC
+                        LIMIT 10;""")
+    rows = cur.fetchall()
+
+    root.wm_attributes('-transparentcolor', '#AE9152')  # To make the background transparent.
+
+    frm = LabelFrame(root, text="Leaderboard", font=('Helvetica', 34, 'bold italic'), fg="gold", labelanchor='n',
+                     relief="raised", bd=15, bg='#AE9152', height=550, width=750)
+    frm.grid(row=9, column=1)
+
+    img = Image.open('Resource/2) Others/Images/lava.jpg')
+    resized_img = img.resize((650, 440), Image.ANTIALIAS)
+    converted_img = ImageTk.PhotoImage(resized_img)
+
+    lbl_img = Label(frm, image=converted_img, height=440, width=650, bd=0)
+    lbl_img.place(x=30, y=10)
+
+    img1 = Image.open('Resource/2) Others/Images/lines.jpg')
+    resized_img1 = img1.resize((610, 400), Image.ANTIALIAS)
+    converted_img1 = ImageTk.PhotoImage(resized_img1)
+
+    lbl_img1 = Label(lbl_img, image=converted_img1, height=400, width=610, bd=0)
+    lbl_img1.place(x=23, y=25)
+
+    style = ttk.Style()  # Styling the table.
+    style.theme_use("clam")
+    style.configure("Treeview",
+                    rowheight=30,
+                    background="black",
+                    foreground="#FFD700",
+                    font=('Helvetica', 14, 'bold italic'))
+    style.map('Treeview', background=[('selected', 'Black')], foreground=[('selected', 'red')])
+
+    style.configure("Treeview.Heading", background="black", foreground="gold", font=('Helvetica', 14, 'bold italic'))
+    style.map('Treeview.Heading', background=[('selected', 'red')])
+
+    tv = ttk.Treeview(lbl_img1, column=(1, 2, 3, 4), show="headings", height=10)  # The table.
+    tv.place(x=13, y=33)
+
+    tv.column(1, width=50, stretch=False)
+    tv.column(2, width=190, stretch=False)
+    tv.column(3, width=205, stretch=False)
+    tv.column(4, width=135, stretch=False)
+
+    tv.heading(1, text="ID")
+    tv.heading(2, text="Name")
+    tv.heading(3, text="Username")
+    tv.heading(4, text=f"{quiz_topic}")
+
+    for o in rows:
+        tv.insert("", "end", values=o)
+
+    conn.commit()
+    conn.close()
+
+    root.mainloop()
+
+# endregion
+
+
+# region Displaying MCQs.
+
+
+signin_fun()  # Calling Sign In function.
+
+
+if correct_user:  # If correct username and password is given, correct_user = True.
+
+    try:
+
+        for l in range(len(ques)):
+            choice = [anser[l], option1[l], option2[l], option3[l]]
+            random.shuffle(choice)
+
+            print()
+            print(f'{question_no})  {question[l]}')
+            print()
+
+            print('1) ' + choice[0])
+            print('2) ' + choice[1])
+            print('3) ' + choice[2])
+            print('4) ' + choice[3])
+            print()
+
+            answer = int(input('Enter the answer number: '))
+
+            chk_ans(answer, l)  # Check Answer Function is called.
+
+            question_no += 1
+
+        print(f'Your score is {score} out of {len(ques)}')  # Final score.
+
+        update_fun()  # Calling the Update Function.
+
+
+        query_fun()  # Calling the leaderboard Function.
+
+    except BaseException as er6:
+        messagebox.showerror("Error while Displaying Questions!", str(type(er6))[6:-1] + " : " + str(er6))
+
+else:
+    messagebox.showerror("Error in Sign in!", "You can't take the quiz.")
 
 
 # endregion
