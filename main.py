@@ -359,7 +359,7 @@ scienceButton = Button(
     border=0,
     command=scienceClick,
 )
-scienceButton.pack(pady=(50, 120), padx=(1, 400))
+scienceButton.pack()
 
 
 img6 = PhotoImage(file="gk.png")
