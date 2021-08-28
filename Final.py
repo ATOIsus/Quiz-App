@@ -27,7 +27,7 @@ global password_var  # The password inserted during signing in.
 global PlayerID      # The ROWID of the player. (Retrieved while signing in)
 global db_score      # The score in the database of the selected topic. (Retrieved while signing in)
 
-file_exists  = False      # Used while importing files. Is a bool value.
+file_exists  = False     # Used while importing files. Is a bool value.
 correct_user = False     # Used in Sign in function. Is a bool value.
 
 global query_fun         # For Leaderboard Function.
@@ -73,11 +73,12 @@ def signin_fun():
                 print(f'PlayerID {PlayerID}')
                 print(f'Db_score {db_score}')
                 correct_user = True
+                messagebox.showinfo("Success", "Successfully Signed In")
                 break
             else:
                 pass
         else:
-            messagebox.showerror('Error while Signing In!', 'Wrong Username or Password')
+            messagebox.showerror('Error while Signing In!', 'Wrong Username or Password.')
 
         conn.commit()
         conn.close()
@@ -134,6 +135,8 @@ try:
 
     random.shuffle(ques)  # Question shuffled every time teh text file is opened.
 
+    file_exists = True
+
 except BaseException as er3:
     messagebox.showerror("Error with database!", str(type(er3))[6:-1] + " : " + str(er3))
     file_exists = False
@@ -189,6 +192,42 @@ def chk_ans(ans, k):
 
 # endregion
 
+
+# region Delete Function.
+
+
+try:
+
+    def delete_fun():
+
+        """ Deletes the row with the given ID,
+            but while implementing it will delete the row of the current user only (Get ROWID in sign in function).  """
+
+
+        response = messagebox.askyesno("Confirmation", "Are you sure to delete your account? ")
+        Label(Tk(), text = response).grid()
+
+        if response == 1:
+
+            global PlayerID
+
+            conn3 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+            c3 = conn3.cursor()
+
+            c3.execute(f"DELETE from information WHERE ROWID = {PlayerID}")
+
+            conn3.commit()
+            conn3.close()
+
+            messagebox.showinfo("Success!", "Account deleted!")
+
+            query_fun()
+
+except BaseException as er6:
+    messagebox.showerror("Error while Displaying Questions!", str(type(er6))[6:-1] + " : " + str(er6))
+
+
+# endregion
 
 
 # region Leaderboard.
@@ -268,6 +307,13 @@ def query_fun():
     conn.commit()
     conn.close()
 
+
+
+    delete_btn = Button(root, text="Delete", command=delete_fun)
+    delete_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
+
+
+
     root.mainloop()
 
 # endregion
@@ -315,8 +361,8 @@ if correct_user:  # If correct username and password is given, correct_user = Tr
 
         query_fun()  # Calling the leaderboard Function.
 
-    except BaseException as er6:
-        messagebox.showerror("Error while Displaying Questions!", str(type(er6))[6:-1] + " : " + str(er6))
+    except BaseException as er7:
+        messagebox.showerror("Error while Displaying Questions!", str(type(er7))[6:-1] + " : " + str(er7))
 
 else:
     messagebox.showerror("Error in Sign in!", "You can't take the quiz.")
