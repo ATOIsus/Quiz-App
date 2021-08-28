@@ -39,7 +39,7 @@ try:  # Exception Handling.
             username_var = input("Enter Username: ")
             password_var = input("Enter Password: ")
 
-            conn = sqlite3.connect('Player Database.db')
+            conn = sqlite3.connect('Database/Player Database.db')
             cur = conn.cursor()
 
             cur.execute(f"SELECT ROWID, Username, Password, {quiz_topic} FROM information")
@@ -89,7 +89,7 @@ try:  # Exception Handling.
     
             if score > db_score :
     
-                conn1 = sqlite3.connect('Player Database.db')
+                conn1 = sqlite3.connect('Database/Player Database.db')
                 cur1 = conn1.cursor()
     
                 cur1.execute(f"UPDATE information SET {quiz_topic} = ? where ROWID = ?", (score, PlayerID))

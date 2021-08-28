@@ -27,7 +27,7 @@ try:
         but while implementing it will delete the row of the current user only (Get ROWID in sign in function).  """
 
         try:
-            conn3 = sqlite3.connect('Player Database.db')
+            conn3 = sqlite3.connect('Database/Player Database.db')
             c3 = conn3.cursor()
 
             c3.execute(f"DELETE from information WHERE ROWID = {delete_ent.get()}")

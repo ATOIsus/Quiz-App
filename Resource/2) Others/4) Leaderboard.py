@@ -42,7 +42,7 @@ try:     # Exception Handling.
 
         quiz_topic = input("Enter the subject:  ")
 
-        conn = sqlite3.connect('Player Database.db')
+        conn = sqlite3.connect('Database/Player Database.db')
         cur = conn.cursor()
 
         cur.execute(f"""SELECT ROWID, Name, Username, {quiz_topic}  FROM information 

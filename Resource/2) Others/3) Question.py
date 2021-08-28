@@ -16,7 +16,7 @@ try:
     ''' To unpickle the MCQs '''
 
     file_open = input("Enter the file to open: ")
-    file = open(f'Resource/1) Question/{file_open}.txt', 'rb')
+    file = open(f'Resource/1) Question/{file_open}.txt', 'rb')   # The path needs to be changed.
 
     ques = list(pickle.load(file))  # Tuple converted into list.
 
