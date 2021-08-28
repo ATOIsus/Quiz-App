@@ -8,4 +8,4 @@ Members:
     Aditya Bharati 
     Abhinav Dev Bhatta 
     Bishal Shrestha 
-    Sabin Maharjan
+    Sabin Maharjan (Leader)
