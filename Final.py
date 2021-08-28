@@ -1,15 +1,15 @@
 import random  # To shuffle choices.
 import pickle  # To unpickle the MCQ.
-from tkinter import *  # To use basic functions and methods of tkinter.
+from tkinter import *           # To use basic functions and methods of tkinter.
 from tkinter import messagebox  # To show popup messagebox.
-from tkinter import ttk  # For the table to display the data from the database.
+from tkinter import ttk         # For the table to display the data from the database.
 from PIL import Image, ImageTk  # To display images.
-import sqlite3  # To connect to the database.
+import sqlite3                  # To connect to the database.
 
 # region Global Variables.
 
 question = []  # List of all questions.
-anser = []  # List of all answers.
+anser = []     # List of all answers.
 
 option1 = []  # List of all option.
 option2 = []  # List of all option.
@@ -24,18 +24,22 @@ global quiz_topic  # The topic that is selected.
 
 global username_var  # The username inserted during signing in.
 global password_var  # The password inserted during signing in.
-global PlayerID  # The ROWID of the player. (Retrieved while signing in)
-global db_score  # The score in the database of the selected topic. (Retrieved while signing in)
+global PlayerID      # The ROWID of the player. (Retrieved while signing in)
+global db_score      # The score in the database of the selected topic. (Retrieved while signing in)
 
-global correct_user  # Used in Sign in function. Is a bool value.
+file_exists  = False      # Used while importing files. Is a bool value.
+correct_user = False     # Used in Sign in function. Is a bool value.
 
-global query_fun  # For Leaderboard Function.
+global query_fun         # For Leaderboard Function.
+
+
 
 
 # endregion
 
 
 # region Sign In Function.
+
 
 
 def signin_fun():
@@ -121,7 +125,7 @@ def update_fun():
 # region Unpickle and separate MCQs.
 
 try:
-    ''' To unpickle the MCQs '''
+    ''' To unpickle the MCQs. '''
 
     quiz_topic = input("Enter the file to open: ")
     file = open(f'Resource/1) Question/{quiz_topic}.txt', 'rb')
@@ -131,7 +135,8 @@ try:
     random.shuffle(ques)  # Question shuffled every time teh text file is opened.
 
 except BaseException as er3:
-    messagebox.showerror("Error while database!", str(type(er3))[6:-1] + " : " + str(er3))
+    messagebox.showerror("Error with database!", str(type(er3))[6:-1] + " : " + str(er3))
+    file_exists = False
 
 try:
     ''' Question, answer and options are separated into different lists. '''
@@ -179,7 +184,7 @@ def chk_ans(ans, k):
             print(f"Wrong! The right answer was:  {anser[k]}")
             print()
     except BaseException as er5:
-        messagebox.showerror("Error in chk_ans function!", str(type(er5))[6:-1] + " : " + str(er5))
+        messagebox.showerror("Error in Check Answer Function!", str(type(er5))[6:-1] + " : " + str(er5))
 
 
 # endregion
@@ -196,7 +201,7 @@ def query_fun():
     # region Defining Canvas.
 
     root = Toplevel()
-    root.title('Database')
+    root.title('Leaderboard')
     root.geometry('750x600')
     root.resizable(False, False)
 
@@ -271,7 +276,12 @@ def query_fun():
 # region Displaying MCQs.
 
 
-signin_fun()  # Calling Sign In function.
+if file_exists:
+
+    signin_fun()  # Calling Sign In function.
+
+else:
+    messagebox.showerror("Error while loading file!", "File not found.")
 
 
 if correct_user:  # If correct username and password is given, correct_user = True.
