@@ -1,10 +1,12 @@
 import random  # To shuffle choices.
 import pickle  # To unpickle the MCQ.
+import sqlite3                  # To connect to the database.
 from tkinter import *           # To use basic functions and methods of tkinter.
 from tkinter import messagebox  # To show popup messagebox.
 from tkinter import ttk         # For the table to display the data from the database.
 from PIL import Image, ImageTk  # To display images.
-import sqlite3                  # To connect to the database.
+from playsound import playsound       # To produce sound during right, wrong answer and highest score.
+
 
 # region Global Variables.
 
@@ -31,8 +33,6 @@ file_exists  = False     # Used while importing files. Is a bool value.
 correct_user = False     # Used in Sign in function. Is a bool value.
 
 global query_fun         # For Leaderboard Function.
-
-
 
 
 # endregion
@@ -111,6 +111,7 @@ def update_fun():
             conn1.commit()
             conn1.close()
 
+            playsound('Resource/2) Others/Sounds/highest.wav')
             messagebox.showinfo("Congratulations!", f"{score} is your highest score!")
 
         else:
@@ -181,8 +182,11 @@ def chk_ans(ans, k):
     global score
     try:
         if choice[ans - 1] == anser[k]:  # Check if the answer is right.
+            playsound('Resource/2) Others/Sounds/correct.wav')
             score += 1
+
         else:
+            playsound('Resource/2) Others/Sounds/incorrect.wav')
             print()
             print(f"Wrong! The right answer was:  {anser[k]}")
             print()
@@ -246,75 +250,78 @@ def query_fun():
 
     # endregion
 
-    global quiz_topic
+    try:
 
-    conn = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
-    cur = conn.cursor()
+        global quiz_topic
 
-    cur.execute(f"""SELECT ROWID, Name, Username, {quiz_topic}  FROM information 
-                        ORDER BY {quiz_topic} DESC
-                        LIMIT 10;""")
-    rows = cur.fetchall()
+        conn = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+        cur = conn.cursor()
 
-    root.wm_attributes('-transparentcolor', '#AE9152')  # To make the background transparent.
+        cur.execute(f"""SELECT ROWID, Name, Username, {quiz_topic}  FROM information 
+                            ORDER BY {quiz_topic} DESC
+                            LIMIT 10;""")
+        rows = cur.fetchall()
 
-    frm = LabelFrame(root, text="Leaderboard", font=('Helvetica', 34, 'bold italic'), fg="gold", labelanchor='n',
-                     relief="raised", bd=15, bg='#AE9152', height=550, width=750)
-    frm.grid(row=9, column=1)
+        root.wm_attributes('-transparentcolor', '#AE9152')  # To make the background transparent.
 
-    img = Image.open('Resource/2) Others/Images/lava.jpg')
-    resized_img = img.resize((650, 440), Image.ANTIALIAS)
-    converted_img = ImageTk.PhotoImage(resized_img)
+        frm = LabelFrame(root, text="Leaderboard", font=('Helvetica', 34, 'bold italic'), fg="gold", labelanchor='n',
+                         relief="raised", bd=15, bg='#AE9152', height=550, width=750)
+        frm.grid(row=9, column=1)
 
-    lbl_img = Label(frm, image=converted_img, height=440, width=650, bd=0)
-    lbl_img.place(x=30, y=10)
+        img = Image.open('Resource/2) Others/Images/lava.jpg')
+        resized_img = img.resize((650, 440), Image.ANTIALIAS)
+        converted_img = ImageTk.PhotoImage(resized_img)
 
-    img1 = Image.open('Resource/2) Others/Images/lines.jpg')
-    resized_img1 = img1.resize((610, 400), Image.ANTIALIAS)
-    converted_img1 = ImageTk.PhotoImage(resized_img1)
+        lbl_img = Label(frm, image=converted_img, height=440, width=650, bd=0)
+        lbl_img.place(x=30, y=10)
 
-    lbl_img1 = Label(lbl_img, image=converted_img1, height=400, width=610, bd=0)
-    lbl_img1.place(x=23, y=25)
+        img1 = Image.open('Resource/2) Others/Images/lines.jpg')
+        resized_img1 = img1.resize((610, 400), Image.ANTIALIAS)
+        converted_img1 = ImageTk.PhotoImage(resized_img1)
 
-    style = ttk.Style()  # Styling the table.
-    style.theme_use("clam")
-    style.configure("Treeview",
-                    rowheight=30,
-                    background="black",
-                    foreground="#FFD700",
-                    font=('Helvetica', 14, 'bold italic'))
-    style.map('Treeview', background=[('selected', 'Black')], foreground=[('selected', 'red')])
+        lbl_img1 = Label(lbl_img, image=converted_img1, height=400, width=610, bd=0)
+        lbl_img1.place(x=23, y=25)
 
-    style.configure("Treeview.Heading", background="black", foreground="gold", font=('Helvetica', 14, 'bold italic'))
-    style.map('Treeview.Heading', background=[('selected', 'red')])
+        style = ttk.Style()  # Styling the table.
+        style.theme_use("clam")
+        style.configure("Treeview",
+                        rowheight=30,
+                        background="black",
+                        foreground="#FFD700",
+                        font=('Helvetica', 14, 'bold italic'))
+        style.map('Treeview', background=[('selected', 'Black')], foreground=[('selected', 'red')])
 
-    tv = ttk.Treeview(lbl_img1, column=(1, 2, 3, 4), show="headings", height=10)  # The table.
-    tv.place(x=13, y=33)
+        style.configure("Treeview.Heading", background="black", foreground="gold", font=('Helvetica', 14, 'bold italic'))
+        style.map('Treeview.Heading', background=[('selected', 'red')])
 
-    tv.column(1, width=50, stretch=False)
-    tv.column(2, width=190, stretch=False)
-    tv.column(3, width=205, stretch=False)
-    tv.column(4, width=135, stretch=False)
+        tv = ttk.Treeview(lbl_img1, column=(1, 2, 3, 4), show="headings", height=10)  # The table.
+        tv.place(x=13, y=33)
 
-    tv.heading(1, text="ID")
-    tv.heading(2, text="Name")
-    tv.heading(3, text="Username")
-    tv.heading(4, text=f"{quiz_topic}")
+        tv.column(1, width=50, stretch=False)
+        tv.column(2, width=190, stretch=False)
+        tv.column(3, width=205, stretch=False)
+        tv.column(4, width=135, stretch=False)
 
-    for o in rows:
-        tv.insert("", "end", values=o)
+        tv.heading(1, text="ID")
+        tv.heading(2, text="Name")
+        tv.heading(3, text="Username")
+        tv.heading(4, text=f"{quiz_topic}")
 
-    conn.commit()
-    conn.close()
+        for o in rows:
+            tv.insert("", "end", values=o)
 
+        conn.commit()
+        conn.close()
 
+        delete_btn = Button(root, text="Delete", command=delete_fun)
+        delete_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
 
-    delete_btn = Button(root, text="Delete", command=delete_fun)
-    delete_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
+    except BaseException as er7:
+        messagebox.showerror("Error in Query Function!", str(type(er7))[6:-1] + " : " + str(er7))
 
+    else:
+        root.mainloop()
 
-
-    root.mainloop()
 
 # endregion
 
@@ -361,8 +368,8 @@ if correct_user:  # If correct username and password is given, correct_user = Tr
 
         query_fun()  # Calling the leaderboard Function.
 
-    except BaseException as er7:
-        messagebox.showerror("Error while Displaying Questions!", str(type(er7))[6:-1] + " : " + str(er7))
+    except BaseException as er8:
+        messagebox.showerror("Error while Displaying Questions!", str(type(er8))[6:-1] + " : " + str(er8))
 
 else:
     messagebox.showerror("Error in Sign in!", "You can't take the quiz.")
