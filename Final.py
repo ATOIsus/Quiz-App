@@ -5,7 +5,7 @@ from tkinter import *           # To use basic functions and methods of tkinter.
 from tkinter import messagebox  # To show popup messagebox.
 from tkinter import ttk         # For the table to display the data from the database.
 from PIL import Image, ImageTk  # To display images.
-from playsound import playsound       # To produce sound during right, wrong answer and highest score.
+from playsound import playsound  # To produce sound during right, wrong answer and highest score.
 
 
 # region Global Variables.
