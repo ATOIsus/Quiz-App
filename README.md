@@ -16,7 +16,9 @@ Here the following things are done:
 
 Here the following things are done: 
                                    
-                                   1) A leaderboard will show top 10 users with highest score. 
+                                   1) A leaderboard will show top 10 users with highest score of the selected topic. 
                                    2) The score will be updated if it is greater than that of the database. 
                                    3) The user can only delete their own account.
+                                   4) Sound effect added for correct and incorrect answer & highest score.
+                                   5) Checking provided and stored Username and Password. i.e. Sign in Logistics. 
 
