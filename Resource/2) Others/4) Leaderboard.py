@@ -52,8 +52,8 @@ try:     # Exception Handling.
 
         root.wm_attributes('-transparentcolor', '#AE9152')  # To make the background transparent.
 
-        frm = LabelFrame(root, text="Leaderboard", font=('Helvetica', 34, 'bold italic'), fg = "gold", labelanchor = 'n',  relief="raised",
-                         bd = 15, bg = '#AE9152', height = 550, width = 750)
+        frm = LabelFrame(root, text="Leaderboard", font=('Helvetica', 34, 'bold italic'), fg = "gold",
+                         labelanchor = 'n',  relief="raised", bd = 15, bg = '#AE9152', height = 550, width = 750)
         frm.grid(row=9, column=1)
 
         lbl_img = Label(frm, image = converted_img, height = 440, width = 650, bd = 0)

@@ -209,7 +209,6 @@ try:
 
 
         response = messagebox.askyesno("Confirmation", "Are you sure to delete your account? ")
-        Label(Tk(), text = response).grid()
 
         if response == 1:
 
@@ -225,7 +224,10 @@ try:
 
             messagebox.showinfo("Success!", "Account deleted!")
 
-            query_fun()
+            query_fun()  # Displays a new window, but that's not intended.
+
+        else:
+            pass
 
 except BaseException as er6:
     messagebox.showerror("Error while Displaying Questions!", str(type(er6))[6:-1] + " : " + str(er6))
