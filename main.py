@@ -94,6 +94,23 @@ def startButtonClick():
     labelText.destroy()
     labelRule.destroy()
     startButton.destroy()
+    img3 = PhotoImage(file="math.png")
+    mathButton = Button(
+        root,
+        image=img3,
+        bg="#66b3ff",
+        relief="raised",
+        border=0,
+        command=mathClick,
+    )
+    mathButton.place(x=175, y=100)
+    math = Label(
+        root,
+        text="Math",
+        bg="#66b3ff",
+        font="Cambria",
+    )
+    math.place(x=175, y=170)
 
 
 def mathClick():
@@ -471,23 +488,6 @@ labelRule = Label(
 )
 labelRule.pack()
 
-img3 = PhotoImage(file="math.png")
-mathButton = Button(
-    root,
-    image=img3,
-    bg="#66b3ff",
-    relief="raised",
-    border=0,
-    command=mathClick,
-)
-mathButton.place(x=175, y=100)
-math = Label(
-    root,
-    text="Math",
-    bg="#66b3ff",
-    font="Cambria",
-)
-math.place(x=175, y=170)
 
 img4 = PhotoImage(file="sports.png")
 sportsButton = Button(
