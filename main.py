@@ -51,6 +51,30 @@ sportsAnswers = [
     ["1", "2", "3", "4"],
 ]
 
+scienceQuestions = [
+    "This is Science Question #1",
+    "This is Science Question #2",
+    "This is Science Question #3",
+    "This is Science Question #4",
+    "This is Science Question #5",
+    "This is Science Question #6",
+    "This is Science Question #7",
+    "This is Science Question #8",
+    "This is Science Question #9",
+    "This is Science Question #10",
+]
+scienceAnswers = [
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+    ["1", "2", "3", "4"],
+]
 
 indexes = []
 
@@ -63,7 +87,6 @@ def gen():
             continue
         else:
             indexes.append(x)
-    print(indexes)
 
 
 def startButtonClick():
@@ -82,6 +105,14 @@ def mathClick():
     architectureButton.destroy()
     programmingButton.destroy()
     politicsButton.destroy()
+    math.destroy()
+    sports.destroy()
+    science.destroy()
+    gk.destroy()
+    lab.destroy()
+    architecture.destroy()
+    programming.destroy()
+    politics.destroy()
     gen()
     labelQuestion1 = Label(
         root,
@@ -150,6 +181,14 @@ def sportsClick():
     architectureButton.destroy()
     programmingButton.destroy()
     politicsButton.destroy()
+    math.destroy()
+    sports.destroy()
+    science.destroy()
+    gk.destroy()
+    lab.destroy()
+    architecture.destroy()
+    programming.destroy()
+    politics.destroy()
     gen()
     labelQuestion2 = Label(
         root,
@@ -219,6 +258,72 @@ def scienceClick():
     architectureButton.destroy()
     programmingButton.destroy()
     politicsButton.destroy()
+    math.destroy()
+    sports.destroy()
+    science.destroy()
+    gk.destroy()
+    lab.destroy()
+    architecture.destroy()
+    programming.destroy()
+    politics.destroy()
+    gen()
+    labelQuestion3 = Label(
+        root,
+        text=scienceQuestions[indexes[0]],
+        font=("Berlin Sans FB", 16),
+        width=500,
+        justify="center",
+        wraplength=400,
+        background="#66b3ff",
+    )
+    labelQuestion3.pack(pady=(100, 50), padx=(90, 100))
+    radiovar = IntVar()
+    radiovar.set(-1)
+    r1 = Radiobutton(
+        root,
+        text=scienceAnswers[indexes[0]][0],
+        font=("Times", 11),
+        value=0,
+        variable=radiovar,
+        bg="#66b3ff"
+    )
+    r1.pack()
+
+    radiovar = IntVar()
+    radiovar.set(-1)
+    r2 = Radiobutton(
+        root,
+        text=scienceAnswers[indexes[0]][1],
+        font=("Times", 11),
+        value=1,
+        variable=radiovar,
+        bg="#66b3ff"
+    )
+    r2.pack()
+
+    radiovar = IntVar()
+    radiovar.set(-1)
+    r3 = Radiobutton(
+        root,
+        text=scienceAnswers[indexes[0]][2],
+        font=("Times", 11),
+        value=2,
+        variable=radiovar,
+        bg="#66b3ff"
+    )
+    r3.pack()
+
+    radiovar = IntVar()
+    radiovar.set(-1)
+    r4 = Radiobutton(
+        root,
+        text=scienceAnswers[indexes[0]][3],
+        font=("Times", 11),
+        value=3,
+        variable=radiovar,
+        bg="#66b3ff"
+    )
+    r4.pack()
 
 
 def gkClick():
@@ -230,6 +335,14 @@ def gkClick():
     architectureButton.destroy()
     programmingButton.destroy()
     politicsButton.destroy()
+    math.destroy()
+    sports.destroy()
+    science.destroy()
+    gk.destroy()
+    lab.destroy()
+    architecture.destroy()
+    programming.destroy()
+    politics.destroy()
 
 
 def labClick():
@@ -241,6 +354,14 @@ def labClick():
     architectureButton.destroy()
     programmingButton.destroy()
     politicsButton.destroy()
+    math.destroy()
+    sports.destroy()
+    science.destroy()
+    gk.destroy()
+    lab.destroy()
+    architecture.destroy()
+    programming.destroy()
+    politics.destroy()
 
 
 def architectureClick():
@@ -252,6 +373,14 @@ def architectureClick():
     architectureButton.destroy()
     programmingButton.destroy()
     politicsButton.destroy()
+    math.destroy()
+    sports.destroy()
+    science.destroy()
+    gk.destroy()
+    lab.destroy()
+    architecture.destroy()
+    programming.destroy()
+    politics.destroy()
 
 
 def programmingClick():
@@ -263,6 +392,14 @@ def programmingClick():
     programmingButton.destroy()
     architectureButton.destroy()
     politicsButton.destroy()
+    math.destroy()
+    sports.destroy()
+    science.destroy()
+    gk.destroy()
+    lab.destroy()
+    architecture.destroy()
+    programming.destroy()
+    politics.destroy()
 
 
 def politicsClick():
@@ -274,6 +411,14 @@ def politicsClick():
     politicsButton.destroy()
     architectureButton.destroy()
     programmingButton.destroy()
+    math.destroy()
+    sports.destroy()
+    science.destroy()
+    gk.destroy()
+    lab.destroy()
+    architecture.destroy()
+    programming.destroy()
+    politics.destroy()
 
 
 root = Tk()
@@ -335,8 +480,14 @@ mathButton = Button(
     border=0,
     command=mathClick,
 )
-mathButton.pack(pady=(90, 5), padx=(5, 400))
-
+mathButton.place(x=175, y=100)
+math = Label(
+    root,
+    text="Math",
+    bg="#66b3ff",
+    font="Cambria",
+)
+math.place(x=175, y=170)
 
 img4 = PhotoImage(file="sports.png")
 sportsButton = Button(
@@ -347,8 +498,14 @@ sportsButton = Button(
     border=0,
     command=sportsClick,
 )
-sportsButton.pack(pady=(50, 115), padx=(1, 400))
-
+sportsButton.place(x=175, y=215)
+sports = Label(
+    root,
+    text="Sports",
+    bg="#66b3ff",
+    font="Cambria",
+)
+sports.place(x=175, y=285)
 
 img5 = PhotoImage(file="science.png")
 scienceButton = Button(
@@ -359,8 +516,14 @@ scienceButton = Button(
     border=0,
     command=scienceClick,
 )
-scienceButton.pack()
-
+scienceButton.place(x=175, y=330)
+science = Label(
+    root,
+    text="Science",
+    bg="#66b3ff",
+    font="Cambria",
+)
+science.place(x=175, y=400)
 
 img6 = PhotoImage(file="gk.png")
 gkButton = Button(
@@ -371,8 +534,14 @@ gkButton = Button(
     border=0,
     command=gkClick,
 )
-gkButton.pack()
-
+gkButton.place(x=175, y=445)
+gk = Label(
+    root,
+    text="Gk",
+    bg="#66b3ff",
+    font="Cambria",
+)
+gk.place(x=175, y=515)
 
 img7 = PhotoImage(file="lab.png")
 labButton = Button(
@@ -383,8 +552,14 @@ labButton = Button(
     border=0,
     command=labClick,
 )
-labButton.pack()
-
+labButton.place(x=500, y=100)
+lab = Label(
+    root,
+    text="Lab",
+    bg="#66b3ff",
+    font="Cambria",
+)
+lab.place(x=500, y=170)
 
 img8 = PhotoImage(file="architecture.png")
 architectureButton = Button(
@@ -395,8 +570,14 @@ architectureButton = Button(
     border=0,
     command=architectureClick,
 )
-architectureButton.pack()
-
+architectureButton.place(x=500, y=215)
+architecture = Label(
+    root,
+    text="Architecture",
+    bg="#66b3ff",
+    font="Cambria",
+)
+architecture.place(x=500, y=285)
 
 img9 = PhotoImage(file="programming.png")
 programmingButton = Button(
@@ -407,7 +588,14 @@ programmingButton = Button(
     border=0,
     command=programmingClick,
 )
-programmingButton.pack()
+programmingButton.place(x=500, y=330)
+programming = Label(
+    root,
+    text="Programming",
+    bg="#66b3ff",
+    font="Cambria",
+)
+programming.place(x=500, y=400)
 
 img10 = PhotoImage(file="politics.png")
 politicsButton = Button(
@@ -418,7 +606,13 @@ politicsButton = Button(
     border=0,
     command=politicsClick,
 )
-politicsButton.pack()
-
+politicsButton.place(x=500, y=445)
+politics = Label(
+    root,
+    text="Politics",
+    bg="#66b3ff",
+    font="Cambria",
+)
+politics.place(x=500, y=515)
 
 root.mainloop()
