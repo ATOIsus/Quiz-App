@@ -995,15 +995,15 @@ labelImage = Label(
     image=img1,
     bg="#66b3ff",
 )
-labelImage.place(x=300, y=50)
+labelImage.pack(pady=(100, 0))
 
 labelText = Label(
     root,
     text="Quiz",
-    font=("Corbel", 31, "bold"),
+    font=("Corbel", 23, "bold"),
     bg="#66b3ff",
 )
-labelText.place(x=310, y=200)
+labelText.pack(pady=(5, 50))
 
 img2 = PhotoImage(file="start-button.png")
 startButton = Button(
@@ -1014,7 +1014,7 @@ startButton = Button(
     border=0,
     command=startButtonClick,
 )
-startButton.place(x=310, y=340)
+startButton.pack(pady=(5, 50))
 
 labelRule = Label(
     root,
@@ -1025,11 +1025,10 @@ labelRule = Label(
     Once you click on an option, that will be the final answer
     So think before you answer
     """,
-    width=50,
-    font=("Cambria", 15),
-    bg="#66b3ff",
+    width=100,
+    font=("Cambria", 13),
+    bg="#ff9933",
     fg="#000000",
 )
-labelRule.place(x=60, y=440)
-
+labelRule.pack()
 root.mainloop()
