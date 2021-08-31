@@ -8,7 +8,7 @@ class sign:
         self.root.title("SIGN IN")
         self.root.geometry("700x500")
         self.root.iconbitmap("user.ico")
-        self.root.configure(bg="#00cccc")
+        self.root.configure(bg="#404040")
 
         frame=Frame(self.root,bg="white")
         frame.place(x=150,y=150,height=300,width=400)
