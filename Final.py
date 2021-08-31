@@ -33,6 +33,7 @@ file_exists  = False     # Used while importing files. Is a bool value.
 correct_user = False     # Used in Sign in function. Is a bool value.
 
 global query_fun         # For Leaderboard Function.
+global root              # For Leaderboard and Delete Function.
 
 
 # endregion
@@ -224,6 +225,8 @@ try:
 
             messagebox.showinfo("Success!", "Account deleted!")
 
+            global root
+            root.destroy()
             query_fun()  # Displays a new window, but that's not intended.
 
         else:
@@ -243,7 +246,11 @@ except BaseException as er6:
 def query_fun():
     """ Shows the data of 10 users in descending order with the highest score in the selected topic. """
 
+    Toplevel().destroy()  # To destroy previous window and load a new window. Specifically for Delete Function.
+
     # region Defining Canvas.
+
+    global root    # To be used in Delete Function.
 
     root = Toplevel()
     root.title('Leaderboard')
