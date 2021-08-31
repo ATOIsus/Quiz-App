@@ -11,7 +11,9 @@ def startButtonClick():
     newWindow1()
 
 
+user_answer = []
 indexes = []
+ques = 1
 
 
 def newWindow1():
@@ -217,12 +219,180 @@ def newWindow1():
 
     def gen():
         global indexes
-        while (len(indexes)) < 5:
+        while (len(indexes)) < 10:
             x = random.randint(0, 9)
             if x in indexes:
                 continue
             else:
                 indexes.append(x)
+
+    def mathSelected():
+        global radioVar, user_answer
+        global labelQuestion1, r1, r2, r3, r4
+        global ques
+        x = radioVar.get()
+        user_answer.append(x)
+        radioVar.set(-1)
+        if ques < 10:
+            labelQuestion1.config(text=mathQuestions[indexes[ques]])
+            r1['text'] = mathAnswers[indexes[ques]][0]
+            r2['text'] = mathAnswers[indexes[ques]][1]
+            r3['text'] = mathAnswers[indexes[ques]][2]
+            r4['text'] = mathAnswers[indexes[ques]][3]
+            ques += 1
+        else:
+            # print(indexes)
+            # print(user_answer)
+            # these two lines were just developement code
+            # we don't need them
+            pass
+
+    def sportsSelected():
+        global radioVar, user_answer
+        global labelQuestion2, r1, r2, r3, r4
+        global ques
+        x = radioVar.get()
+        user_answer.append(x)
+        radioVar.set(-1)
+        if ques < 10:
+            labelQuestion2.config(text=sportsQuestions[indexes[ques]])
+            r1['text'] = sportsAnswers[indexes[ques]][0]
+            r2['text'] = sportsAnswers[indexes[ques]][1]
+            r3['text'] = sportsAnswers[indexes[ques]][2]
+            r4['text'] = sportsAnswers[indexes[ques]][3]
+            ques += 1
+        else:
+            # print(indexes)
+            # print(user_answer)
+            # these two lines were just developement code
+            # we don't need them
+            pass
+
+    def scienceSelected():
+        global radioVar, user_answer
+        global labelQuestion3, r1, r2, r3, r4
+        global ques
+        x = radioVar.get()
+        user_answer.append(x)
+        radioVar.set(-1)
+        if ques < 10:
+            labelQuestion3.config(text=scienceQuestions[indexes[ques]])
+            r1['text'] = scienceAnswers[indexes[ques]][0]
+            r2['text'] = scienceAnswers[indexes[ques]][1]
+            r3['text'] = scienceAnswers[indexes[ques]][2]
+            r4['text'] = scienceAnswers[indexes[ques]][3]
+            ques += 1
+        else:
+            # print(indexes)
+            # print(user_answer)
+            # these two lines were just developement code
+            # we don't need them
+            pass
+
+    def gkSelected():
+        global radioVar, user_answer
+        global labelQuestion4, r1, r2, r3, r4
+        global ques
+        x = radioVar.get()
+        user_answer.append(x)
+        radioVar.set(-1)
+        if ques < 10:
+            labelQuestion4.config(text=gkQuestions[indexes[ques]])
+            r1['text'] = gkAnswers[indexes[ques]][0]
+            r2['text'] = gkAnswers[indexes[ques]][1]
+            r3['text'] = gkAnswers[indexes[ques]][2]
+            r4['text'] = gkAnswers[indexes[ques]][3]
+            ques += 1
+        else:
+            # print(indexes)
+            # print(user_answer)
+            # these two lines were just developement code
+            # we don't need them
+            pass
+
+    def labSelected():
+        global radioVar, user_answer
+        global labelQuestion5, r1, r2, r3, r4
+        global ques
+        x = radioVar.get()
+        user_answer.append(x)
+        radioVar.set(-1)
+        if ques < 10:
+            labelQuestion5.config(text=labQuestions[indexes[ques]])
+            r1['text'] = labAnswers[indexes[ques]][0]
+            r2['text'] = labAnswers[indexes[ques]][1]
+            r3['text'] = labAnswers[indexes[ques]][2]
+            r4['text'] = labAnswers[indexes[ques]][3]
+            ques += 1
+        else:
+            # print(indexes)
+            # print(user_answer)
+            # these two lines were just developement code
+            # we don't need them
+            pass
+
+    def architectureSelected():
+        global radioVar, user_answer
+        global labelQuestion6, r1, r2, r3, r4
+        global ques
+        x = radioVar.get()
+        user_answer.append(x)
+        radioVar.set(-1)
+        if ques < 10:
+            labelQuestion6.config(text=architectureQuestions[indexes[ques]])
+            r1['text'] = architectureAnswers[indexes[ques]][0]
+            r2['text'] = architectureAnswers[indexes[ques]][1]
+            r3['text'] = architectureAnswers[indexes[ques]][2]
+            r4['text'] = architectureAnswers[indexes[ques]][3]
+            ques += 1
+        else:
+            # print(indexes)
+            # print(user_answer)
+            # these two lines were just developement code
+            # we don't need them
+            pass
+
+    def programmingSelected():
+        global radioVar, user_answer
+        global labelQuestion7, r1, r2, r3, r4
+        global ques
+        x = radioVar.get()
+        user_answer.append(x)
+        radioVar.set(-1)
+        if ques < 10:
+            labelQuestion7.config(text=programmingQuestions[indexes[ques]])
+            r1['text'] = programmingAnswers[indexes[ques]][0]
+            r2['text'] = programmingAnswers[indexes[ques]][1]
+            r3['text'] = programmingAnswers[indexes[ques]][2]
+            r4['text'] = programmingAnswers[indexes[ques]][3]
+            ques += 1
+        else:
+            # print(indexes)
+            # print(user_answer)
+            # these two lines were just developement code
+            # we don't need them
+            pass
+
+    def politicsSelected():
+        global radioVar, user_answer
+        global labelQuestion8, r1, r2, r3, r4
+        global ques
+        x = radioVar.get()
+        user_answer.append(x)
+        radioVar.set(-1)
+        if ques < 10:
+            labelQuestion8.config(text=politicsQuestions[indexes[ques]])
+            r1['text'] = politicsAnswers[indexes[ques]][0]
+            r2['text'] = politicsAnswers[indexes[ques]][1]
+            r3['text'] = politicsAnswers[indexes[ques]][2]
+            r4['text'] = politicsAnswers[indexes[ques]][3]
+            ques += 1
+        else:
+            # print(indexes)
+            # print(user_answer)
+            # these two lines were just developement code
+            # we don't need them
+            pass
 
     def mathClick():
         mathButton.destroy()
@@ -242,6 +412,7 @@ def newWindow1():
         programming.destroy()
         politics.destroy()
         gen()
+        global labelQuestion1, r1, r2, r3, r4
         labelQuestion1 = Label(
             root2,
             text=mathQuestions[indexes[0]],
@@ -251,50 +422,51 @@ def newWindow1():
             background="#66b3ff",
         )
         labelQuestion1.pack(pady=(100, 50), padx=(90, 100))
-        radiovar = IntVar()
-        radiovar.set(-1)
+
+        global radioVar
+        radioVar = IntVar()
+        radioVar.set(-1)
+
         r1 = Radiobutton(
             root2,
             text=mathAnswers[indexes[0]][0],
             font=("Times", 11),
             value=0,
-            variable=radiovar,
+            variable=radioVar,
+            command=mathSelected,
             bg="#66b3ff"
         )
         r1.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r2 = Radiobutton(
             root2,
             text=mathAnswers[indexes[0]][1],
             font=("Times", 11),
             value=1,
-            variable=radiovar,
+            variable=radioVar,
+            command=mathSelected,
             bg="#66b3ff"
         )
         r2.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r3 = Radiobutton(
             root2,
             text=mathAnswers[indexes[0]][2],
             font=("Times", 11),
             value=2,
-            variable=radiovar,
+            variable=radioVar,
+            command=mathSelected,
             bg="#66b3ff"
         )
         r3.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r4 = Radiobutton(
             root2,
             text=mathAnswers[indexes[0]][3],
             font=("Times", 11),
             value=3,
-            variable=radiovar,
+            variable=radioVar,
+            command=mathSelected,
             bg="#66b3ff"
         )
         r4.pack()
@@ -317,6 +489,7 @@ def newWindow1():
         programming.destroy()
         politics.destroy()
         gen()
+        global labelQuestion2, r1, r2, r3, r4
         labelQuestion2 = Label(
             root2,
             text=sportsQuestions[indexes[0]],
@@ -327,50 +500,51 @@ def newWindow1():
             background="#66b3ff",
         )
         labelQuestion2.pack(pady=(100, 50), padx=(90, 100))
-        radiovar = IntVar()
-        radiovar.set(-1)
+
+        global radioVar
+        radioVar = IntVar()
+        radioVar.set(-1)
+
         r1 = Radiobutton(
             root2,
             text=sportsAnswers[indexes[0]][0],
             font=("Times", 11),
             value=0,
-            variable=radiovar,
+            variable=radioVar,
+            command=sportsSelected,
             bg="#66b3ff"
         )
         r1.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r2 = Radiobutton(
             root2,
             text=sportsAnswers[indexes[0]][1],
             font=("Times", 11),
             value=1,
-            variable=radiovar,
+            variable=radioVar,
+            command=sportsSelected,
             bg="#66b3ff"
         )
         r2.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r3 = Radiobutton(
             root2,
             text=sportsAnswers[indexes[0]][2],
             font=("Times", 11),
             value=2,
-            variable=radiovar,
+            variable=radioVar,
+            command=sportsSelected,
             bg="#66b3ff"
         )
         r3.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r4 = Radiobutton(
             root2,
             text=sportsAnswers[indexes[0]][3],
             font=("Times", 11),
             value=3,
-            variable=radiovar,
+            variable=radioVar,
+            command=sportsSelected,
             bg="#66b3ff"
         )
         r4.pack()
@@ -393,6 +567,7 @@ def newWindow1():
         programming.destroy()
         politics.destroy()
         gen()
+        global labelQuestion3, r1, r2, r3, r4
         labelQuestion3 = Label(
             root2,
             text=scienceQuestions[indexes[0]],
@@ -403,50 +578,51 @@ def newWindow1():
             background="#66b3ff",
         )
         labelQuestion3.pack(pady=(100, 50), padx=(90, 100))
-        radiovar = IntVar()
-        radiovar.set(-1)
+
+        global radioVar
+        radioVar = IntVar()
+        radioVar.set(-1)
+
         r1 = Radiobutton(
             root2,
             text=scienceAnswers[indexes[0]][0],
             font=("Times", 11),
             value=0,
-            variable=radiovar,
+            variable=radioVar,
+            command=scienceSelected,
             bg="#66b3ff"
         )
         r1.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r2 = Radiobutton(
             root2,
             text=scienceAnswers[indexes[0]][1],
             font=("Times", 11),
             value=1,
-            variable=radiovar,
+            variable=radioVar,
+            command=scienceSelected,
             bg="#66b3ff"
         )
         r2.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r3 = Radiobutton(
             root2,
             text=scienceAnswers[indexes[0]][2],
             font=("Times", 11),
             value=2,
-            variable=radiovar,
+            variable=radioVar,
+            command=scienceSelected,
             bg="#66b3ff"
         )
         r3.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r4 = Radiobutton(
             root2,
             text=scienceAnswers[indexes[0]][3],
             font=("Times", 11),
             value=3,
-            variable=radiovar,
+            variable=radioVar,
+            command=scienceSelected,
             bg="#66b3ff"
         )
         r4.pack()
@@ -469,7 +645,8 @@ def newWindow1():
         programming.destroy()
         politics.destroy()
         gen()
-        labelQuestion3 = Label(
+        global labelQuestion4, r1, r2, r3, r4
+        labelQuestion4 = Label(
             root2,
             text=gkQuestions[indexes[0]],
             font=("Berlin Sans FB", 16),
@@ -478,51 +655,52 @@ def newWindow1():
             wraplength=400,
             background="#66b3ff",
         )
-        labelQuestion3.pack(pady=(100, 50), padx=(90, 100))
-        radiovar = IntVar()
-        radiovar.set(-1)
+        labelQuestion4.pack(pady=(100, 50), padx=(90, 100))
+
+        global radioVar
+        radioVar = IntVar()
+        radioVar.set(-1)
+
         r1 = Radiobutton(
             root2,
             text=gkAnswers[indexes[0]][0],
             font=("Times", 11),
             value=0,
-            variable=radiovar,
+            variable=radioVar,
+            command=gkSelected,
             bg="#66b3ff"
         )
         r1.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r2 = Radiobutton(
             root2,
             text=gkAnswers[indexes[0]][1],
             font=("Times", 11),
             value=1,
-            variable=radiovar,
+            variable=radioVar,
+            command=gkSelected,
             bg="#66b3ff"
         )
         r2.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r3 = Radiobutton(
             root2,
             text=gkAnswers[indexes[0]][2],
             font=("Times", 11),
             value=2,
-            variable=radiovar,
+            variable=radioVar,
+            command=gkSelected,
             bg="#66b3ff"
         )
         r3.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r4 = Radiobutton(
             root2,
             text=gkAnswers[indexes[0]][3],
             font=("Times", 11),
             value=3,
-            variable=radiovar,
+            variable=radioVar,
+            command=gkSelected,
             bg="#66b3ff"
         )
         r4.pack()
@@ -545,7 +723,9 @@ def newWindow1():
         programming.destroy()
         politics.destroy()
         gen()
-        labelQuestion3 = Label(
+
+        global labelQuestion5, r1, r2, r3, r4
+        labelQuestion5 = Label(
             root2,
             text=labQuestions[indexes[0]],
             font=("Berlin Sans FB", 16),
@@ -554,51 +734,52 @@ def newWindow1():
             wraplength=400,
             background="#66b3ff",
         )
-        labelQuestion3.pack(pady=(100, 50), padx=(90, 100))
-        radiovar = IntVar()
-        radiovar.set(-1)
+        labelQuestion5.pack(pady=(100, 50), padx=(90, 100))
+
+        global radioVar
+        radioVar = IntVar()
+        radioVar.set(-1)
+
         r1 = Radiobutton(
             root2,
             text=labAnswers[indexes[0]][0],
             font=("Times", 11),
             value=0,
-            variable=radiovar,
+            variable=radioVar,
+            command=labSelected,
             bg="#66b3ff"
         )
         r1.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r2 = Radiobutton(
             root2,
             text=labAnswers[indexes[0]][1],
             font=("Times", 11),
             value=1,
-            variable=radiovar,
+            variable=radioVar,
+            command=labSelected,
             bg="#66b3ff"
         )
         r2.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r3 = Radiobutton(
             root2,
             text=labAnswers[indexes[0]][2],
             font=("Times", 11),
             value=2,
-            variable=radiovar,
+            variable=radioVar,
+            command=labSelected,
             bg="#66b3ff"
         )
         r3.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r4 = Radiobutton(
             root2,
             text=labAnswers[indexes[0]][3],
             font=("Times", 11),
             value=3,
-            variable=radiovar,
+            variable=radioVar,
+            command=labSelected,
             bg="#66b3ff"
         )
         r4.pack()
@@ -621,7 +802,8 @@ def newWindow1():
         programming.destroy()
         politics.destroy()
         gen()
-        labelQuestion3 = Label(
+        global labelQuestion6, r1, r2, r3, r4
+        labelQuestion6 = Label(
             root2,
             text=architectureQuestions[indexes[0]],
             font=("Berlin Sans FB", 16),
@@ -630,51 +812,52 @@ def newWindow1():
             wraplength=400,
             background="#66b3ff",
         )
-        labelQuestion3.pack(pady=(100, 50), padx=(90, 100))
-        radiovar = IntVar()
-        radiovar.set(-1)
+        labelQuestion6.pack(pady=(100, 50), padx=(90, 100))
+
+        global radioVar
+        radioVar = IntVar()
+        radioVar.set(-1)
+
         r1 = Radiobutton(
             root2,
             text=architectureAnswers[indexes[0]][0],
             font=("Times", 11),
             value=0,
-            variable=radiovar,
+            variable=radioVar,
+            command=architectureSelected,
             bg="#66b3ff"
         )
         r1.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r2 = Radiobutton(
             root2,
             text=architectureAnswers[indexes[0]][1],
             font=("Times", 11),
             value=1,
-            variable=radiovar,
+            variable=radioVar,
+            command=architectureSelected,
             bg="#66b3ff"
         )
         r2.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r3 = Radiobutton(
             root2,
             text=architectureAnswers[indexes[0]][2],
             font=("Times", 11),
             value=2,
-            variable=radiovar,
+            variable=radioVar,
+            command=architectureSelected,
             bg="#66b3ff"
         )
         r3.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r4 = Radiobutton(
             root2,
             text=architectureAnswers[indexes[0]][3],
             font=("Times", 11),
             value=3,
-            variable=radiovar,
+            variable=radioVar,
+            command=architectureSelected,
             bg="#66b3ff"
         )
         r4.pack()
@@ -697,7 +880,8 @@ def newWindow1():
         programming.destroy()
         politics.destroy()
         gen()
-        labelQuestion3 = Label(
+        global labelQuestion7, r1, r2, r3, r4
+        labelQuestion7 = Label(
             root2,
             text=programmingQuestions[indexes[0]],
             font=("Berlin Sans FB", 16),
@@ -706,51 +890,52 @@ def newWindow1():
             wraplength=400,
             background="#66b3ff",
         )
-        labelQuestion3.pack(pady=(100, 50), padx=(90, 100))
-        radiovar = IntVar()
-        radiovar.set(-1)
+        labelQuestion7.pack(pady=(100, 50), padx=(90, 100))
+
+        global radioVar
+        radioVar = IntVar()
+        radioVar.set(-1)
+
         r1 = Radiobutton(
             root2,
             text=programmingAnswers[indexes[0]][0],
             font=("Times", 11),
             value=0,
-            variable=radiovar,
+            variable=radioVar,
+            command=programmingSelected,
             bg="#66b3ff"
         )
         r1.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r2 = Radiobutton(
             root2,
             text=programmingAnswers[indexes[0]][1],
             font=("Times", 11),
             value=1,
-            variable=radiovar,
+            variable=radioVar,
+            command=programmingSelected,
             bg="#66b3ff"
         )
         r2.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r3 = Radiobutton(
             root2,
             text=programmingAnswers[indexes[0]][2],
             font=("Times", 11),
             value=2,
-            variable=radiovar,
+            variable=radioVar,
+            command=programmingSelected,
             bg="#66b3ff"
         )
         r3.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r4 = Radiobutton(
             root2,
             text=programmingAnswers[indexes[0]][3],
             font=("Times", 11),
             value=3,
-            variable=radiovar,
+            variable=radioVar,
+            command=programmingSelected,
             bg="#66b3ff"
         )
         r4.pack()
@@ -773,7 +958,8 @@ def newWindow1():
         programming.destroy()
         politics.destroy()
         gen()
-        labelQuestion3 = Label(
+        global labelQuestion8, r1, r2, r3, r4
+        labelQuestion8 = Label(
             root2,
             text=politicsQuestions[indexes[0]],
             font=("Berlin Sans FB", 16),
@@ -782,51 +968,52 @@ def newWindow1():
             wraplength=400,
             background="#66b3ff",
         )
-        labelQuestion3.pack(pady=(100, 50), padx=(90, 100))
-        radiovar = IntVar()
-        radiovar.set(-1)
+        labelQuestion8.pack(pady=(100, 50), padx=(90, 100))
+
+        global radioVar
+        radioVar = IntVar()
+        radioVar.set(-1)
+
         r1 = Radiobutton(
             root2,
             text=politicsAnswers[indexes[0]][0],
             font=("Times", 11),
             value=0,
-            variable=radiovar,
+            variable=radioVar,
+            command=politicsSelected,
             bg="#66b3ff"
         )
         r1.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r2 = Radiobutton(
             root2,
             text=politicsAnswers[indexes[0]][1],
             font=("Times", 11),
             value=1,
-            variable=radiovar,
+            variable=radioVar,
+            command=politicsSelected,
             bg="#66b3ff"
         )
         r2.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r3 = Radiobutton(
             root2,
             text=politicsAnswers[indexes[0]][2],
             font=("Times", 11),
             value=2,
-            variable=radiovar,
+            variable=radioVar,
+            command=politicsSelected,
             bg="#66b3ff"
         )
         r3.pack()
 
-        radiovar = IntVar()
-        radiovar.set(-1)
         r4 = Radiobutton(
             root2,
             text=politicsAnswers[indexes[0]][3],
             font=("Times", 11),
             value=3,
-            variable=radiovar,
+            variable=radioVar,
+            command=politicsSelected,
             bg="#66b3ff"
         )
         r4.pack()
