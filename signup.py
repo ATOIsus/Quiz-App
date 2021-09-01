@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 root=Tk()
 
-class sign:
+class signup:
     def __init__(self,root):
         self.root=root
         self.root.title("SIGN UP")
@@ -47,5 +47,5 @@ class sign:
         else:
             messagebox.showinfo("Congrats","You are signned up",parent=self.root)
 
-obj = sign(root)
+obj = signup(root)
 root.mainloop()
