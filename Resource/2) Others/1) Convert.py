@@ -9,13 +9,13 @@ try:
     for i in range(1, 21):
         # The comments below shows what happens in one iteration.
 
-        inp = input(f"Enter {i} : ")  # Question  A. Answer(choice)  B. Choice_1 C. Choice_2 D. Choice_3
+        i = input(f"Entry {i} : ")  # Question  A. Answer(choice)  B. Choice_1 C. Choice_2 D. Choice_3
 
         # Make sure to add something unique and possibly least used sequence of random characters.
         # There were errors when ',' was used;
         # When commas ',' were already in the question and it created more than 5 elements.
 
-        b = inp.replace('A.', 'zzzzz')  # Question  zzzzz Answer(choice)  B. Choice_1 C. Choice_2 D. Choice_3
+        b = i.replace('A.', 'zzzzz')  # Question  zzzzz Answer(choice)  B. Choice_1 C. Choice_2 D. Choice_3
         c = b.replace('B.', 'zzzzz')  # Question  zzzzz Answer(choice)  zzzzz Choice_1 C. Choice_2 D. Choice_3
         d = c.replace('C.', 'zzzzz')  # Question  zzzzz Answer(choice)  zzzzz Choice_1 zzzzz Choice_2 D. Choice_3
         e = d.replace('D.', 'zzzzz')  # Question  zzzzz Answer(choice)  zzzzz Choice_1 zzzzz Choice_2 zzzzz Choice_3
