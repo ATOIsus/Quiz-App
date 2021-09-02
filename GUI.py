@@ -6,37 +6,15 @@ global chosen_topic
 global img3, img4, img5, img6, img7, img8, img9, img10
 
 
-mathQuestions = [
-    "This is Math Question #1",
-    "This is Math Question #2",
-    "This is Math Question #3",
-    "This is Math Question #4",
-    "This is Math Question #5",
-    "This is Math Question #6",
-    "This is Math Question #7",
-    "This is Math Question #8",
-    "This is Math Question #9",
-    "This is Math Question #10",
-]
-mathAnswers = [
-    ["1", "2", "3", "4"],
-    ["1", "2", "3", "4"],
-    ["1", "2", "3", "4"],
-    ["1", "2", "3", "4"],
-    ["1", "2", "3", "4"],
-    ["1", "2", "3", "4"],
-    ["1", "2", "3", "4"],
-    ["1", "2", "3", "4"],
-    ["1", "2", "3", "4"],
-    ["1", "2", "3", "4"],
-]
+mathQuestions = ["This is Math Question #1"]
+mathAnswers = ["Choice 1", "Choice 2", "Choice 3", "Choice 4"]
 
 
 def choice_selected():
 
     global choice_var
 
-    print(choice_var)
+    print(choice_var.get())
 
 
 
@@ -115,18 +93,19 @@ def question_fun():
     labelQuestion1 = Label(question_label, text=mathQuestions[0], font=("Berlin Sans FB", 16), width=500, wraplength=400, background="#66b3ff")
     labelQuestion1.pack(pady=(100, 50), padx=(90, 100))
 
-    choice_var = StringVar()
-
-    r1 = Radiobutton(question_label, text=mathAnswers[0], font=("Times", 11), value=0, variable=choice_var, bg="#66b3ff", command= choice_selected)
+    choice_var = IntVar()
+    choice_var.set(-1)
+    r1 = Radiobutton(question_label, text=mathAnswers[0], font=("Times", 11), variable=choice_var, value=0,  bg="#66b3ff", command= choice_selected)
     r1.pack()
 
-    r2 = Radiobutton(question_label, text=mathAnswers[1], font=("Times", 11), value=1, variable=choice_var, bg="#66b3ff", command= choice_selected)
+
+    r2 = Radiobutton(question_label, text=mathAnswers[1], font=("Times", 11),  variable=choice_var, value=1, bg="#66b3ff", command= choice_selected)
     r2.pack()
 
-    r3 = Radiobutton(question_label, text=mathAnswers[2], font=("Times", 11), value=2, variable=choice_var,  bg="#66b3ff", command= choice_selected)
+    r3 = Radiobutton(question_label, text=mathAnswers[2], font=("Times", 11),  variable=choice_var, value=2, bg="#66b3ff", command= choice_selected)
     r3.pack()
 
-    r4 = Radiobutton(question_label, text=mathAnswers[3], font=("Times", 11), value=3, variable=choice_var,  bg="#66b3ff", command= choice_selected)
+    r4 = Radiobutton(question_label, text=mathAnswers[3], font=("Times", 11),  variable=choice_var, value=3,  bg="#66b3ff", command= choice_selected)
     r4.pack()
 
 
