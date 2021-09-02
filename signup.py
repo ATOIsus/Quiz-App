@@ -13,26 +13,26 @@ class signup:
         frame=Frame(self.root,bg="white")
         frame.place(x=150,y=150,height=320,width=400)
 
-        lbl=Label(frame,text="Sign Up",font=("Times",30,"bold"),fg="green",bg="white")
-        lbl.place(x=60,y=5)
+        s_up=Label(frame,text="Sign Up",font=("Times",30,"bold"),fg="green",bg="white")
+        s_up.place(x=60,y=5)
 
-        lbl0=Label(frame,text="Username",font=("arial",15,"bold"),fg="green",bg="white")
-        lbl0.place(x=60,y=53)
+        u_name=Label(frame,text="Username",font=("arial",15,"bold"),fg="green",bg="white")
+        u_name.place(x=60,y=53)
         self.entry0=Entry(frame,font=("arial,15"),bg="light green")
         self.entry0.place(x=60,y=80,width="300",height="30")
 
-        lbl1 = Label(frame, text="E-mail", font=("arial", 15, "bold"), fg="green", bg="white")
-        lbl1.place(x=60, y=110)
+        email = Label(frame, text="E-mail", font=("arial", 15, "bold"), fg="green", bg="white")
+        email.place(x=60, y=110)
         self.entry1 = Entry(frame, font=("arial,15"), bg="light green")
         self.entry1.place(x=60, y=140, width="300", height="30")
 
-        lbl2 = Label(frame, text="Password", font=("arial", 15, "bold"), fg="green", bg="white")
-        lbl2.place(x=60, y=170)
+        password = Label(frame, text="Password", font=("arial", 15, "bold"), fg="green", bg="white")
+        password.place(x=60, y=170)
         self.entry2 = Entry(frame, font=("arial,15"), bg="light green",show="*")
         self.entry2.place(x=60, y=200, width="300", height="30")
 
-        lbl3 = Label(frame, text="Confirm Password", font=("arial", 15, "bold"), fg="green", bg="white")
-        lbl3.place(x=60, y=230)
+        c_password = Label(frame, text="Confirm Password", font=("arial", 15, "bold"), fg="green", bg="white")
+        c_password.place(x=60, y=230)
         self.entry3 = Entry(frame, font=("arial,15"), bg="light green",show="*")
         self.entry3.place(x=60, y=260, width="300", height="30")
 
