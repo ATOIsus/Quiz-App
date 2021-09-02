@@ -6,14 +6,14 @@ root.geometry("700x600")
 root.config(background="#66b3ff")
 root.resizable(False, False)
 
-img1 = PhotoImage(file="quiz.png")
+img1 = PhotoImage(file="Resource/2) Others/Images/quiz.png")
 labelImage = Label(root, image=img1, bg="#66b3ff")
 labelImage.pack(pady=(100, 0))
 
 labelText = Label(root, text="Quiz", font=("Corbel", 23, "bold"), bg="#66b3ff")
 labelText.pack(pady=(5, 50))
 
-img2 = PhotoImage(file="start-button.png")
+img2 = PhotoImage(file="Resource/2) Others/Images/start-button.png")
 startButton = Button(root, image=img2, bg="#66b3ff", relief="flat", border=0)  # command=pass)
 startButton.pack(pady=(5, 50))
 
