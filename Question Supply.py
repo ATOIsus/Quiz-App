@@ -20,12 +20,9 @@ option3 = []  # List of all option.
 score = 0  # The number of correct answers.
 ques = []  # List of all MCQs (Questions and Choices).
 
-global quiz_topic  # The topic that is selected.
-
-file_exists  = False     # Used while importing files. Is a bool value.
-
 global ans_index         # The indexing for the answer in Supplying MCQ Function.
 
+global choice            # For Check Function.
 
 
 
@@ -45,6 +42,8 @@ def chk_ans(ans, k):
     """ Question and choices are displayed; the answer is checked and scored. """
 
     global score
+    global choice
+
     try:
         if choice[ans - 1] == anser[k]:  # Check if the answer is right.
             playsound('Resource/2) Others/Sounds/correct.wav')
@@ -65,14 +64,16 @@ def chk_ans(ans, k):
 # region 3) Unpickle and separate MCQs (Sabin).
 
 
-def unpickle_fun():
+def unpickle_fun(quiz_topic):
+
+    global ques
+
     try:
         ''' To unpickle the MCQs. '''
 
-        global quiz_topic
-        global ques
 
-        file = open(f'Resource/1) Question/{quiz_topic.get()}.txt', 'rb')
+
+        file = open(f'Resource/1) Question/{quiz_topic}.txt', 'rb')
 
         ques = list(pickle.load(file))  # Tuple converted into list.
 
@@ -85,7 +86,6 @@ def unpickle_fun():
     try:
         ''' Question, answer and options are separated into different lists. '''
 
-        global ques
 
         for i in ques:
 
@@ -127,25 +127,32 @@ def question_fun(question_pa, choice1_pa, choice2_pa, choice3_pa, choice4_pa):
 
     question_label.pack(pady=(100, 50), padx=(90, 100))
 
-    labelQuestion1 = Label(question_label, text=question_pa, font=("Berlin Sans FB", 16), width=500, wraplength=400, background="#66b3ff")
+    labelQuestion1 = Label(question_label, font=("Berlin Sans FB", 16), width=500, wraplength=400, background="#66b3ff")
     labelQuestion1.pack(pady=(100, 50), padx=(90, 100))
 
-    # choice_var = IntVar()
-    # choice_var.set(-1)
+    choice_var = IntVar()
+    choice_var.set(-1)
 
     global ans_index
 
-    r1 = Radiobutton(question_label, text=choice1_pa, font=("Times", 11),  bg="#66b3ff", command= lambda : chk_ans(1, ans_index))
+    r1 = Radiobutton(question_label, font=("Times", 11),  bg="#66b3ff", variable = choice_var, value = 0, command= lambda : chk_ans(1, ans_index))
     r1.pack()
 
-    r2 = Radiobutton(question_label, text=choice2_pa, font=("Times", 11), bg="#66b3ff", command= lambda : chk_ans(2, ans_index))
+    r2 = Radiobutton(question_label, font=("Times", 11), bg="#66b3ff", variable = choice_var, value = 0, command= lambda : chk_ans(2, ans_index))
     r2.pack()
 
-    r3 = Radiobutton(question_label, text=choice3_pa, font=("Times", 11), bg="#66b3ff", command= lambda : chk_ans(3, ans_index))
+    r3 = Radiobutton(question_label, font=("Times", 11), bg="#66b3ff", variable = choice_var, value = 0, command= lambda : chk_ans(3, ans_index))
     r3.pack()
 
-    r4 = Radiobutton(question_label, text=choice4_pa, font=("Times", 11), bg="#66b3ff", command= lambda : chk_ans(4, ans_index))
+    r4 = Radiobutton(question_label, font=("Times", 11), bg="#66b3ff", variable = choice_var, value = 0, command= lambda : chk_ans(4, ans_index))
     r4.pack()
+
+    labelQuestion1.configure(text=question_pa)
+    r1.configure(text=choice1_pa)
+    r2.configure(text=choice2_pa)
+    r3.configure(text=choice3_pa)
+    r4.configure(text=choice4_pa)
+
 
 # endregion
 
@@ -161,6 +168,7 @@ def supply_MCQ():
     try:
 
         global ans_index
+        global choice
 
         for ans_index in range(len(ques)):
 
@@ -168,6 +176,7 @@ def supply_MCQ():
             random.shuffle(choice)
 
             question_fun(question[ans_index], choice[0], choice[1], choice[2], choice[3])
+
 
 
     except BaseException as er8:
@@ -187,13 +196,10 @@ def start_fun():
 
     starting_label.destroy()
 
-    global quiz_topic
     global img3, img4, img5, img6, img7, img8, img9, img10
 
 
     topic_label.grid()
-
-    quiz_topic = StringVar()
 
     img3 = PhotoImage(file="Resource/2) Others/Images/math.png")
     img4 = PhotoImage(file="Resource/2) Others/Images/sports.png")
@@ -204,43 +210,43 @@ def start_fun():
     img9 = PhotoImage(file="Resource/2) Others/Images/programming.png")
     img10 = PhotoImage(file="Resource/2) Others/Images/politics.png")
 
-    mathButton = Button(topic_label, image=img3, bg="#66b3ff", relief="raised", border=0, variable = quiz_topic.set("Math"), command=unpickle_fun)
+    mathButton = Button(topic_label, image=img3, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Math"))
     mathButton.place(x=175, y=100)
     math = Label(topic_label, text="Math", bg="#66b3ff", font="Cambria")
     math.place(x=175, y=170)
 
-    sportsButton = Button(topic_label, image=img4, bg="#66b3ff", relief="raised", border=0, variable = quiz_topic.set("Sport"), command=unpickle_fun)
+    sportsButton = Button(topic_label, image=img4, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Sport"))
     sportsButton.place(x=175, y=215)
-    sports = Label(topic_label, text="Sports", bg="#66b3ff", font="Cambria")
+    sports = Label(topic_label, text="Sport", bg="#66b3ff", font="Cambria")
     sports.place(x=175, y=285)
 
-    scienceButton = Button(topic_label, image=img5, bg="#66b3ff", relief="raised", border=0, variable = quiz_topic.set("Science"), command=unpickle_fun)
+    scienceButton = Button(topic_label, image=img5, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Science"))
     scienceButton.place(x=175, y=330)
     science = Label(topic_label, text="Science", bg="#66b3ff", font="Cambria")
     science.place(x=175, y=400)
 
 
-    gkButton = Button(topic_label, image=img6, bg="#66b3ff", relief="raised", border=0, variable = quiz_topic.set("GK"), command=unpickle_fun)
+    gkButton = Button(topic_label, image=img6, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("GK"))
     gkButton.place(x=175, y=445)
     gk = Label(topic_label, text="Gk", bg="#66b3ff", font="Cambria")
     gk.place(x=175, y=515)
 
-    labButton = Button(topic_label, image=img7, bg="#66b3ff", relief="raised", border=0, variable = quiz_topic.set("Lab"), command=unpickle_fun)
+    labButton = Button(topic_label, image=img7, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Lab"))
     labButton.place(x=500, y=100)
     lab = Label(topic_label, text="Lab", bg="#66b3ff", font="Cambria")
     lab.place(x=500, y=170)
 
-    architectureButton = Button(topic_label, image=img8, bg="#66b3ff", relief="raised", border=0, variable = quiz_topic.set("Architecture"), command=unpickle_fun)
+    architectureButton = Button(topic_label, image=img8, bg="#66b3ff", relief="raised", command= lambda : unpickle_fun("Architecture"))
     architectureButton.place(x=500, y=215)
     architecture = Label(topic_label, text="Architecture", bg="#66b3ff", font="Cambria")
     architecture.place(x=500, y=285)
 
-    programmingButton = Button(topic_label, image=img9, bg="#66b3ff", relief="raised", border=0,  variable = quiz_topic.set("Programming"), command=unpickle_fun)
+    programmingButton = Button(topic_label, image=img9, bg="#66b3ff", relief="raised", command= lambda : unpickle_fun("Programming"))
     programmingButton.place(x=500, y=330)
     programming = Label(topic_label, text="Programming", bg="#66b3ff", font="Cambria")
     programming.place(x=500, y=400)
 
-    politicsButton = Button(topic_label, image=img10, bg="#66b3ff", relief="raised", border=0,  variable = quiz_topic.set("Politics"), command=unpickle_fun)
+    politicsButton = Button(topic_label, image=img10, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Politics"))
     politicsButton.place(x=500, y=445)
     politics = Label(topic_label, text="Politics", bg="#66b3ff", font="Cambria")
     politics.place(x=500, y=515)
