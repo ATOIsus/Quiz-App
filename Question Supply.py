@@ -20,165 +20,25 @@ option3 = []  # List of all option.
 score = 0  # The number of correct answers.
 ques = []  # List of all MCQs (Questions and Choices).
 
-question_no = 1  # The indexing for the question in the final program.
-
 global quiz_topic  # The topic that is selected.
 
-global username_var  # The username inserted during signing in.
-global password_var  # The password inserted during signing in.
-global PlayerID      # The ROWID of the player. (Retrieved while signing in)
-global db_score      # The score in the database of the selected topic. (Retrieved while signing in)
-
 file_exists  = False     # Used while importing files. Is a bool value.
-correct_user = False     # Used in Sign in function. Is a bool value.
 
-global query_fun         # For Leaderboard Function.
-global root              # For Leaderboard and Delete Function.
-
-
-# endregion
+global ans_index         # The indexing for the answer in Supplying MCQ Function.
 
 
 
 
-
-
-# region Sign In Function.
-
-
-
-def signin_fun():
-    """ Checks if the provided username & password is same to that stored in the database. """
-
-    global quiz_topic
-    global username_var
-    global password_var
-    global PlayerID
-    global db_score
-    global correct_user
-
-    try:
-
-        username_var = input("Enter Username: ")
-        password_var = input("Enter Password: ")
-
-        conn = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
-        cur = conn.cursor()
-
-        cur.execute(f"SELECT ROWID, Username, Password, {quiz_topic} FROM information")
-        records = cur.fetchall()
-
-        correct_user = False
-
-        for record in records:
-
-            if username_var == str(record[1]) and password_var == str(record[2]):
-                PlayerID = record[0]  # ROWID
-                db_score = record[3]  # quiz_topic
-                print(f'PlayerID {PlayerID}')
-                print(f'Db_score {db_score}')
-                correct_user = True
-                messagebox.showinfo("Success", "Successfully Signed In")
-                break
-            else:
-                pass
-        else:
-            messagebox.showerror('Error while Signing In!', 'Wrong Username or Password.')
-
-        conn.commit()
-        conn.close()
-
-    except BaseException as er1:
-        messagebox.showerror("Error While Signing In", str(type(er1))[6:-1] + " : " + str(er1))
+global img3, img4, img5, img6, img7, img8, img9, img10   # To display the images in start function.
 
 
 # endregion
 
 
-# region Update Function
 
 
-def update_fun():
-    """ Updates the score if it is greater than that stored in the database of a selected topic. """
+# region 6) Check Answer Function (Sabin).
 
-    global db_score
-    global score
-
-    try:
-
-        if score > db_score:
-
-            conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
-            cur1 = conn1.cursor()
-
-            cur1.execute(f"UPDATE information SET {quiz_topic} = ? where ROWID = ?", (score, PlayerID))
-
-            conn1.commit()
-            conn1.close()
-
-            playsound('Resource/2) Others/Sounds/highest.wav')
-            messagebox.showinfo("Congratulations!", f"{score} is your highest score!")
-
-        else:
-            pass
-
-    except BaseException as er2:
-        messagebox.showerror("Error in Update Function!", str(type(er2))[6:-1] + " : " + str(er2))
-
-
-# endregion
-
-
-# region Unpickle and separate MCQs.
-
-try:
-    ''' To unpickle the MCQs. '''
-
-    quiz_topic = input("Enter the file to open: ")
-    file = open(f'Resource/1) Question/{quiz_topic}.txt', 'rb')
-
-    ques = list(pickle.load(file))  # Tuple converted into list.
-
-    random.shuffle(ques)  # Question shuffled every time teh text file is opened.
-
-    file_exists = True
-
-except BaseException as er3:
-    messagebox.showerror("Error with database!", str(type(er3))[6:-1] + " : " + str(er3))
-    file_exists = False
-
-try:
-    ''' Question, answer and options are separated into different lists. '''
-
-    for i in ques:
-
-        if len(i) == 3:  # If there are only 2 options.
-            option2.append(' Both')
-            option3.append(' Neither')
-
-        elif len(i) == 4:  # If there are 3 options.
-            option3.append(' None')
-
-        for j in range(len(i)):
-            if j == 0:
-                question.append(str(i[0]))
-            elif j == 1:
-                anser.append(str(i[1]))
-            elif j == 2:
-                option1.append(str(i[2]))
-            elif j == 3:
-                option2.append(str(i[3]))
-            elif j == 4:
-                option3.append(str(i[4]))
-
-except BaseException as er4:
-    messagebox.showerror("Error in separation of MCQs", str(type(er4))[6:-1] + " : " + str(er4))
-
-
-# endregion
-
-
-# region Check Answer Function.
 
 
 def chk_ans(ans, k):
@@ -202,190 +62,242 @@ def chk_ans(ans, k):
 # endregion
 
 
-# region Delete Function.
+# region 3) Unpickle and separate MCQs (Sabin).
 
 
-try:
-
-    def delete_fun():
-
-        """ Deletes the row with the given ID,
-            but while implementing it will delete the row of the current user only (Get ROWID in sign in function).  """
-
-
-        response = messagebox.askyesno("Confirmation", "Are you sure to delete your account? ")
-
-        if response == 1:
-
-            global PlayerID
-
-            conn3 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
-            c3 = conn3.cursor()
-
-            c3.execute(f"DELETE from information WHERE ROWID = {PlayerID}")
-
-            conn3.commit()
-            conn3.close()
-
-            messagebox.showinfo("Success!", "Account deleted!")
-
-            global root
-            root.destroy()
-            query_fun()  # Displays a new window, but that's not intended.
-
-        else:
-            pass
-
-except BaseException as er6:
-    messagebox.showerror("Error while Displaying Questions!", str(type(er6))[6:-1] + " : " + str(er6))
-
-
-# endregion
-
-
-# region Leaderboard.
-
-
-
-def query_fun():
-    """ Shows the data of 10 users in descending order with the highest score in the selected topic. """
-
-    Toplevel().destroy()  # To destroy previous window and load a new window. Specifically for Delete Function.
-
-    # region Defining Canvas.
-
-    global root    # To be used in Delete Function.
-
-    root = Toplevel()
-    root.title('Leaderboard')
-    root.geometry('750x600')
-    root.resizable(False, False)
-
-    # endregion
-
+def unpickle_fun():
     try:
+        ''' To unpickle the MCQs. '''
 
         global quiz_topic
+        global ques
 
-        conn = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
-        cur = conn.cursor()
+        file = open(f'Resource/1) Question/{quiz_topic.get()}.txt', 'rb')
 
-        cur.execute(f"""SELECT ROWID, Name, Username, {quiz_topic}  FROM information 
-                            ORDER BY {quiz_topic} DESC
-                            LIMIT 10;""")
-        rows = cur.fetchall()
+        ques = list(pickle.load(file))  # Tuple converted into list.
 
-        root.wm_attributes('-transparentcolor', '#AE9152')  # To make the background transparent.
+        random.shuffle(ques)  # Question shuffled every time teh text file is opened.
 
-        frm = LabelFrame(root, text="Leaderboard", font=('Helvetica', 34, 'bold italic'), fg="gold", labelanchor='n',
-                         relief="raised", bd=15, bg='#AE9152', height=550, width=750)
-        frm.grid(row=9, column=1)
 
-        img = Image.open('Resource/2) Others/Images/lava.jpg')
-        resized_img = img.resize((650, 440), Image.ANTIALIAS)
-        converted_img = ImageTk.PhotoImage(resized_img)
+    except BaseException as er3:
+        messagebox.showerror("Error with database!", str(type(er3))[6:-1] + " : " + str(er3))
 
-        lbl_img = Label(frm, image=converted_img, height=440, width=650, bd=0)
-        lbl_img.place(x=30, y=10)
+    try:
+        ''' Question, answer and options are separated into different lists. '''
 
-        img1 = Image.open('Resource/2) Others/Images/lines.jpg')
-        resized_img1 = img1.resize((610, 400), Image.ANTIALIAS)
-        converted_img1 = ImageTk.PhotoImage(resized_img1)
+        global ques
 
-        lbl_img1 = Label(lbl_img, image=converted_img1, height=400, width=610, bd=0)
-        lbl_img1.place(x=23, y=25)
+        for i in ques:
 
-        style = ttk.Style()  # Styling the table.
-        style.theme_use("clam")
-        style.configure("Treeview",
-                        rowheight=30,
-                        background="black",
-                        foreground="#FFD700",
-                        font=('Helvetica', 14, 'bold italic'))
-        style.map('Treeview', background=[('selected', 'Black')], foreground=[('selected', 'red')])
+            if len(i) == 3:  # If there are only 2 options.
+                option2.append(' Both')
+                option3.append(' Neither')
 
-        style.configure("Treeview.Heading", background="black", foreground="gold", font=('Helvetica', 14, 'bold italic'))
-        style.map('Treeview.Heading', background=[('selected', 'red')])
+            elif len(i) == 4:  # If there are 3 options.
+                option3.append(' None')
 
-        tv = ttk.Treeview(lbl_img1, column=(1, 2, 3, 4), show="headings", height=10)  # The table.
-        tv.place(x=13, y=33)
+            for j in range(len(i)):
+                if j == 0:
+                    question.append(str(i[0]))
+                elif j == 1:
+                    anser.append(str(i[1]))
+                elif j == 2:
+                    option1.append(str(i[2]))
+                elif j == 3:
+                    option2.append(str(i[3]))
+                elif j == 4:
+                    option3.append(str(i[4]))
 
-        tv.column(1, width=50, stretch=False)
-        tv.column(2, width=190, stretch=False)
-        tv.column(3, width=205, stretch=False)
-        tv.column(4, width=135, stretch=False)
+    except BaseException as er4:
+        messagebox.showerror("Error in separation of MCQs", str(type(er4))[6:-1] + " : " + str(er4))
 
-        tv.heading(1, text="ID")
-        tv.heading(2, text="Name")
-        tv.heading(3, text="Username")
-        tv.heading(4, text=f"{quiz_topic}")
-
-        for o in rows:
-            tv.insert("", "end", values=o)
-
-        conn.commit()
-        conn.close()
-
-        delete_btn = Button(root, text="Delete", command=delete_fun)
-        delete_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
-
-    except BaseException as er7:
-        messagebox.showerror("Error in Query Function!", str(type(er7))[6:-1] + " : " + str(er7))
-
-    else:
-        root.mainloop()
-
+    supply_MCQ()
 
 # endregion
 
 
-# region Displaying MCQs.
+
+# region 5) Displaying MCQs (Abhinav).
 
 
-if file_exists:
 
-    signin_fun()  # Calling Sign In function.
+def question_fun(question_pa, choice1_pa, choice2_pa, choice3_pa, choice4_pa):
 
-else:
-    messagebox.showerror("Error while loading file!", "File not found.")
+    topic_label.destroy()
+
+    question_label.pack(pady=(100, 50), padx=(90, 100))
+
+    labelQuestion1 = Label(question_label, text=question_pa, font=("Berlin Sans FB", 16), width=500, wraplength=400, background="#66b3ff")
+    labelQuestion1.pack(pady=(100, 50), padx=(90, 100))
+
+    # choice_var = IntVar()
+    # choice_var.set(-1)
+
+    global ans_index
+
+    r1 = Radiobutton(question_label, text=choice1_pa, font=("Times", 11),  bg="#66b3ff", command= lambda : chk_ans(1, ans_index))
+    r1.pack()
+
+    r2 = Radiobutton(question_label, text=choice2_pa, font=("Times", 11), bg="#66b3ff", command= lambda : chk_ans(2, ans_index))
+    r2.pack()
+
+    r3 = Radiobutton(question_label, text=choice3_pa, font=("Times", 11), bg="#66b3ff", command= lambda : chk_ans(3, ans_index))
+    r3.pack()
+
+    r4 = Radiobutton(question_label, text=choice4_pa, font=("Times", 11), bg="#66b3ff", command= lambda : chk_ans(4, ans_index))
+    r4.pack()
+
+# endregion
 
 
-if correct_user:  # If correct username and password is given, correct_user = True.
+
+
+# region 4) Supplying MCQs (Sabin).
+
+
+
+def supply_MCQ():
 
     try:
 
-        for l in range(len(ques)):
-            choice = [anser[l], option1[l], option2[l], option3[l]]
+        global ans_index
+
+        for ans_index in range(len(ques)):
+
+            choice = [anser[ans_index], option1[ans_index], option2[ans_index], option3[ans_index]]
             random.shuffle(choice)
 
-            print()
-            print(f'{question_no})  {question[l]}')
-            print()
+            question_fun(question[ans_index], choice[0], choice[1], choice[2], choice[3])
 
-            print('1) ' + choice[0])
-            print('2) ' + choice[1])
-            print('3) ' + choice[2])
-            print('4) ' + choice[3])
-            print()
-
-            answer = int(input('Enter the answer number: '))
-
-            chk_ans(answer, l)  # Check Answer Function is called.
-
-            question_no += 1
-
-        print(f'Your score is {score} out of {len(ques)}')  # Final score.
-
-        update_fun()  # Calling the Update Function.
-
-
-        query_fun()  # Calling the leaderboard Function.
 
     except BaseException as er8:
         messagebox.showerror("Error while Displaying Questions!", str(type(er8))[6:-1] + " : " + str(er8))
 
-else:
-    messagebox.showerror("Error in Sign in!", "You can't take the quiz.")
+
+# endregion
+
+
+
+
+# region 2) Displaying Topics (Abhinav).
+
+
+
+def start_fun():
+
+    starting_label.destroy()
+
+    global quiz_topic
+    global img3, img4, img5, img6, img7, img8, img9, img10
+
+
+    topic_label.grid()
+
+    quiz_topic = StringVar()
+
+    img3 = PhotoImage(file="Resource/2) Others/Images/math.png")
+    img4 = PhotoImage(file="Resource/2) Others/Images/sports.png")
+    img5 = PhotoImage(file="Resource/2) Others/Images/science.png")
+    img6 = PhotoImage(file="Resource/2) Others/Images/gk.png")
+    img7 = PhotoImage(file="Resource/2) Others/Images/lab.png")
+    img8 = PhotoImage(file="Resource/2) Others/Images/architecture.png")
+    img9 = PhotoImage(file="Resource/2) Others/Images/programming.png")
+    img10 = PhotoImage(file="Resource/2) Others/Images/politics.png")
+
+    mathButton = Button(topic_label, image=img3, bg="#66b3ff", relief="raised", border=0, variable = quiz_topic.set("Math"), command=unpickle_fun)
+    mathButton.place(x=175, y=100)
+    math = Label(topic_label, text="Math", bg="#66b3ff", font="Cambria")
+    math.place(x=175, y=170)
+
+    sportsButton = Button(topic_label, image=img4, bg="#66b3ff", relief="raised", border=0, variable = quiz_topic.set("Sport"), command=unpickle_fun)
+    sportsButton.place(x=175, y=215)
+    sports = Label(topic_label, text="Sports", bg="#66b3ff", font="Cambria")
+    sports.place(x=175, y=285)
+
+    scienceButton = Button(topic_label, image=img5, bg="#66b3ff", relief="raised", border=0, variable = quiz_topic.set("Science"), command=unpickle_fun)
+    scienceButton.place(x=175, y=330)
+    science = Label(topic_label, text="Science", bg="#66b3ff", font="Cambria")
+    science.place(x=175, y=400)
+
+
+    gkButton = Button(topic_label, image=img6, bg="#66b3ff", relief="raised", border=0, variable = quiz_topic.set("GK"), command=unpickle_fun)
+    gkButton.place(x=175, y=445)
+    gk = Label(topic_label, text="Gk", bg="#66b3ff", font="Cambria")
+    gk.place(x=175, y=515)
+
+    labButton = Button(topic_label, image=img7, bg="#66b3ff", relief="raised", border=0, variable = quiz_topic.set("Lab"), command=unpickle_fun)
+    labButton.place(x=500, y=100)
+    lab = Label(topic_label, text="Lab", bg="#66b3ff", font="Cambria")
+    lab.place(x=500, y=170)
+
+    architectureButton = Button(topic_label, image=img8, bg="#66b3ff", relief="raised", border=0, variable = quiz_topic.set("Architecture"), command=unpickle_fun)
+    architectureButton.place(x=500, y=215)
+    architecture = Label(topic_label, text="Architecture", bg="#66b3ff", font="Cambria")
+    architecture.place(x=500, y=285)
+
+    programmingButton = Button(topic_label, image=img9, bg="#66b3ff", relief="raised", border=0,  variable = quiz_topic.set("Programming"), command=unpickle_fun)
+    programmingButton.place(x=500, y=330)
+    programming = Label(topic_label, text="Programming", bg="#66b3ff", font="Cambria")
+    programming.place(x=500, y=400)
+
+    politicsButton = Button(topic_label, image=img10, bg="#66b3ff", relief="raised", border=0,  variable = quiz_topic.set("Politics"), command=unpickle_fun)
+    politicsButton.place(x=500, y=445)
+    politics = Label(topic_label, text="Politics", bg="#66b3ff", font="Cambria")
+    politics.place(x=500, y=515)
+
+# endregion
+
+
+
+# region  1) Starting (Abhinav).
+
+
+
+root_main = Tk()
+root_main.title("Quiz")
+root_main.geometry("750x600")
+root_main.config(background="#66b3ff")
+root_main.resizable(False, False)
+
+question_label = LabelFrame(root_main, background="#66b3ff", height=600, width =700, bd=0)
+
+topic_label = LabelFrame(root_main, background="#66b3ff", height=600, width =700, bd=0)
+
+
+
+# region 1) Starting Page.
+
+starting_label = LabelFrame(root_main, background="#66b3ff")
+starting_label.pack()
+
+img1 = PhotoImage(file="Resource/2) Others/Images/quiz.png")
+labelImage = Label(starting_label, image=img1, bg="#66b3ff")
+labelImage.pack(pady=(100, 0))
+
+labelText = Label(starting_label, text="Quiz", font=("Corbel", 23, "bold"), bg="#66b3ff")
+labelText.pack(pady=(5, 50))
+
+img2 = PhotoImage(file="Resource/2) Others/Images/start-button.png")
+startButton = Button(starting_label, image=img2, bg="#66b3ff", relief="flat", border=0, command=start_fun)
+startButton.pack(pady=(5, 50))
+
+labelRule = Label(starting_label,
+                  text="""
+                  How this Quiz works:
+                  There are 8 topics to choose from.
+                  Each topic has has a total of 20 questions.
+                  Once you click on an option, that will be the final answer.
+                  So think before you answer.
+                  """,
+                  width=100, font=("Cambria", 13), bg="#ff9933", fg="#000000")
+
+labelRule.pack()
+
+root_main.mainloop()
+
+# endregion
 
 
 # endregion
+
+
