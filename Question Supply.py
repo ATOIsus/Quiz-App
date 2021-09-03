@@ -1,10 +1,7 @@
 import random  # To shuffle choices.
 import pickle  # To unpickle the MCQ.
-import sqlite3                  # To connect to the database.
 from tkinter import *           # To use basic functions and methods of tkinter.
 from tkinter import messagebox  # To show popup messagebox.
-from tkinter import ttk         # For the table to display the data from the database.
-from PIL import Image, ImageTk  # To display images.
 from playsound import playsound  # To produce sound during right, wrong answer and highest score.
 
 
@@ -42,15 +39,17 @@ def selected_fun():
     global ques_index
     global labelQuestion1, r1, r2, r3, r4
     global choice
-    global choice_var
     global score
-
 
     choice_var.set(-1)
 
 
-    if ques_index < 20:
+    if ques_index == 20:
+        question_label.destroy()
+        lbl_score.config(text=f"The total score is {score}")
+        lbl_score.pack()
 
+    elif ques_index < 20:
         choice = [anser[ques_index], option1[ques_index], option2[ques_index], option3[ques_index]]
         random.shuffle(choice)
 
@@ -63,8 +62,10 @@ def selected_fun():
         r4['text'] = choice[3]
 
         ques_index += 1
+
     else:
         pass
+
 
 
 # region 5) Check Answer Function (Sabin).
@@ -81,31 +82,17 @@ def chk_ans(ans, k):
     try:
         if choice[ans] == anser[k-1]:  # Check if the answer is right.
             playsound('Resource/2) Others/Sounds/correct.wav')
-            print(f"ans {ans} k {k-1}")
             score += 1
 
         else:
             playsound('Resource/2) Others/Sounds/incorrect.wav')
-            Label(root_main, text = f"Wrong! The right answer was:  {anser[k-1]}").place()
 
 
-        if ques_index < 20:
+        if ques_index < 21:
             selected_fun()
 
-        if ques_index == 19:
-            ques_index += 1
-
-        elif ques_index == 20:
-            question_label.destroy()
-            Label(root_main, text=f"The total score is {score}").place()
-
         else:
             pass
-
-        else:
-            pass
-
-
 
     except BaseException as er5:
         messagebox.showerror("Error in Check Answer Function!", str(type(er5))[6:-1] + " : " + str(er5))
@@ -130,10 +117,10 @@ def question_fun():
     global choice_var
 
 
-    question_label.pack(pady=(100, 50), padx=(90, 100))
+    question_label.grid(padx = 10, pady = 200)
 
     labelQuestion1 = Label(question_label, font=("Berlin Sans FB", 16), background="#66b3ff")
-    labelQuestion1.pack(pady=(100, 50), padx=(90, 100))
+    labelQuestion1.pack(anchor = "w")
 
     choice_var = IntVar()
     choice_var.set(-1)
@@ -151,7 +138,7 @@ def question_fun():
     r4 = Radiobutton(question_label, font=("Times", 11), bg="#66b3ff", variable = choice_var, value = 3, command= lambda : chk_ans(3, ques_index))
     r4.pack(anchor = "w")
 
-    if ques_index < 20:
+    if ques_index < 21:
         selected_fun()
     else:
         pass
@@ -301,7 +288,7 @@ question_label = LabelFrame(root_main, background="#66b3ff", height=600, width =
 
 topic_label = LabelFrame(root_main, background="#66b3ff", height=600, width =700, bd=0)
 
-
+lbl_score = Label(root_main)
 
 # region 1) Starting Page.
 
@@ -337,4 +324,5 @@ root_main.mainloop()
 
 
 # endregion
+
 
