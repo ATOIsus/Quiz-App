@@ -20,21 +20,54 @@ option3 = []  # List of all option.
 score = 0  # The number of correct answers.
 ques = []  # List of all MCQs (Questions and Choices).
 
-global ans_index         # The indexing for the answer in Supplying MCQ Function.
-
 global choice            # For Check Function.
 
+ques_index = 0
 
+global choice_var
 
 global img3, img4, img5, img6, img7, img8, img9, img10   # To display the images in start function.
-
+global labelQuestion1, r1, r2, r3, r4
 
 # endregion
 
 
 
 
-# region 6) Check Answer Function (Sabin).
+
+
+
+def selected_fun():
+
+    global ques_index
+    global labelQuestion1, r1, r2, r3, r4
+    global choice
+    global choice_var
+    global score
+
+
+    choice_var.set(-1)
+
+
+    if ques_index < 20:
+
+        choice = [anser[ques_index], option1[ques_index], option2[ques_index], option3[ques_index]]
+        random.shuffle(choice)
+
+        print(ques_index, len(ques))
+
+        labelQuestion1.config(text=question[ques_index])
+        r1['text'] = choice[0]
+        r2['text'] = choice[1]
+        r3['text'] = choice[2]
+        r4['text'] = choice[3]
+
+        ques_index += 1
+    else:
+        pass
+
+
+# region 5) Check Answer Function (Sabin).
 
 
 
@@ -43,17 +76,37 @@ def chk_ans(ans, k):
 
     global score
     global choice
+    global ques_index
 
     try:
-        if choice[ans - 1] == anser[k]:  # Check if the answer is right.
+        if choice[ans] == anser[k-1]:  # Check if the answer is right.
             playsound('Resource/2) Others/Sounds/correct.wav')
+            print(f"ans {ans} k {k-1}")
             score += 1
 
         else:
             playsound('Resource/2) Others/Sounds/incorrect.wav')
-            print()
-            print(f"Wrong! The right answer was:  {anser[k]}")
-            print()
+            Label(root_main, text = f"Wrong! The right answer was:  {anser[k-1]}").place()
+
+
+        if ques_index < 20:
+            selected_fun()
+
+        if ques_index == 19:
+            ques_index += 1
+
+        elif ques_index == 20:
+            question_label.destroy()
+            Label(root_main, text=f"The total score is {score}").place()
+
+        else:
+            pass
+
+        else:
+            pass
+
+
+
     except BaseException as er5:
         messagebox.showerror("Error in Check Answer Function!", str(type(er5))[6:-1] + " : " + str(er5))
 
@@ -61,7 +114,56 @@ def chk_ans(ans, k):
 # endregion
 
 
+
+
+
+# region 4) Displaying MCQs (Abhinav).
+
+
+
+def question_fun():
+
+    topic_label.destroy()
+
+    global labelQuestion1, r1, r2, r3, r4
+    global ques_index
+    global choice_var
+
+
+    question_label.pack(pady=(100, 50), padx=(90, 100))
+
+    labelQuestion1 = Label(question_label, font=("Berlin Sans FB", 16), background="#66b3ff")
+    labelQuestion1.pack(pady=(100, 50), padx=(90, 100))
+
+    choice_var = IntVar()
+    choice_var.set(-1)
+
+
+    r1 = Radiobutton(question_label, font=("Times", 11),  bg="#66b3ff", variable = choice_var, value = 0, command= lambda : chk_ans(0, ques_index))
+    r1.pack(anchor = "w")
+
+    r2 = Radiobutton(question_label, font=("Times", 11), bg="#66b3ff", variable = choice_var, value = 1, command= lambda : chk_ans(1, ques_index))
+    r2.pack(anchor = "w")
+
+    r3 = Radiobutton(question_label, font=("Times", 11), bg="#66b3ff", variable = choice_var, value = 2, command= lambda : chk_ans(2, ques_index))
+    r3.pack(anchor = "w")
+
+    r4 = Radiobutton(question_label, font=("Times", 11), bg="#66b3ff", variable = choice_var, value = 3, command= lambda : chk_ans(3, ques_index))
+    r4.pack(anchor = "w")
+
+    if ques_index < 20:
+        selected_fun()
+    else:
+        pass
+
+
+
+# endregion
+
+
+
 # region 3) Unpickle and separate MCQs (Sabin).
+
 
 
 def unpickle_fun(quiz_topic):
@@ -111,80 +213,9 @@ def unpickle_fun(quiz_topic):
     except BaseException as er4:
         messagebox.showerror("Error in separation of MCQs", str(type(er4))[6:-1] + " : " + str(er4))
 
-    supply_MCQ()
+    question_fun()
 
 # endregion
-
-
-
-# region 5) Displaying MCQs (Abhinav).
-
-
-
-def question_fun(question_pa, choice1_pa, choice2_pa, choice3_pa, choice4_pa):
-
-    topic_label.destroy()
-
-    question_label.pack(pady=(100, 50), padx=(90, 100))
-
-    labelQuestion1 = Label(question_label, font=("Berlin Sans FB", 16), width=500, wraplength=400, background="#66b3ff")
-    labelQuestion1.pack(pady=(100, 50), padx=(90, 100))
-
-    choice_var = IntVar()
-    choice_var.set(-1)
-
-    global ans_index
-
-    r1 = Radiobutton(question_label, font=("Times", 11),  bg="#66b3ff", variable = choice_var, value = 0, command= lambda : chk_ans(1, ans_index))
-    r1.pack()
-
-    r2 = Radiobutton(question_label, font=("Times", 11), bg="#66b3ff", variable = choice_var, value = 0, command= lambda : chk_ans(2, ans_index))
-    r2.pack()
-
-    r3 = Radiobutton(question_label, font=("Times", 11), bg="#66b3ff", variable = choice_var, value = 0, command= lambda : chk_ans(3, ans_index))
-    r3.pack()
-
-    r4 = Radiobutton(question_label, font=("Times", 11), bg="#66b3ff", variable = choice_var, value = 0, command= lambda : chk_ans(4, ans_index))
-    r4.pack()
-
-    labelQuestion1.configure(text=question_pa)
-    r1.configure(text=choice1_pa)
-    r2.configure(text=choice2_pa)
-    r3.configure(text=choice3_pa)
-    r4.configure(text=choice4_pa)
-
-
-# endregion
-
-
-
-
-# region 4) Supplying MCQs (Sabin).
-
-
-
-def supply_MCQ():
-
-    try:
-
-        global ans_index
-        global choice
-
-        for ans_index in range(len(ques)):
-
-            choice = [anser[ans_index], option1[ans_index], option2[ans_index], option3[ans_index]]
-            random.shuffle(choice)
-
-            question_fun(question[ans_index], choice[0], choice[1], choice[2], choice[3])
-
-
-
-    except BaseException as er8:
-        messagebox.showerror("Error while Displaying Questions!", str(type(er8))[6:-1] + " : " + str(er8))
-
-
-# endregion
-
 
 
 
@@ -255,6 +286,7 @@ def start_fun():
 
 
 
+
 # region  1) Starting (Abhinav).
 
 
@@ -305,5 +337,4 @@ root_main.mainloop()
 
 
 # endregion
-
 
