@@ -30,7 +30,7 @@ global labelQuestion1, r1, r2, r3, r4
 
 
 
-
+# region 6) Selected Function (Abhinav).
 
 
 
@@ -65,6 +65,9 @@ def selected_fun():
 
     else:
         pass
+
+
+# endregion
 
 
 
@@ -102,8 +105,6 @@ def chk_ans(ans, k):
 
 
 
-
-
 # region 4) Displaying MCQs (Abhinav).
 
 
@@ -117,26 +118,26 @@ def question_fun():
     global choice_var
 
 
-    question_label.grid(padx = 10, pady = 200)
+    question_label.grid(padx = 100, pady = 140)
 
-    labelQuestion1 = Label(question_label, font=("Berlin Sans FB", 16), background="#66b3ff")
-    labelQuestion1.pack(anchor = "w")
+    labelQuestion1 = Label(question_label, font=("Berlin Sans FB", 19), background="#66b3ff", wraplength=600, justify = "left")
+    labelQuestion1.pack(anchor = "w", padx = 20, pady = 30)
 
     choice_var = IntVar()
     choice_var.set(-1)
 
 
-    r1 = Radiobutton(question_label, font=("Times", 11),  bg="#66b3ff", variable = choice_var, value = 0, command= lambda : chk_ans(0, ques_index))
-    r1.pack(anchor = "w")
+    r1 = Radiobutton(question_label, font=("Times", 15),  bg="#66b3ff", variable = choice_var, value = 0, command= lambda : chk_ans(0, ques_index))
+    r1.pack(anchor = "w", padx = 20, pady = 10)
 
-    r2 = Radiobutton(question_label, font=("Times", 11), bg="#66b3ff", variable = choice_var, value = 1, command= lambda : chk_ans(1, ques_index))
-    r2.pack(anchor = "w")
+    r2 = Radiobutton(question_label, font=("Times", 15), bg="#66b3ff", variable = choice_var, value = 1, command= lambda : chk_ans(1, ques_index))
+    r2.pack(anchor = "w", padx = 20, pady = 10)
 
-    r3 = Radiobutton(question_label, font=("Times", 11), bg="#66b3ff", variable = choice_var, value = 2, command= lambda : chk_ans(2, ques_index))
-    r3.pack(anchor = "w")
+    r3 = Radiobutton(question_label, font=("Times", 15), bg="#66b3ff", variable = choice_var, value = 2, command= lambda : chk_ans(2, ques_index))
+    r3.pack(anchor = "w", padx = 20, pady = 10)
 
-    r4 = Radiobutton(question_label, font=("Times", 11), bg="#66b3ff", variable = choice_var, value = 3, command= lambda : chk_ans(3, ques_index))
-    r4.pack(anchor = "w")
+    r4 = Radiobutton(question_label, font=("Times", 15), bg="#66b3ff", variable = choice_var, value = 3, command= lambda : chk_ans(3, ques_index))
+    r4.pack(anchor = "w", padx = 20, pady = 10)
 
     if ques_index < 21:
         selected_fun()
@@ -326,3 +327,5 @@ root_main.mainloop()
 # endregion
 
 
+
+# Compiled and managed by Sabin Maharjan.
