@@ -1,8 +1,11 @@
 import random  # To shuffle choices.
 import pickle  # To unpickle the MCQ.
-from tkinter import *           # To use basic functions and methods of tkinter.
-from tkinter import messagebox  # To show popup messagebox.
-from playsound import playsound  # To produce sound during right, wrong answer and highest score.
+from tkinter import *              # To use basic functions and methods of tkinter.
+from tkinter import messagebox     # To show popup messagebox.
+from playsound import playsound    # To produce sound during right, wrong answer and highest score.
+from tkinter import ttk            # For the table to display the data from the database.
+import sqlite3                     # To use database.
+
 
 
 # region Global Variables.
@@ -22,11 +25,89 @@ global choice            # For Check Function.
 ques_index = 0
 
 global choice_var
+global quiz_topic
+
 
 global img3, img4, img5, img6, img7, img8, img9, img10   # To display the images in start function.
 global labelQuestion1, r1, r2, r3, r4
 
+
 # endregion
+
+
+
+
+# region 7) Leaderboard (Sabin).
+
+
+
+def query_fun():
+    """ Shows the data of 10 users in descending order with the highest score in the selected topic. """
+
+    global quiz_topic
+
+    leaderboard_label.grid()
+
+    conn = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+    cur = conn.cursor()
+
+    cur.execute(f"""SELECT ROWID, Name, Username, {quiz_topic}  FROM information 
+                        ORDER BY {quiz_topic} DESC
+                        LIMIT 10;""")
+    rows = cur.fetchall()
+
+    frm = LabelFrame(leaderboard_label, text="Leaderboard", font=('Helvetica', 34, 'bold italic'), fg="gold", labelanchor='n',
+                     relief="raised", bd=15, bg='#AE9152', height=550, width=750)
+    frm.grid(row=9, column=1)
+
+
+    image_1 = PhotoImage(file="Resource/2) Others/Images/lava.png")
+
+    lbl_image = Label(frm, image=image_1, height=440, width=650, bd=0, bg = "Gold")
+    lbl_image.place(x=30, y=10)
+
+    image_2 = PhotoImage(file="Resource/2) Others/Images/lines.png")
+
+    lbl_image1 = Label(lbl_image, image=image_2, height=400, width=610, bd=0, bg = "Black")
+    lbl_image1.place(x=23, y=25)
+
+    style = ttk.Style()  # Styling the table.
+    style.theme_use("clam")
+    style.configure("Treeview",
+                    rowheight=30,
+                    background="black",
+                    foreground="#FFD700",
+                    font=('Helvetica', 14, 'bold italic'))
+    style.map('Treeview', background=[('selected', 'Black')], foreground=[('selected', 'red')])
+
+    style.configure("Treeview.Heading", background="black", foreground="gold", font=('Helvetica', 14, 'bold italic'))
+    style.map('Treeview.Heading', background=[('selected', 'red')])
+
+    tv = ttk.Treeview(lbl_image1, column=(1, 2, 3, 4), show="headings", height=10)  # The table.
+    tv.place(x=9, y=30)
+
+    tv.column(1, width=50, stretch=False)
+    tv.column(2, width=190, stretch=False)
+    tv.column(3, width=205, stretch=False)
+    tv.column(4, width=145, stretch=False)
+
+    tv.heading(1, text="ID")
+    tv.heading(2, text="Name")
+    tv.heading(3, text="Username")
+    tv.heading(4, text=f"{quiz_topic}")
+
+    for o in rows:
+        tv.insert("", "end", values=o)
+
+    conn.commit()
+    conn.close()
+
+    delete_btn = Button(leaderboard_label, text="Delete")  # , command=delete_fun)
+    delete_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
+
+
+# endregion
+
 
 
 
@@ -41,19 +122,18 @@ def selected_fun():
     global choice
     global score
 
+
     choice_var.set(-1)
 
 
     if ques_index == 20:
         question_label.destroy()
-        lbl_score.config(text=f"The total score is {score}")
-        lbl_score.pack()
+        query_fun()
+
 
     elif ques_index < 20:
         choice = [anser[ques_index], option1[ques_index], option2[ques_index], option3[ques_index]]
         random.shuffle(choice)
-
-        print(ques_index, len(ques))
 
         labelQuestion1.config(text=question[ques_index])
         r1['text'] = choice[0]
@@ -118,26 +198,26 @@ def question_fun():
     global choice_var
 
 
-    question_label.grid(padx = 100, pady = 140)
+    question_label.grid(padx = 100, pady = 120)
 
-    labelQuestion1 = Label(question_label, font=("Berlin Sans FB", 19), background="#66b3ff", wraplength=600, justify = "left")
-    labelQuestion1.pack(anchor = "w", padx = 20, pady = 30)
+    labelQuestion1 = Label(question_label, font=("Berlin Sans FB", 17), background="#66b3ff", wraplength=620, justify = "left")
+    labelQuestion1.place(x = 5, y = 50)
 
     choice_var = IntVar()
     choice_var.set(-1)
 
 
-    r1 = Radiobutton(question_label, font=("Times", 15),  bg="#66b3ff", variable = choice_var, value = 0, command= lambda : chk_ans(0, ques_index))
-    r1.pack(anchor = "w", padx = 20, pady = 10)
+    r1 = Radiobutton(question_label, font=("Times", 15),  bg="#66b3ff", variable = choice_var,  justify = "left", value = 0, command= lambda : chk_ans(0, ques_index))
+    r1.place(x = 5, y = 165)
 
-    r2 = Radiobutton(question_label, font=("Times", 15), bg="#66b3ff", variable = choice_var, value = 1, command= lambda : chk_ans(1, ques_index))
-    r2.pack(anchor = "w", padx = 20, pady = 10)
+    r2 = Radiobutton(question_label, font=("Times", 15), bg="#66b3ff", variable = choice_var, justify = "left", value = 1, command= lambda : chk_ans(1, ques_index))
+    r2.place(x = 5, y = 205)
 
-    r3 = Radiobutton(question_label, font=("Times", 15), bg="#66b3ff", variable = choice_var, value = 2, command= lambda : chk_ans(2, ques_index))
-    r3.pack(anchor = "w", padx = 20, pady = 10)
+    r3 = Radiobutton(question_label, font=("Times", 15), bg="#66b3ff", variable = choice_var, justify = "left", value = 2, command= lambda : chk_ans(2, ques_index))
+    r3.place(x = 5, y = 245)
 
-    r4 = Radiobutton(question_label, font=("Times", 15), bg="#66b3ff", variable = choice_var, value = 3, command= lambda : chk_ans(3, ques_index))
-    r4.pack(anchor = "w", padx = 20, pady = 10)
+    r4 = Radiobutton(question_label, font=("Times", 15), bg="#66b3ff", variable = choice_var, justify = "left", value = 3, command= lambda : chk_ans(3, ques_index))
+    r4.place(x = 5, y = 285)
 
     if ques_index < 21:
         selected_fun()
@@ -154,16 +234,19 @@ def question_fun():
 
 
 
-def unpickle_fun(quiz_topic):
+def unpickle_fun(quiz_topic_pa):
 
     global ques
+    global quiz_topic
+
+    quiz_topic = quiz_topic_pa
 
     try:
         ''' To unpickle the MCQs. '''
 
 
 
-        file = open(f'Resource/1) Question/{quiz_topic}.txt', 'rb')
+        file = open(f'Resource/1) Question/{quiz_topic_pa}.txt', 'rb')
 
         ques = list(pickle.load(file))  # Tuple converted into list.
 
@@ -284,12 +367,15 @@ root_main.title("Quiz")
 root_main.geometry("750x600")
 root_main.config(background="#66b3ff")
 root_main.resizable(False, False)
+root_main.wm_attributes('-transparentcolor', '#AE9152')  # To make the background transparent fro Leaderboard.
 
 question_label = LabelFrame(root_main, background="#66b3ff", height=600, width =700, bd=0)
 
 topic_label = LabelFrame(root_main, background="#66b3ff", height=600, width =700, bd=0)
 
-lbl_score = Label(root_main)
+leaderboard_label = LabelFrame(root_main, height=600, width =750, bd=0)
+
+
 
 # region 1) Starting Page.
 
@@ -318,6 +404,8 @@ labelRule = Label(starting_label,
                   width=100, font=("Cambria", 13), bg="#ff9933", fg="#000000")
 
 labelRule.pack()
+
+
 
 root_main.mainloop()
 
