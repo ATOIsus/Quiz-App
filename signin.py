@@ -30,7 +30,7 @@ class signin:
         btn=Button(frame,text="sign in",bd=4,bg="green",fg="white",font=("arial",15),command=self.signn)
         btn.place(x=160,y=240)
 
-        btn1 = Button(self.root, text="SIGN UP", bd=4, bg="blue", fg="white", font=("arial", 15), command=)
+        btn1 = Button(self.root, text="SIGN UP", bd=4, bg="blue", fg="white", font=("arial", 15), command=self.sign_wn1)
         btn1.place(x=580, y=440)
 
     def sign_wn(self):
