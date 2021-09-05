@@ -22,14 +22,14 @@ ques = []  # List of all MCQs (Questions and Choices).
 
 global choice            # For Check Function.
 
-ques_index = 0
+ques_index = 1           # To Count the number of questions.
 
-global choice_var
-global quiz_topic
+global choice_var        # IntVar used in Selected Function.
+global quiz_topic        # The topic chosen in Start Function.
 
 
 global img3, img4, img5, img6, img7, img8, img9, img10   # To display the images in start function.
-global labelQuestion1, r1, r2, r3, r4
+global labelQuestion1, r1, r2, r3, r4                    # To display questions and options.
 
 
 # endregion
@@ -42,7 +42,7 @@ global labelQuestion1, r1, r2, r3, r4
 
 
 def query_fun():
-    """ Shows the data of 10 users in descending order with the highest score in the selected topic. """
+    """ Shows the data of 10 users in descending order with the highest score of the selected topic. """
 
     global quiz_topic
 
@@ -116,6 +116,7 @@ def query_fun():
 
 
 def selected_fun():
+    """ Loads/passes next question and choices to the question_fun """
 
     global ques_index
     global labelQuestion1, r1, r2, r3, r4
@@ -126,16 +127,16 @@ def selected_fun():
     choice_var.set(-1)
 
 
-    if ques_index == 20:
+    if ques_index == 21:
         question_label.destroy()
         query_fun()
 
 
-    elif ques_index < 20:
-        choice = [anser[ques_index], option1[ques_index], option2[ques_index], option3[ques_index]]
+    elif ques_index < 21:
+        choice = [anser[ques_index-1], option1[ques_index-1], option2[ques_index-1], option3[ques_index-1]]
         random.shuffle(choice)
 
-        labelQuestion1.config(text=question[ques_index])
+        labelQuestion1.config(text=f" {ques_index}) {question[ques_index-1]}")
         r1['text'] = choice[0]
         r2['text'] = choice[1]
         r3['text'] = choice[2]
@@ -156,14 +157,14 @@ def selected_fun():
 
 
 def chk_ans(ans, k):
-    """ Question and choices are displayed; the answer is checked and scored. """
+    """ The choice is checked and scored accordingly. """
 
     global score
     global choice
     global ques_index
 
     try:
-        if choice[ans] == anser[k-1]:  # Check if the answer is right.
+        if choice[ans] == anser[k-2]:  # Check if the answer is right.
             playsound('Resource/2) Others/Sounds/correct.wav')
             score += 1
 
@@ -171,7 +172,7 @@ def chk_ans(ans, k):
             playsound('Resource/2) Others/Sounds/incorrect.wav')
 
 
-        if ques_index < 21:
+        if ques_index < 22:
             selected_fun()
 
         else:
@@ -190,6 +191,7 @@ def chk_ans(ans, k):
 
 
 def question_fun():
+    """ To display the question and choices of the selected topic. """
 
     topic_label.destroy()
 
@@ -219,7 +221,7 @@ def question_fun():
     r4 = Radiobutton(question_label, font=("Times", 15), bg="#66b3ff", variable = choice_var, justify = "left", value = 3, command= lambda : chk_ans(3, ques_index))
     r4.place(x = 5, y = 285)
 
-    if ques_index < 21:
+    if ques_index < 22:
         selected_fun()
     else:
         pass
@@ -235,6 +237,7 @@ def question_fun():
 
 
 def unpickle_fun(quiz_topic_pa):
+    """ To unpickle the MCQs and separate question, answer and choices."""
 
     global ques
     global quiz_topic
@@ -243,7 +246,6 @@ def unpickle_fun(quiz_topic_pa):
 
     try:
         ''' To unpickle the MCQs. '''
-
 
 
         file = open(f'Resource/1) Question/{quiz_topic_pa}.txt', 'rb')
@@ -295,13 +297,14 @@ def unpickle_fun(quiz_topic_pa):
 
 
 def start_fun():
+    """ To display the 8 topics and choose one."""
 
-    starting_label.destroy()
+    starting_label.destroy()  # Destroy the previous LabelFrame.
 
     global img3, img4, img5, img6, img7, img8, img9, img10
 
 
-    topic_label.grid()
+    topic_label.grid()         # To load/display the current working LabelFrame.
 
     img3 = PhotoImage(file="Resource/2) Others/Images/math.png")
     img4 = PhotoImage(file="Resource/2) Others/Images/sports.png")
