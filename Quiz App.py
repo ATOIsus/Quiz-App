@@ -40,9 +40,47 @@ global ent_uname_up, ent_email_up, ent_pass_up, ent_c_pass_up   # For Sign Up Fu
 # endregion
 
 
+# region 13) Delete Function (Sabin).
 
 
-# region 7) Leaderboard (Sabin).
+
+def delete_fun():
+
+    """ Deletes the row with the given ID,
+    but while implementing it will delete the row of the current user only (Get ROWID in sign in function).  """
+
+
+    response = messagebox.askyesno("Confirmation", "Are you sure to delete your account? ")
+
+    try:
+
+        if response == 1:
+
+            global player_ID
+
+            conn3 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+            c3 = conn3.cursor()
+
+            c3.execute(f"DELETE from information WHERE ROWID = {player_ID}")
+
+            conn3.commit()
+            conn3.close()
+
+            messagebox.showinfo("Success!", "Account deleted!")
+
+            leaderboard_label.destroy()
+            query_fun()
+
+
+    except BaseException as er:
+        messagebox.showerror("Error in Delete Function!", str(type(er))[6:-1] + " : " + str(er))
+
+
+
+# endregion
+
+
+# region 12) Leaderboard (Sabin).
 
 
 
@@ -50,7 +88,9 @@ def query_fun():
     """ Shows the data of 10 users in descending order with the highest score of the selected topic. """
 
     global quiz_topic
+    global leaderboard_label
 
+    leaderboard_label = LabelFrame(root_main, height=600, width=750, bd=0)
     leaderboard_label.grid()
 
     conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
@@ -107,16 +147,49 @@ def query_fun():
     conn1.commit()
     conn1.close()
 
-    delete_btn = Button(leaderboard_label, text="Delete")  # , command=delete_fun)
+    delete_btn = Button(leaderboard_label, text="Delete", command=delete_fun)
     delete_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
 
 
 # endregion
 
 
+# region 11) Update Score (Sabin).
 
 
-# region 6) Selected Function (Abhinav).
+def update_fun():
+    """ Updates the score if it is greater than that stored in the database of a selected topic. """
+
+    global score, db_score, player_ID
+
+    try:
+
+        if score > db_score:
+
+            conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+            cur1 = conn1.cursor()
+
+            cur1.execute(f"UPDATE information SET {quiz_topic} = ? where ROWID = ?", (score, player_ID))
+
+            conn1.commit()
+            conn1.close()
+
+            playsound('Resource/2) Others/Sounds/highest.wav')
+            messagebox.showinfo("Congratulations!", f"{score} is your highest score!")
+
+        else:
+            pass
+
+    except BaseException as er1:
+        messagebox.showerror("Error in update function", str(type(er1))[6:-1] + " : " + str(er1))
+
+    query_fun()
+
+
+# endregion
+
+
+# region 10) Selected Function (Abhinav).
 
 
 
@@ -134,7 +207,8 @@ def selected_fun():
 
     if ques_index == 21:
         question_label.destroy()
-        query_fun()
+        update_fun()
+
 
 
     elif ques_index < 21:
@@ -157,7 +231,7 @@ def selected_fun():
 
 
 
-# region 5) Check Answer Function (Sabin).
+# region 9) Check Answer Function (Sabin).
 
 
 
@@ -191,7 +265,7 @@ def chk_ans(ans, k):
 
 
 
-# region 4) Displaying MCQs (Abhinav).
+# region 8) Displaying MCQs (Abhinav).
 
 
 
@@ -281,7 +355,6 @@ def sign_up():
                 pass
 
         else:
-            print(ent_email_up.get(), ent_uname_up.get(), ent_pass_up.get())
             c1.execute(
                 """INSERT INTO information VALUES (:Email, :Username, :Password, :Architecture, 
                 :Lab , :Math , :Politics , :Programming , :Science , :Sport, :GK)""",
@@ -301,13 +374,16 @@ def sign_up():
 
             messagebox.showinfo("Completed", "Player Data Inserted")
 
+            ent_uname_up.delete(0, END)
+            ent_email_up.delete(0, END)
+            ent_pass_up.delete(0, END)
+            ent_c_pass_up.delete(0, END)
+
+            sign_in_GUI()
+
         conn1.commit()
         conn1.close()
 
-        ent_uname_up.delete(0, END)
-        ent_email_up.delete(0, END)
-        ent_pass_up.delete(0, END)
-        ent_c_pass_up.delete(0, END)
 
 
 
