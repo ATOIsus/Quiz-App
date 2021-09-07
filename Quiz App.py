@@ -32,12 +32,15 @@ global img3, img4, img5, img6, img7, img8, img9, img10   # To display the images
 global labelQuestion1, r1, r2, r3, r4                    # To display questions and options.
 
 global user_name_signin, password_signin                        # For Sign In Function.
+global ent_uname_in, ent_pass_in                                # For Sign In Function.
 global player_ID, db_score                                      # For Sign In Function.
-global ent_uname_up, ent_email_up, ent_pass_up, ent_c_pass_up   # For Sign Up Function.
+global ent_uname_up, ent_name_up, ent_pass_up, ent_c_pass_up   # For Sign Up Function.
 
+signed_in = False   # To check if the user has Signed In or not.
 
 
 # endregion
+
 
 
 # region 14) Start Over (Sabin).
@@ -45,11 +48,15 @@ global ent_uname_up, ent_email_up, ent_pass_up, ent_c_pass_up   # For Sign Up Fu
 
 
 def start_over_fun():
+    """ Ask the user if they want to start over or quit. """
+
+    global ques_index
 
     start_response = messagebox.askyesno("Start Over?", "Would you like to start over a new topic? ")
 
     if start_response == 1:
         leaderboard_label.destroy()
+        ques_index = 1
         start_fun()
 
     else:
@@ -106,6 +113,7 @@ def delete_fun():
 # endregion
 
 
+
 # region 12) Leaderboard (Sabin).
 
 
@@ -122,14 +130,14 @@ def query_fun():
     conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
     cur1 = conn1.cursor()
 
-    cur1.execute(f"""SELECT ROWID, Email, Username, {quiz_topic}  FROM information 
+    cur1.execute(f"""SELECT ROWID, Name, Username, {quiz_topic}  FROM information 
                         ORDER BY {quiz_topic} DESC
                         LIMIT 10;""")
     rows = cur1.fetchall()
 
     frm = LabelFrame(leaderboard_label, text="Leaderboard", font=('Helvetica', 34, 'bold italic'), fg="gold", labelanchor='n',
                      relief="raised", bd=15, bg='#AE9152', height=550, width=750)
-    frm.grid(row=9, column=1)
+    frm.place(x=0, y=0)
 
 
     image_1 = PhotoImage(file="Resource/2) Others/Images/lava.png")
@@ -163,7 +171,7 @@ def query_fun():
     tv.column(4, width=145, stretch=False)
 
     tv.heading(1, text="ID")
-    tv.heading(2, text="Email")
+    tv.heading(2, text="Name")
     tv.heading(3, text="Username")
     tv.heading(4, text=f"{quiz_topic}")
 
@@ -173,41 +181,51 @@ def query_fun():
     conn1.commit()
     conn1.close()
 
-    delete_btn = Button(leaderboard_label, text="Delete", command=delete_fun)
-    delete_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
+    delete_btn = Button(leaderboard_label, text="Delete", command=delete_fun, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
+    delete_btn.place(x=50, y=555)
 
-    start_btn = Button(leaderboard_label, text="Start Over?", command=delete_fun)
-    start_btn.grid(row=14, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
+    start_btn = Button(leaderboard_label, text="Start Over?", command=start_over_fun, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
+    start_btn.place(x=290, y=555)
+
+    quit_btn = Button(leaderboard_label, text="Exit", command=root_main.destroy, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
+    quit_btn.place(x=530, y=555)
 
 
 # endregion
 
 
+
 # region 11) Update Score (Sabin).
+
 
 
 def update_fun():
     """ Updates the score if it is greater than that stored in the database of a selected topic. """
 
-    global score, db_score, player_ID
+    global score, db_score, player_ID, signed_in
 
     try:
+        if signed_in:
 
-        if score > db_score:
+            if score > db_score:
 
-            conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
-            cur1 = conn1.cursor()
+                conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+                cur1 = conn1.cursor()
 
-            cur1.execute(f"UPDATE information SET {quiz_topic} = ? where ROWID = ?", (score, player_ID))
+                cur1.execute(f"UPDATE information SET {quiz_topic} = ? where ROWID = ?", (score, player_ID))
 
-            conn1.commit()
-            conn1.close()
+                conn1.commit()
+                conn1.close()
 
-            playsound('Resource/2) Others/Sounds/highest.wav')
-            messagebox.showinfo("Congratulations!", f"{score} is your highest score!")
+                playsound('Resource/2) Others/Sounds/highest.wav')
+                messagebox.showinfo("Congratulations!", f"{score} is your highest score from {db_score}!")
+
+            else:
+                pass
 
         else:
-            pass
+            messagebox.showinfo("Not Signed In!", f"Your score {score} will not be saved because you are not signed in.")
+
 
     except BaseException as er1:
         messagebox.showerror("Error in update function", str(type(er1))[6:-1] + " : " + str(er1))
@@ -216,6 +234,7 @@ def update_fun():
 
 
 # endregion
+
 
 
 # region 10) Selected Function (Abhinav).
@@ -301,7 +320,6 @@ def chk_ans(ans, k):
 def question_fun():
     """ To display the question and choices of the selected topic. """
 
-    topic_label.destroy()
     frame_signin.destroy()
 
     global labelQuestion1, r1, r2, r3, r4
@@ -347,13 +365,13 @@ def question_fun():
 
 def sign_up():
 
-    global ent_uname_up, ent_email_up, ent_pass_up, ent_c_pass_up
+    global ent_uname_up, ent_name_up, ent_pass_up, ent_c_pass_up
 
-    if ent_uname_up.get() == '' and ent_pass_up.get() == '' and ent_email_up.get() == '' and ent_c_pass_up.get() == '':
+    if ent_uname_up.get() == '' and ent_pass_up.get() == '' and ent_name_up.get() == '' and ent_c_pass_up.get() == '':
         messagebox.showerror("Error!", "Cannot Enter Empty Fields!")
 
-    elif ent_email_up.get() == '':
-        messagebox.showerror("Error!", "Cannot Enter Empty Email!")
+    elif ent_name_up.get() == '':
+        messagebox.showerror("Error!", "Cannot Enter Empty Name!")
 
     elif ent_uname_up.get() == '':
         messagebox.showerror("Error!", "Cannot Enter Empty Username!")
@@ -385,10 +403,10 @@ def sign_up():
 
         else:
             c1.execute(
-                """INSERT INTO information VALUES (:Email, :Username, :Password, :Architecture, 
+                """INSERT INTO information VALUES (:Name, :Username, :Password, :Architecture, 
                 :Lab , :Math , :Politics , :Programming , :Science , :Sport, :GK)""",
                 {
-                    'Email': ent_email_up.get(),
+                    'Name': ent_name_up.get(),
                     'Username': ent_uname_up.get(),
                     'Password': ent_pass_up.get(),
                     'Architecture': 0,
@@ -401,10 +419,10 @@ def sign_up():
                     'GK': 0,
                 })
 
-            messagebox.showinfo("Completed", "Player Data Inserted")
+            messagebox.showinfo("Signed Up!", f"Congratulations! {ent_uname_up.get()}, you account has been created! ")
 
             ent_uname_up.delete(0, END)
-            ent_email_up.delete(0, END)
+            ent_name_up.delete(0, END)
             ent_pass_up.delete(0, END)
             ent_c_pass_up.delete(0, END)
 
@@ -420,14 +438,14 @@ def sign_up():
 
 
 
-# region 6) Sign Up (Bishal).
+# region 6) Sign Up GUI (Bishal).
 
 
 
 
 def sign_up_GUI():
 
-    global ent_uname_up, ent_email_up, ent_pass_up, ent_c_pass_up
+    global ent_uname_up, ent_name_up, ent_pass_up, ent_c_pass_up
     global frame_signup
 
     frame_signin.destroy()
@@ -439,15 +457,15 @@ def sign_up_GUI():
     lbl_signup = Label(frame_signup, text="Sign Up", font=("Times", 30, "bold"), fg="green", bg="white")
     lbl_signup.place(x=60, y=5)
 
-    lbl_u_name = Label(frame_signup, text="Username", font=("arial", 15, "bold"), fg="green", bg="white")
-    lbl_u_name.place(x=60, y=53)
-    ent_uname_up = Entry(frame_signup, font="arial,15", bg="light green")
-    ent_uname_up.place(x=60, y=80, width="300", height="30")
+    lbl_name = Label(frame_signup, text="Name", font=("arial", 15, "bold"), fg="green", bg="white")
+    lbl_name.place(x=60, y=53)
+    ent_name_up = Entry(frame_signup, font="arial,15", bg="light green")
+    ent_name_up.place(x=60, y=80, width="300", height="30")
 
-    lbl_email = Label(frame_signup, text="E-mail", font=("arial", 15, "bold"), fg="green", bg="white")
-    lbl_email.place(x=60, y=110)
-    ent_email_up = Entry(frame_signup, font="arial,15", bg="light green")
-    ent_email_up.place(x=60, y=140, width="300", height="30")
+    lbl_u_name = Label(frame_signup, text="Username", font=("arial", 15, "bold"), fg="green", bg="white")
+    lbl_u_name.place(x=60, y= 110)
+    ent_uname_up = Entry(frame_signup, font="arial,15", bg="light green")
+    ent_uname_up.place(x=60, y= 140, width="300", height="30")
 
     lbl_pass = Label(frame_signup, text="Password", font=("arial", 15, "bold"), fg="green", bg="white")
     lbl_pass.place(x=60, y=170)
@@ -477,6 +495,7 @@ def sign_up_GUI():
 def sign_in():
 
     global user_name_signin, password_signin
+    global ent_uname_in, ent_pass_in
     global quiz_topic, player_ID, db_score
 
 
@@ -498,14 +517,15 @@ def sign_in():
                 player_ID = record[0]  # ROWID
                 db_score = record[3]  # quiz_topic
 
-                messagebox.showinfo("Success", "Successfully Signed In")
+                messagebox.showinfo("Signed In!", f" Welcome again {user_name_signin.get()}!")
+
+                ent_uname_in.delete(0, END)
+                ent_pass_in.delete(0, END)
 
                 question_fun()
 
-                # ent_uname_in.delete(0, END)
-                # ent_pass_in.delete(0, END)
-
                 break
+
             else:
                 pass
         else:
@@ -529,6 +549,7 @@ def sign_in_GUI():
     topic_label.destroy()
 
     global user_name_signin, password_signin
+    global ent_uname_in, ent_pass_in
     global frame_signin
 
     frame_signin = LabelFrame(root_main, bg="white", bd=0, height=400, width=450)
@@ -568,7 +589,7 @@ def unpickle_fun(quiz_topic_pa):
     """ To unpickle the MCQs and separate question, answer and choices."""
 
     global ques
-    global quiz_topic
+    global quiz_topic, signed_in
 
     quiz_topic = quiz_topic_pa
 
@@ -618,9 +639,12 @@ def unpickle_fun(quiz_topic_pa):
     response_signin = messagebox.askyesno("Sign In", " Would you like to Sign In?")
 
     if response_signin == 1:
+        signed_in = True
         sign_in_GUI()
 
     else:
+        signed_in = False
+        topic_label.destroy()
         question_fun()
 
 # endregion
@@ -704,7 +728,7 @@ root_main = Tk()
 root_main.title("Quiz")
 root_main.geometry("750x600")
 root_main.config(background="#66b3ff")
-root_main.resizable(False, False)
+# root_main.resizable(False, False)
 root_main.wm_attributes('-transparentcolor', '#AE9152')  # To make the background transparent fro Leaderboard.
 
 question_label = LabelFrame(root_main, background="#66b3ff", height=600, width =700, bd=0)  # Question Function.
@@ -757,7 +781,7 @@ root_main.mainloop()
 
 
 
-# region 0) Create Database & Table.
+# region 0) Create Database & Table (Sabin & Aditya).
 
 
 
@@ -768,7 +792,7 @@ c = conn.cursor()
 c.execute(""" CREATE TABLE IF NOT EXISTS
           information
           (
-          Email text, 
+          Name text, 
           Username text,
           Password text,
           Architecture integer, 
