@@ -31,6 +31,11 @@ global quiz_topic        # The topic chosen in Start Function.
 global img3, img4, img5, img6, img7, img8, img9, img10   # To display the images in start function.
 global labelQuestion1, r1, r2, r3, r4                    # To display questions and options.
 
+global ent_uname_in, ent_pass_in                                # For Sign In Function.
+global player_ID, db_score                                      # For Sign In Function.
+global ent_uname_up, ent_email_up, ent_pass_up, ent_c_pass_up   # For Sign Up Function.
+
+
 
 # endregion
 
@@ -48,13 +53,13 @@ def query_fun():
 
     leaderboard_label.grid()
 
-    conn = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
-    cur = conn.cursor()
+    conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+    cur1 = conn1.cursor()
 
-    cur.execute(f"""SELECT ROWID, Name, Username, {quiz_topic}  FROM information 
+    cur1.execute(f"""SELECT ROWID, Name, Username, {quiz_topic}  FROM information 
                         ORDER BY {quiz_topic} DESC
                         LIMIT 10;""")
-    rows = cur.fetchall()
+    rows = cur1.fetchall()
 
     frm = LabelFrame(leaderboard_label, text="Leaderboard", font=('Helvetica', 34, 'bold italic'), fg="gold", labelanchor='n',
                      relief="raised", bd=15, bg='#AE9152', height=550, width=750)
@@ -99,8 +104,8 @@ def query_fun():
     for o in rows:
         tv.insert("", "end", values=o)
 
-    conn.commit()
-    conn.close()
+    conn1.commit()
+    conn1.close()
 
     delete_btn = Button(leaderboard_label, text="Delete")  # , command=delete_fun)
     delete_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
@@ -194,6 +199,7 @@ def question_fun():
     """ To display the question and choices of the selected topic. """
 
     topic_label.destroy()
+    frame_signin.destroy()
 
     global labelQuestion1, r1, r2, r3, r4
     global ques_index
@@ -232,7 +238,222 @@ def question_fun():
 
 
 
-# region 3) Unpickle and separate MCQs (Sabin).
+# region 7) Sign Up to Database (Sabin & Bishal).
+
+
+
+def sign_up():
+
+    global ent_uname_up, ent_email_up, ent_pass_up, ent_c_pass_up
+
+    if ent_uname_up.get() == '' and ent_pass_up.get() == '' and ent_email_up.get() == '' and ent_c_pass_up.get() == '':
+        messagebox.showerror("Error!", "Cannot Enter Empty Fields!")
+
+    elif ent_email_up.get() == '':
+        messagebox.showerror("Error!", "Cannot Enter Empty Email!")
+
+    elif ent_uname_up.get() == '':
+        messagebox.showerror("Error!", "Cannot Enter Empty Username!")
+
+    elif ent_pass_up.get() == '':
+        messagebox.showerror("Error!", "Cannot Enter Empty Password!")
+
+    elif ent_c_pass_up.get() == '':
+        messagebox.showerror("Error!", "Cannot Enter Empty Confirm Password!")
+
+    elif ent_pass_up.get() != ent_c_pass_up.get():
+        messagebox.showerror("Error!", "Password and Confirm Password need to be the same!")
+
+    else:
+        conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+        c1 = conn1.cursor()
+
+        c1.execute(f"SELECT Username FROM information")
+        records = c1.fetchall()
+
+        for record in records:
+
+            if ent_uname_up.get() == str(record[0]):
+                messagebox.showerror("Error!", "Cannot Use Same Username Twice!")
+                break
+
+            else:
+                pass
+
+        else:
+            c1.execute(
+                """INSERT INTO information VALUES (:Email, :Username, :Password, :Architecture, 
+                :Lab , :Math , :Politics , :Programming , :Science , :Sport, :GK)""",
+                {
+                    'Email': ent_email_up.get(),
+                    'Username': ent_uname_up.get(),
+                    'Password': ent_pass_up.get(),
+                    'Architecture': 0,
+                    'Lab': 0,
+                    'Math': 0,
+                    'Politics': 0,
+                    'Programming': 0,
+                    'Science': 0,
+                    'Sport': 0,
+                    'GK': 0,
+                })
+
+            messagebox.showinfo("Completed", "Player Data Inserted")
+
+        conn1.commit()
+        conn1.close()
+
+        ent_uname_up.delete(0, END)
+        ent_email_up.delete(0, END)
+        ent_pass_up.delete(0, END)
+        ent_c_pass_up.delete(0, END)
+
+        sign_in_GUI()
+
+
+# endregion
+
+
+
+# region 6) Sign Up (Bishal).
+
+
+
+
+def sign_up_GUI():
+
+    global ent_uname_up, ent_email_up, ent_pass_up, ent_c_pass_up
+    global frame_signup
+
+    frame_signin.destroy()
+
+    frame_signup = LabelFrame(root_main, bg="white", bd=0, height=400, width=450)
+    frame_signup.place(x=150, y=110)
+
+
+    lbl_signup = Label(frame_signup, text="Sign Up", font=("Times", 30, "bold"), fg="green", bg="white")
+    lbl_signup.place(x=60, y=5)
+
+    lbl_u_name = Label(frame_signup, text="Username", font=("arial", 15, "bold"), fg="green", bg="white")
+    lbl_u_name.place(x=60, y=53)
+    ent_uname_up = Entry(frame_signup, font="arial,15", bg="light green")
+    ent_uname_up.place(x=60, y=80, width="300", height="30")
+
+    lbl_email = Label(frame_signup, text="E-mail", font=("arial", 15, "bold"), fg="green", bg="white")
+    lbl_email.place(x=60, y=110)
+    ent_email_up = Entry(frame_signup, font="arial,15", bg="light green")
+    ent_email_up.place(x=60, y=140, width="300", height="30")
+
+    lbl_pass = Label(frame_signup, text="Password", font=("arial", 15, "bold"), fg="green", bg="white")
+    lbl_pass.place(x=60, y=170)
+    ent_pass_up = Entry(frame_signup, font="arial,15", bg="light green", show="*")
+    ent_pass_up.place(x=60, y=200, width="300", height="30")
+
+    lbl_c_pass = Label(frame_signup, text="Confirm Password", font=("arial", 15, "bold"), fg="green", bg="white")
+    lbl_c_pass.place(x=60, y=230)
+    ent_c_pass_up = Entry(frame_signup, font="arial,15", bg="light green", show="*")
+    ent_c_pass_up.place(x=60, y=260, width="300", height="30")
+
+    btn_signup_up = Button(frame_signup, text="Sign Up", bd=3, bg="green", fg="white", font=("arial", 15), command=sign_up)
+    btn_signup_up.place(x=160, y=310)
+
+    btn_signin_up = Button(frame_signup, text="SIGN IN", bd=4, bg="blue", fg="white", font=("arial", 15), command=sign_in_GUI)
+    btn_signin_up.place(x=350, y=350)
+
+
+# endregion
+
+
+
+# region 5) Check Sign In Details (Sabin & Bishal).
+
+
+
+def sign_in():
+
+    global ent_uname_in, ent_uname_in
+    global quiz_topic, player_ID, db_score
+
+
+    if ent_uname_in.get() == "" or ent_pass_in.get() == "":
+        messagebox.showerror("Error", "All fields are required")
+
+    else:
+
+        conn2 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+        cur2 = conn2.cursor()
+
+        cur2.execute(f"SELECT ROWID, Username, Password, {quiz_topic} FROM information")
+        records = cur2.fetchall()
+
+
+        for record in records:
+
+            if ent_uname_in == str(record[1]) and ent_pass_in == str(record[2]):
+                player_ID = record[0]  # ROWID
+                db_score = record[3]  # quiz_topic
+
+                messagebox.showinfo("Success", "Successfully Signed In")
+
+                ent_uname_in.delete(0, END)
+                ent_pass_in.delete(0, END)
+
+                break
+            else:
+                pass
+        else:
+            messagebox.showerror('Error while Signing In!', 'Wrong Username or Password.')
+
+        conn2.commit()
+        conn2.close()
+
+        start_fun()
+
+
+# endregion
+
+
+
+# region 4) Sign In GUI (Bishal).
+
+
+
+def sign_in_GUI():
+
+    frame_signup.destroy()
+    topic_label.destroy()
+
+    global ent_uname_in, ent_pass_in
+    global frame_signin
+
+    frame_signin = LabelFrame(root_main, bg="white", bd=0, height=400, width=450)
+    frame_signin.place(x=150, y=110)
+
+    lbl_signin = Label(frame_signin, text="Sign In", font=("Times", 30, "bold"), fg="green", bg="white")
+    lbl_signin.place(x=60, y=30)
+
+    lbl_user_n = Label(frame_signin, text="Username", font=("arial", 15, "bold"), fg="green", bg="white")
+    lbl_user_n.place(x=60, y=90)
+    ent_uname_in = Entry(frame_signin, font="arial, 15", bg="light green")
+    ent_uname_in.place(x=60, y=120, width="300", height="30")
+
+    lbl_p_word = Label(frame_signin, text="Password", font=("arial", 15, "bold"), fg="green", bg="white")
+    lbl_p_word.place(x=60, y=160)
+    ent_pass_in = Entry(frame_signin, font="arial, 15", bg="light green", show="*")
+    ent_pass_in.place(x=60, y=190, width="300", height="30")
+
+    btn_signin_in = Button(frame_signin, text="Sign In", bd=4, bg="green", fg="white", font=("arial", 15), command=sign_in)
+    btn_signin_in.place(x=160, y=240)
+
+    btn_signup_in = Button(frame_signin, text="SIGN UP", bd=4, bg="blue", fg="white", font=("arial", 15), command=sign_up_GUI)
+    btn_signup_in.place(x=345, y=350)
+
+
+#  endregion
+
+
+
+# region 3) Unpickle and Separate MCQs (Sabin).
 
 
 
@@ -286,7 +507,14 @@ def unpickle_fun(quiz_topic_pa):
     except BaseException as er4:
         messagebox.showerror("Error in separation of MCQs", str(type(er4))[6:-1] + " : " + str(er4))
 
-    question_fun()
+
+    response_signin = messagebox.askyesno("Sign In", " Would you like to Sign In?")
+
+    if response_signin == 1:
+        sign_in_GUI()
+
+    else:
+        question_fun()
 
 # endregion
 
@@ -299,11 +527,12 @@ def unpickle_fun(quiz_topic_pa):
 def start_fun():
     """ To display the 8 topics and choose one."""
 
-    starting_label.destroy()  # Destroy the previous LabelFrame.
-
     global img3, img4, img5, img6, img7, img8, img9, img10
+    global topic_label
 
+    starting_label.destroy()
 
+    topic_label = LabelFrame(root_main, background="#66b3ff", height=600, width=700, bd=0)  # Reinitialized.
     topic_label.grid()         # To load/display the current working LabelFrame.
 
     img3 = PhotoImage(file="Resource/2) Others/Images/math.png")
@@ -360,7 +589,6 @@ def start_fun():
 
 
 
-
 # region  1) Starting (Abhinav).
 
 
@@ -372,12 +600,15 @@ root_main.config(background="#66b3ff")
 root_main.resizable(False, False)
 root_main.wm_attributes('-transparentcolor', '#AE9152')  # To make the background transparent fro Leaderboard.
 
-question_label = LabelFrame(root_main, background="#66b3ff", height=600, width =700, bd=0)
+question_label = LabelFrame(root_main, background="#66b3ff", height=600, width =700, bd=0)  # Question Function.
 
-topic_label = LabelFrame(root_main, background="#66b3ff", height=600, width =700, bd=0)
+topic_label = LabelFrame(root_main, background="#66b3ff", height=600, width =700, bd=0)     # Start Function.
 
-leaderboard_label = LabelFrame(root_main, height=600, width =750, bd=0)
+leaderboard_label = LabelFrame(root_main, height=600, width =750, bd=0)                     # Query Function.
 
+frame_signin = LabelFrame(root_main, bg="white", bd=0, height=400, width=450)   # Sign In GUI Function.
+
+frame_signup = LabelFrame(root_main, bg="white", bd=0, height=400, width=450)   # Sign Up GUI Function.
 
 
 # region 1) Starting Page.
@@ -419,4 +650,35 @@ root_main.mainloop()
 
 
 
-# Compiled and managed by Sabin Maharjan.
+# region 0) Create Database & Table.
+
+
+
+conn = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+
+c = conn.cursor()
+
+c.execute(""" CREATE TABLE IF NOT EXISTS
+          information
+          (
+          Email text, 
+          Username text,
+          Password text,
+          Architecture integer, 
+          Lab integer,
+          Math integer,
+          Politics integer,
+          Programming integer,
+          Science integer,
+          Sport integer,
+          GK integer
+          )""")
+
+conn.commit()
+conn.close()
+
+# endregion
+
+
+
+# Compiled and Managed by Sabin Maharjan.
