@@ -31,7 +31,7 @@ global quiz_topic        # The topic chosen in Start Function.
 global img3, img4, img5, img6, img7, img8, img9, img10   # To display the images in start function.
 global labelQuestion1, r1, r2, r3, r4                    # To display questions and options.
 
-global ent_uname_in, ent_pass_in                                # For Sign In Function.
+global user_name_signin, password_signin                        # For Sign In Function.
 global player_ID, db_score                                      # For Sign In Function.
 global ent_uname_up, ent_email_up, ent_pass_up, ent_c_pass_up   # For Sign Up Function.
 
@@ -56,7 +56,7 @@ def query_fun():
     conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
     cur1 = conn1.cursor()
 
-    cur1.execute(f"""SELECT ROWID, Name, Username, {quiz_topic}  FROM information 
+    cur1.execute(f"""SELECT ROWID, Email, Username, {quiz_topic}  FROM information 
                         ORDER BY {quiz_topic} DESC
                         LIMIT 10;""")
     rows = cur1.fetchall()
@@ -97,7 +97,7 @@ def query_fun():
     tv.column(4, width=145, stretch=False)
 
     tv.heading(1, text="ID")
-    tv.heading(2, text="Name")
+    tv.heading(2, text="Email")
     tv.heading(3, text="Username")
     tv.heading(4, text=f"{quiz_topic}")
 
@@ -281,6 +281,7 @@ def sign_up():
                 pass
 
         else:
+            print(ent_email_up.get(), ent_uname_up.get(), ent_pass_up.get())
             c1.execute(
                 """INSERT INTO information VALUES (:Email, :Username, :Password, :Architecture, 
                 :Lab , :Math , :Politics , :Programming , :Science , :Sport, :GK)""",
@@ -308,7 +309,6 @@ def sign_up():
         ent_pass_up.delete(0, END)
         ent_c_pass_up.delete(0, END)
 
-        sign_in_GUI()
 
 
 # endregion
@@ -371,11 +371,11 @@ def sign_up_GUI():
 
 def sign_in():
 
-    global ent_uname_in, ent_uname_in
+    global user_name_signin, password_signin
     global quiz_topic, player_ID, db_score
 
 
-    if ent_uname_in.get() == "" or ent_pass_in.get() == "":
+    if user_name_signin.get() == "" or password_signin.get() == "":
         messagebox.showerror("Error", "All fields are required")
 
     else:
@@ -389,14 +389,16 @@ def sign_in():
 
         for record in records:
 
-            if ent_uname_in == str(record[1]) and ent_pass_in == str(record[2]):
+            if user_name_signin.get() == record[1] and password_signin.get() == record[2]:
                 player_ID = record[0]  # ROWID
                 db_score = record[3]  # quiz_topic
 
                 messagebox.showinfo("Success", "Successfully Signed In")
 
-                ent_uname_in.delete(0, END)
-                ent_pass_in.delete(0, END)
+                question_fun()
+
+                # ent_uname_in.delete(0, END)
+                # ent_pass_in.delete(0, END)
 
                 break
             else:
@@ -406,8 +408,6 @@ def sign_in():
 
         conn2.commit()
         conn2.close()
-
-        start_fun()
 
 
 # endregion
@@ -423,7 +423,7 @@ def sign_in_GUI():
     frame_signup.destroy()
     topic_label.destroy()
 
-    global ent_uname_in, ent_pass_in
+    global user_name_signin, password_signin
     global frame_signin
 
     frame_signin = LabelFrame(root_main, bg="white", bd=0, height=400, width=450)
@@ -432,14 +432,16 @@ def sign_in_GUI():
     lbl_signin = Label(frame_signin, text="Sign In", font=("Times", 30, "bold"), fg="green", bg="white")
     lbl_signin.place(x=60, y=30)
 
+    user_name_signin = StringVar()
     lbl_user_n = Label(frame_signin, text="Username", font=("arial", 15, "bold"), fg="green", bg="white")
     lbl_user_n.place(x=60, y=90)
-    ent_uname_in = Entry(frame_signin, font="arial, 15", bg="light green")
+    ent_uname_in = Entry(frame_signin, font="arial, 15", bg="light green", textvariable = user_name_signin)
     ent_uname_in.place(x=60, y=120, width="300", height="30")
 
+    password_signin = StringVar()
     lbl_p_word = Label(frame_signin, text="Password", font=("arial", 15, "bold"), fg="green", bg="white")
     lbl_p_word.place(x=60, y=160)
-    ent_pass_in = Entry(frame_signin, font="arial, 15", bg="light green", show="*")
+    ent_pass_in = Entry(frame_signin, font="arial, 15", bg="light green", show="*", textvariable = password_signin)
     ent_pass_in.place(x=60, y=190, width="300", height="30")
 
     btn_signin_in = Button(frame_signin, text="Sign In", bd=4, bg="green", fg="white", font=("arial", 15), command=sign_in)
