@@ -1,36 +1,40 @@
-import _tkinter
 from tkinter import *
-from tkinter import messagebox, Tk
+from tkinter import messagebox
+
+global ent_uname_in, ent_pass_in
+global ent_uname_up, ent_email_up, ent_pass_up, ent_c_pass_up
 
 
-
-
-def sign_up():
-    if ent_uname_up.get() == "" or ent_email_up.get() == "" or entry_pass_up.get() == "" or ent_c_pass_up.get() == "":
-        messagebox.showerror("Error", "All fields are required")
-        
-    elif (entry2.get()) != (entry3.get()):
-        messagebox.showerror("Error", "Password Unmatched")
-        
-    else:
-        messagebox.showinfo("Congrats", "You are signed up")
+# region Sign In (Bishal).
 
 
 def sign_in():
+
+    global ent_uname_in, ent_pass_in
+
     if ent_uname_in.get() == "" or ent_pass_in.get() == "":
         messagebox.showerror("Error", "All fields are required")
 
     else:
         messagebox.showinfo("Congrats", "You are signed in")
 
+        ent_uname_in.delete(0, END)
+        ent_pass_in.delete(0, END)
 
 
 def sign_in_GUI():
 
-    frame_signup.destroy()
+    try:
+        frame_signup.destroy()
+    except e:
+        print(e)
 
-    frame_signin.place(x=150, y=150, height=300, width=400, bg="#404040")
+    global frame_signin
+    global ent_uname_in, ent_pass_in
 
+
+    frame_signin = LabelFrame(root, bg="white", bd=0, height=400, width=450)
+    frame_signin.place(x=150, y=110)
 
     lbl_signin = Label(frame_signin, text="Sign In", font=("Times", 30, "bold"), fg="green", bg="white")
     lbl_signin.place(x=60, y=30)
@@ -45,21 +49,52 @@ def sign_in_GUI():
     ent_pass_in = Entry(frame_signin, font="arial, 15", bg="light green", show="*")
     ent_pass_in.place(x=60, y=190, width="300", height="30")
 
-    btn_signin = Button(frame_signin, text="Sign In", bd=4, bg="green", fg="white", font=("arial", 15), command=sig_in)
-    btn_signin.place(x=160, y=240)
+    btn_signin_in = Button(frame_signin, text="Sign In", bd=4, bg="green", fg="white", font=("arial", 15), command=sign_in)
+    btn_signin_in.place(x=160, y=240)
 
-    btn_signup = Button(frame_signin, text="SIGN UP", bd=4, bg="blue", fg="white", font=("arial", 15), command=sign_up_GUI)
-    btn_signup.place(x=580, y=440)
+    btn_signup_in = Button(frame_signin, text="SIGN UP", bd=4, bg="blue", fg="white", font=("arial", 15), command=sign_up_GUI)
+    btn_signup_in.place(x=350, y=350)
 
 
+#  endregion
+
+
+
+# region Sign Up (Bishal).
+
+
+
+def sign_up():
+
+    global ent_uname_up, ent_email_up, ent_pass_up, ent_c_pass_up
+
+    if ent_uname_up.get() == "" or ent_email_up.get() == "" or ent_pass_up.get() == "" or ent_c_pass_up.get() == "":
+        messagebox.showerror("Error", "All fields are required")
+
+    elif (ent_pass_up.get()) != (ent_c_pass_up.get()):
+        messagebox.showerror("Error", "Password Unmatched")
+
+    else:
+        messagebox.showinfo("Congrats", "You are signed up")
+
+        ent_uname_up.delete(0, END)
+        ent_email_up.delete(0, END)
+        ent_pass_up.delete(0, END)
+        ent_c_pass_up.delete(0, END)
 
 
 
 def sign_up_GUI():
+    try:
+        frame_signin.destroy()
+    except e:
+        print(e)
 
-    frame_signin.destroy()
+    global frame_signup
+    global ent_uname_up, ent_email_up, ent_pass_up, ent_c_pass_up
 
-    frame_signup.place(x=150, y=150, height=320, width=400)
+    frame_signup = LabelFrame(root, bg="white", bd=0, height=400, width=450)
+    frame_signup.place(x=150, y=110)
 
 
     lbl_signup = Label(frame_signup, text="Sign Up", font=("Times", 30, "bold"), fg="green", bg="white")
@@ -77,34 +112,33 @@ def sign_up_GUI():
 
     lbl_pass = Label(frame_signup, text="Password", font=("arial", 15, "bold"), fg="green", bg="white")
     lbl_pass.place(x=60, y=170)
-    entry_pass_up = Entry(frame_signup, font="arial,15", bg="light green", show="*")
-    entry_pass_up.place(x=60, y=200, width="300", height="30")
+    ent_pass_up = Entry(frame_signup, font="arial,15", bg="light green", show="*")
+    ent_pass_up.place(x=60, y=200, width="300", height="30")
 
     lbl_c_pass = Label(frame_signup, text="Confirm Password", font=("arial", 15, "bold"), fg="green", bg="white")
     lbl_c_pass.place(x=60, y=230)
     ent_c_pass_up = Entry(frame_signup, font="arial,15", bg="light green", show="*")
     ent_c_pass_up.place(x=60, y=260, width="300", height="30")
 
-    btn = Button(frame_signup, text="sign up", bd=3, bg="green", fg="white", font=("arial", 15), command=sign_up)
-    btn.place(x=300, y=450)
-    
-    btn1 = Button(frame_signup, text="SIGN IN", bd=4, bg="blue", fg="white", font=("arial", 15), command=sign_in_GUI)
-    btn1.place(x=580, y=440)
+    btn_signup_up = Button(frame_signup, text="Sign Up", bd=3, bg="green", fg="white", font=("arial", 15), command=sign_up)
+    btn_signup_up.place(x=160, y=310)
 
+    btn_signin_up = Button(frame_signup, text="SIGN IN", bd=4, bg="blue", fg="white", font=("arial", 15), command=sign_in_GUI)
+    btn_signin_up.place(x=350, y=350)
+
+
+# endregion
 
 
 root = Tk()
-
 root.title("SIGN IN")
-root.geometry("700x500")
+root.geometry("750x600")
 root.iconbitmap("user.ico")
+root.configure(bg="#404040")
+frame_signin = LabelFrame(root, bg="white", bd=0, height=400, width=450)
+frame_signup = LabelFrame(root, bg="white", bd=0, height=400, width=450)
 
-frame_signin = Frame(root, bg="white")
-frame_signup = Frame(root, bg="white")
-
-
-
-sign_in_GUI()
+sign_up_GUI()
 
 
 root.mainloop()
