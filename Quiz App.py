@@ -40,6 +40,32 @@ global ent_uname_up, ent_email_up, ent_pass_up, ent_c_pass_up   # For Sign Up Fu
 # endregion
 
 
+# region 14) Start Over (Sabin).
+
+
+
+def start_over_fun():
+
+    start_response = messagebox.askyesno("Start Over?", "Would you like to start over a new topic? ")
+
+    if start_response == 1:
+        leaderboard_label.destroy()
+        start_fun()
+
+    else:
+        exit_response = messagebox.askyesno("Quit", "Would you like to exit the application?")
+
+        if exit_response == 1:
+            root_main.destroy()
+
+        else:
+            pass
+
+
+# endregion
+
+
+
 # region 13) Delete Function (Sabin).
 
 
@@ -149,6 +175,9 @@ def query_fun():
 
     delete_btn = Button(leaderboard_label, text="Delete", command=delete_fun)
     delete_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
+
+    start_btn = Button(leaderboard_label, text="Start Over?", command=delete_fun)
+    start_btn.grid(row=14, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
 
 
 # endregion
