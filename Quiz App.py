@@ -7,7 +7,6 @@ from tkinter import ttk            # For the table to display the data from the 
 import sqlite3                     # To use database.
 
 
-
 # region Global Variables.
 
 question = []  # List of all questions.
@@ -127,7 +126,7 @@ def query_fun():
     global leaderboard_label
     global image_1, image_2
 
-    leaderboard_label = LabelFrame(root_main, height=600, width=750, bd=0)
+    leaderboard_label = LabelFrame(root_main, height=600, width=750, bd=0, bg = "Gold", background='#AE9152')
     leaderboard_label.grid()
 
     conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
@@ -143,14 +142,14 @@ def query_fun():
     frm.place(x=0, y=0)
 
 
-    image_1 = PhotoImage(file="Resource/2) Others/Images/lava.png")
+    image_1 = PhotoImage(file="Resource/2) Others/Images/fractal.png")
 
     lbl_image = Label(frm, image=image_1, height=440, width=650, bd=0, bg = "Gold")
     lbl_image.place(x=30, y=10)
 
-    image_2 = PhotoImage(file="Resource/2) Others/Images/lines.png")
+    image_2 = PhotoImage(file="Resource/2) Others/Images/fractal.png")
 
-    lbl_image1 = Label(lbl_image, image=image_2, height=400, width=610, bd=0, bg = "Black")
+    lbl_image1 = Label(lbl_image, image = image_2, height=400, width=610, bd=0)
     lbl_image1.place(x=23, y=25)
 
     style = ttk.Style()  # Styling the table.
@@ -256,7 +255,6 @@ def selected_fun():
 
 
     choice_var.set(-1)
-
 
     if ques_index == 21:
         question_label.destroy()
@@ -740,7 +738,7 @@ question_label = LabelFrame(root_main, background="#66b3ff", height=600, width =
 
 topic_label = LabelFrame(root_main, background="#66b3ff", height=600, width =700, bd=0)     # Start Function.
 
-leaderboard_label = LabelFrame(root_main, height=600, width =750, bd=0)                     # Query Function.
+leaderboard_label = LabelFrame(root_main, height=600, width =750, bd=0, background='#AE9152')        # Query Function.
 
 frame_signin = LabelFrame(root_main, bg="white", bd=0, height=400, width=450)   # Sign In GUI Function.
 
