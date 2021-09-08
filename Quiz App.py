@@ -1,8 +1,8 @@
-import random  # To shuffle choices.
-import pickle  # To unpickle the MCQ.
+import random     # To shuffle choices.
+import pickle     # To unpickle the MCQ.
+import winsound   # To produce sound during right, wrong answer and highest score.
 from tkinter import *              # To use basic functions and methods of tkinter.
 from tkinter import messagebox     # To show popup messagebox.
-from playsound import playsound    # To produce sound during right, wrong answer and highest score.
 from tkinter import ttk            # For the table to display the data from the database.
 import sqlite3                     # To use database.
 
@@ -121,7 +121,7 @@ def delete_fun():
 def query_fun():
     """ Shows the data of 10 users in descending order with the highest score of the selected topic. """
 
-    global quiz_topic
+    global quiz_topic, signed_in
     global leaderboard_label
 
     leaderboard_label = LabelFrame(root_main, height=600, width=750, bd=0)
@@ -181,8 +181,9 @@ def query_fun():
     conn1.commit()
     conn1.close()
 
-    delete_btn = Button(leaderboard_label, text="Delete", command=delete_fun, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
-    delete_btn.place(x=30, y=555)
+    if signed_in:
+        delete_btn = Button(leaderboard_label, text="Delete", command=delete_fun, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
+        delete_btn.place(x=30, y=555)
 
     start_btn = Button(leaderboard_label, text="Start Over?", command=start_over_fun, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
     start_btn.place(x=270, y=555)
@@ -217,8 +218,9 @@ def update_fun():
                 conn1.commit()
                 conn1.close()
 
-                playsound('Resource/2) Others/Sounds/highest.wav')
+                winsound.PlaySound("Resource/2) Others/Sounds/highest", winsound.SND_FILENAME)
                 messagebox.showinfo("Congratulations!", f"{score} is your highest score from {db_score}!")
+
 
             else:
                 pass
@@ -292,12 +294,11 @@ def chk_ans(ans, k):
 
     try:
         if choice[ans] == anser[k-2]:  # Check if the answer is right.
-            playsound('Resource/2) Others/Sounds/correct.wav')
+            winsound.PlaySound("Resource/2) Others/Sounds/correct", winsound.SND_FILENAME)
             score += 1
 
         else:
-            playsound('Resource/2) Others/Sounds/incorrect.wav')
-
+            winsound.PlaySound("Resource/2) Others/Sounds/incorrect", winsound.SND_FILENAME)
 
         if ques_index < 22:
             selected_fun()
