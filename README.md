@@ -9,5 +9,5 @@ Members:
 
            Aditya Bharati. 
            Abhinav Dev Bhatta. 
-           Bishal Shrestha. 
+           bis-hub: Bishal Shrestha. 
            ATOIsus: Sabin Maharjan. (Leader)
