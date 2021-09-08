@@ -182,13 +182,13 @@ def query_fun():
     conn1.close()
 
     delete_btn = Button(leaderboard_label, text="Delete", command=delete_fun, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
-    delete_btn.place(x=50, y=555)
+    delete_btn.place(x=30, y=555)
 
     start_btn = Button(leaderboard_label, text="Start Over?", command=start_over_fun, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
-    start_btn.place(x=290, y=555)
+    start_btn.place(x=270, y=555)
 
     quit_btn = Button(leaderboard_label, text="Exit", command=root_main.destroy, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
-    quit_btn.place(x=530, y=555)
+    quit_btn.place(x=510, y=555)
 
 
 # endregion
@@ -325,8 +325,9 @@ def question_fun():
     global labelQuestion1, r1, r2, r3, r4
     global ques_index
     global choice_var
+    global question_label
 
-
+    question_label = LabelFrame(root_main, background="#66b3ff", height=600, width=700, bd=0)
     question_label.grid(padx = 100, pady = 120)
 
     labelQuestion1 = Label(question_label, font=("Berlin Sans FB", 17), background="#66b3ff", wraplength=620, justify = "left")
@@ -728,7 +729,7 @@ root_main = Tk()
 root_main.title("Quiz")
 root_main.geometry("750x600")
 root_main.config(background="#66b3ff")
-# root_main.resizable(False, False)
+root_main.resizable(False, False)
 root_main.wm_attributes('-transparentcolor', '#AE9152')  # To make the background transparent fro Leaderboard.
 
 question_label = LabelFrame(root_main, background="#66b3ff", height=600, width =700, bd=0)  # Question Function.
