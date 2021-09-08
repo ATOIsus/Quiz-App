@@ -38,6 +38,8 @@ global ent_uname_up, ent_name_up, ent_pass_up, ent_c_pass_up   # For Sign Up Fun
 
 signed_in = False   # To check if the user has Signed In or not.
 
+global image_1, image_2
+
 
 # endregion
 
@@ -123,6 +125,7 @@ def query_fun():
 
     global quiz_topic, signed_in
     global leaderboard_label
+    global image_1, image_2
 
     leaderboard_label = LabelFrame(root_main, height=600, width=750, bd=0)
     leaderboard_label.grid()
