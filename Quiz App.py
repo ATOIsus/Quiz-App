@@ -106,8 +106,8 @@ def delete_fun():
             query_fun()
 
 
-    except BaseException as er:
-        messagebox.showerror("Error in Delete Function!", str(type(er))[6:-1] + " : " + str(er))
+    except BaseException as er1:
+        messagebox.showerror("Error in Delete Function!", str(type(er1))[6:-1] + " : " + str(er1))
 
 
 
@@ -126,72 +126,77 @@ def query_fun():
     global leaderboard_label
     global image_1, image_2
 
-    leaderboard_label = LabelFrame(root_main, height=600, width=750, bd=0, bg = "Gold", background='#AE9152')
-    leaderboard_label.grid()
+    try:
 
-    conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
-    cur1 = conn1.cursor()
+        leaderboard_label = LabelFrame(root_main, height=600, width=750, bd=0, bg = "Gold", background='#AE9152')
+        leaderboard_label.grid()
 
-    cur1.execute(f"""SELECT ROWID, Name, Username, {quiz_topic}  FROM information 
-                        ORDER BY {quiz_topic} DESC
-                        LIMIT 10;""")
-    rows = cur1.fetchall()
+        conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+        cur1 = conn1.cursor()
 
-    frm = LabelFrame(leaderboard_label, text="Leaderboard", font=('Helvetica', 34, 'bold italic'), fg="gold", labelanchor='n',
-                     relief="raised", bd=15, bg='#AE9152', height=550, width=750)
-    frm.place(x=0, y=0)
+        cur1.execute(f"""SELECT ROWID, Name, Username, {quiz_topic}  FROM information 
+                            ORDER BY {quiz_topic} DESC
+                            LIMIT 10;""")
+        rows = cur1.fetchall()
+
+        frm = LabelFrame(leaderboard_label, text="Leaderboard", font=('Helvetica', 34, 'bold italic'), fg="gold", labelanchor='n',
+                         relief="raised", bd=15, bg='#AE9152', height=550, width=750)
+        frm.place(x=0, y=0)
 
 
-    image_1 = PhotoImage(file="Resource/2) Others/Images/fractal.png")
+        image_1 = PhotoImage(file="Resource/2) Others/Images/fractal.png")
 
-    lbl_image = Label(frm, image=image_1, height=440, width=650, bd=0, bg = "Gold")
-    lbl_image.place(x=30, y=10)
+        lbl_image = Label(frm, image=image_1, height=440, width=650, bd=0, bg = "Gold")
+        lbl_image.place(x=30, y=10)
 
-    image_2 = PhotoImage(file="Resource/2) Others/Images/fractal.png")
+        image_2 = PhotoImage(file="Resource/2) Others/Images/fractal.png")
 
-    lbl_image1 = Label(lbl_image, image = image_2, height=400, width=610, bd=0)
-    lbl_image1.place(x=23, y=25)
+        lbl_image1 = Label(lbl_image, image = image_2, height=400, width=610, bd=0)
+        lbl_image1.place(x=23, y=25)
 
-    style = ttk.Style()  # Styling the table.
-    style.theme_use("clam")
-    style.configure("Treeview",
-                    rowheight=30,
-                    background="black",
-                    foreground="#FFD700",
-                    font=('Helvetica', 14, 'bold italic'))
-    style.map('Treeview', background=[('selected', 'Black')], foreground=[('selected', 'red')])
+        style = ttk.Style()  # Styling the table.
+        style.theme_use("clam")
+        style.configure("Treeview",
+                        rowheight=30,
+                        background="black",
+                        foreground="#FFD700",
+                        font=('Helvetica', 14, 'bold italic'))
+        style.map('Treeview', background=[('selected', 'Black')], foreground=[('selected', 'red')])
 
-    style.configure("Treeview.Heading", background="black", foreground="gold", font=('Helvetica', 14, 'bold italic'))
-    style.map('Treeview.Heading', background=[('selected', 'red')])
+        style.configure("Treeview.Heading", background="black", foreground="gold", font=('Helvetica', 14, 'bold italic'))
+        style.map('Treeview.Heading', background=[('selected', 'red')])
 
-    tv = ttk.Treeview(lbl_image1, column=(1, 2, 3, 4), show="headings", height=10)  # The table.
-    tv.place(x=9, y=30)
+        tv = ttk.Treeview(lbl_image1, column=(1, 2, 3, 4), show="headings", height=10)  # The table.
+        tv.place(x=9, y=30)
 
-    tv.column(1, width=50, stretch=False)
-    tv.column(2, width=190, stretch=False)
-    tv.column(3, width=205, stretch=False)
-    tv.column(4, width=145, stretch=False)
+        tv.column(1, width=50, stretch=False)
+        tv.column(2, width=190, stretch=False)
+        tv.column(3, width=205, stretch=False)
+        tv.column(4, width=145, stretch=False)
 
-    tv.heading(1, text="ID")
-    tv.heading(2, text="Name")
-    tv.heading(3, text="Username")
-    tv.heading(4, text=f"{quiz_topic}")
+        tv.heading(1, text="ID")
+        tv.heading(2, text="Name")
+        tv.heading(3, text="Username")
+        tv.heading(4, text=f"{quiz_topic}")
 
-    for o in rows:
-        tv.insert("", "end", values=o)
+        for o in rows:
+            tv.insert("", "end", values=o)
 
-    conn1.commit()
-    conn1.close()
+        conn1.commit()
+        conn1.close()
 
-    if signed_in:
-        delete_btn = Button(leaderboard_label, text="Delete", command=delete_fun, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
-        delete_btn.place(x=30, y=555)
+        if signed_in:
+            delete_btn = Button(leaderboard_label, text="Delete", command=delete_fun, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
+            delete_btn.place(x=30, y=555)
 
-    start_btn = Button(leaderboard_label, text="Start Over?", command=start_over_fun, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
-    start_btn.place(x=270, y=555)
+        start_btn = Button(leaderboard_label, text="Start Over?", command=start_over_fun, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
+        start_btn.place(x=270, y=555)
 
-    quit_btn = Button(leaderboard_label, text="Exit", command=root_main.destroy, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
-    quit_btn.place(x=510, y=555)
+        quit_btn = Button(leaderboard_label, text="Exit", command=root_main.destroy, bg = "Black", fg = "Gold", width = 15, font=("Times", 17, "bold"), padx=0, pady=0)
+        quit_btn.place(x=510, y=555)
+
+    except BaseException as er2:
+        messagebox.showerror("Error in Query Function!", str(type(er2))[6:-1] + " : " + str(er2))
 
 
 # endregion
@@ -231,8 +236,8 @@ def update_fun():
             messagebox.showinfo("Not Signed In!", f"Your score {score} will not be saved because you are not signed in.")
 
 
-    except BaseException as er1:
-        messagebox.showerror("Error in update function", str(type(er1))[6:-1] + " : " + str(er1))
+    except BaseException as er3:
+        messagebox.showerror("Error in Update Function!", str(type(er3))[6:-1] + " : " + str(er3))
 
     query_fun()
 
@@ -259,7 +264,6 @@ def selected_fun():
     if ques_index == 21:
         question_label.destroy()
         update_fun()
-
 
 
     elif ques_index < 21:
@@ -307,8 +311,8 @@ def chk_ans(ans, k):
         else:
             pass
 
-    except BaseException as er5:
-        messagebox.showerror("Error in Check Answer Function!", str(type(er5))[6:-1] + " : " + str(er5))
+    except BaseException as er4:
+        messagebox.showerror("Error in Check Answer Function!", str(type(er4))[6:-1] + " : " + str(er4))
 
 
 # endregion
@@ -367,6 +371,7 @@ def question_fun():
 
 
 def sign_up():
+    """ Check if all fields are filled up and Insert data into the database."""
 
     global ent_uname_up, ent_name_up, ent_pass_up, ent_c_pass_up
 
@@ -389,52 +394,54 @@ def sign_up():
         messagebox.showerror("Error!", "Password and Confirm Password need to be the same!")
 
     else:
-        conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
-        c1 = conn1.cursor()
+        try:
+            conn1 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+            c1 = conn1.cursor()
 
-        c1.execute(f"SELECT Username FROM information")
-        records = c1.fetchall()
+            c1.execute(f"SELECT Username FROM information")
+            records = c1.fetchall()
 
-        for record in records:
+            for record in records:
 
-            if ent_uname_up.get() == str(record[0]):
-                messagebox.showerror("Error!", "Cannot Use Same Username Twice!")
-                break
+                if ent_uname_up.get() == str(record[0]):
+                    messagebox.showerror("Error!", "Cannot Use Same Username Twice!")
+                    break
+
+                else:
+                    pass
 
             else:
-                pass
+                c1.execute(
+                    """INSERT INTO information VALUES (:Name, :Username, :Password, :Architecture, 
+                    :Lab , :Math , :Politics , :Programming , :Science , :Sport, :GK)""",
+                    {
+                        'Name': ent_name_up.get(),
+                        'Username': ent_uname_up.get(),
+                        'Password': ent_pass_up.get(),
+                        'Architecture': 0,
+                        'Lab': 0,
+                        'Math': 0,
+                        'Politics': 0,
+                        'Programming': 0,
+                        'Science': 0,
+                        'Sport': 0,
+                        'GK': 0,
+                    })
 
-        else:
-            c1.execute(
-                """INSERT INTO information VALUES (:Name, :Username, :Password, :Architecture, 
-                :Lab , :Math , :Politics , :Programming , :Science , :Sport, :GK)""",
-                {
-                    'Name': ent_name_up.get(),
-                    'Username': ent_uname_up.get(),
-                    'Password': ent_pass_up.get(),
-                    'Architecture': 0,
-                    'Lab': 0,
-                    'Math': 0,
-                    'Politics': 0,
-                    'Programming': 0,
-                    'Science': 0,
-                    'Sport': 0,
-                    'GK': 0,
-                })
+                messagebox.showinfo("Signed Up!", f"Congratulations! {ent_uname_up.get()}, you account has been created! ")
 
-            messagebox.showinfo("Signed Up!", f"Congratulations! {ent_uname_up.get()}, you account has been created! ")
+                ent_uname_up.delete(0, END)
+                ent_name_up.delete(0, END)
+                ent_pass_up.delete(0, END)
+                ent_c_pass_up.delete(0, END)
 
-            ent_uname_up.delete(0, END)
-            ent_name_up.delete(0, END)
-            ent_pass_up.delete(0, END)
-            ent_c_pass_up.delete(0, END)
+                sign_in_GUI()
 
-            sign_in_GUI()
+            conn1.commit()
+            conn1.close()
 
-        conn1.commit()
-        conn1.close()
-
-
+        except BaseException as er5:
+            messagebox.showerror("Error in Sign Up Function!", str(type(er5))[6:-1] + " : " + str(er5))
 
 
 # endregion
@@ -447,6 +454,7 @@ def sign_up():
 
 
 def sign_up_GUI():
+    """ The Graphical Interface for the User to Sign Up. """
 
     global ent_uname_up, ent_name_up, ent_pass_up, ent_c_pass_up
     global frame_signup
@@ -496,6 +504,7 @@ def sign_up_GUI():
 
 
 def sign_in():
+    """ Check if the provided Username and Password matches to that stored in database. """
 
     global user_name_signin, password_signin
     global ent_uname_in, ent_pass_in
@@ -507,35 +516,41 @@ def sign_in():
 
     else:
 
-        conn2 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
-        cur2 = conn2.cursor()
+        try:
 
-        cur2.execute(f"SELECT ROWID, Username, Password, {quiz_topic} FROM information")
-        records = cur2.fetchall()
+            conn2 = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+            cur2 = conn2.cursor()
+
+            cur2.execute(f"SELECT ROWID, Username, Password, {quiz_topic} FROM information")
+            records = cur2.fetchall()
 
 
-        for record in records:
+            for record in records:
 
-            if user_name_signin.get() == record[1] and password_signin.get() == record[2]:
-                player_ID = record[0]  # ROWID
-                db_score = record[3]  # quiz_topic
+                if user_name_signin.get() == record[1] and password_signin.get() == record[2]:
+                    player_ID = record[0]  # ROWID
+                    db_score = record[3]  # quiz_topic
 
-                messagebox.showinfo("Signed In!", f" Welcome again {user_name_signin.get()}!")
+                    messagebox.showinfo("Signed In!", f" Welcome again {user_name_signin.get()}!")
 
-                ent_uname_in.delete(0, END)
-                ent_pass_in.delete(0, END)
+                    ent_uname_in.delete(0, END)
+                    ent_pass_in.delete(0, END)
 
-                question_fun()
+                    question_fun()
 
-                break
+                    break
 
+                else:
+                    pass
             else:
-                pass
-        else:
-            messagebox.showerror('Error while Signing In!', 'Wrong Username or Password.')
+                messagebox.showerror('Error while Signing In!', 'Wrong Username or Password.')
 
-        conn2.commit()
-        conn2.close()
+            conn2.commit()
+            conn2.close()
+
+
+        except BaseException as er6:
+            messagebox.showerror("Error in Sign In Function!", str(type(er6))[6:-1] + " : " + str(er6))
 
 
 # endregion
@@ -547,6 +562,7 @@ def sign_in():
 
 
 def sign_in_GUI():
+    """ The Graphical Interface for the User to Sign In. """
 
     frame_signup.destroy()
     topic_label.destroy()
@@ -607,8 +623,8 @@ def unpickle_fun(quiz_topic_pa):
         random.shuffle(ques)  # Question shuffled every time teh text file is opened.
 
 
-    except BaseException as er3:
-        messagebox.showerror("Error with database!", str(type(er3))[6:-1] + " : " + str(er3))
+    except BaseException as er7:
+        messagebox.showerror("Error with database!", str(type(er7))[6:-1] + " : " + str(er7))
 
     try:
         ''' Question, answer and options are separated into different lists. '''
@@ -635,8 +651,8 @@ def unpickle_fun(quiz_topic_pa):
                 elif j == 4:
                     option3.append(str(i[4]))
 
-    except BaseException as er4:
-        messagebox.showerror("Error in separation of MCQs", str(type(er4))[6:-1] + " : " + str(er4))
+    except BaseException as er8:
+        messagebox.showerror("Error in separation of MCQs", str(type(er8))[6:-1] + " : " + str(er8))
 
 
     response_signin = messagebox.askyesno("Sign In", " Would you like to Sign In?")
@@ -664,60 +680,65 @@ def start_fun():
     global img3, img4, img5, img6, img7, img8, img9, img10
     global topic_label
 
-    starting_label.destroy()
+    try:
 
-    topic_label = LabelFrame(root_main, background="#66b3ff", height=600, width=700, bd=0)  # Reinitialized.
-    topic_label.grid()         # To load/display the current working LabelFrame.
+        starting_label.destroy()
 
-    img3 = PhotoImage(file="Resource/2) Others/Images/math.png")
-    img4 = PhotoImage(file="Resource/2) Others/Images/sports.png")
-    img5 = PhotoImage(file="Resource/2) Others/Images/science.png")
-    img6 = PhotoImage(file="Resource/2) Others/Images/gk.png")
-    img7 = PhotoImage(file="Resource/2) Others/Images/lab.png")
-    img8 = PhotoImage(file="Resource/2) Others/Images/architecture.png")
-    img9 = PhotoImage(file="Resource/2) Others/Images/programming.png")
-    img10 = PhotoImage(file="Resource/2) Others/Images/politics.png")
+        topic_label = LabelFrame(root_main, background="#66b3ff", height=600, width=700, bd=0)  # Reinitialized.
+        topic_label.grid()         # To load/display the current working LabelFrame.
 
-    mathButton = Button(topic_label, image=img3, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Math"))
-    mathButton.place(x=175, y=100)
-    math = Label(topic_label, text="Math", bg="#66b3ff", font="Cambria")
-    math.place(x=175, y=170)
+        img3 = PhotoImage(file="Resource/2) Others/Images/math.png")
+        img4 = PhotoImage(file="Resource/2) Others/Images/sports.png")
+        img5 = PhotoImage(file="Resource/2) Others/Images/science.png")
+        img6 = PhotoImage(file="Resource/2) Others/Images/gk.png")
+        img7 = PhotoImage(file="Resource/2) Others/Images/lab.png")
+        img8 = PhotoImage(file="Resource/2) Others/Images/architecture.png")
+        img9 = PhotoImage(file="Resource/2) Others/Images/programming.png")
+        img10 = PhotoImage(file="Resource/2) Others/Images/politics.png")
 
-    sportsButton = Button(topic_label, image=img4, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Sport"))
-    sportsButton.place(x=175, y=215)
-    sports = Label(topic_label, text="Sport", bg="#66b3ff", font="Cambria")
-    sports.place(x=175, y=285)
+        mathButton = Button(topic_label, image=img3, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Math"))
+        mathButton.place(x=175, y=100)
+        math = Label(topic_label, text="Math", bg="#66b3ff", font="Cambria")
+        math.place(x=175, y=170)
 
-    scienceButton = Button(topic_label, image=img5, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Science"))
-    scienceButton.place(x=175, y=330)
-    science = Label(topic_label, text="Science", bg="#66b3ff", font="Cambria")
-    science.place(x=175, y=400)
+        sportsButton = Button(topic_label, image=img4, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Sport"))
+        sportsButton.place(x=175, y=215)
+        sports = Label(topic_label, text="Sport", bg="#66b3ff", font="Cambria")
+        sports.place(x=175, y=285)
+
+        scienceButton = Button(topic_label, image=img5, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Science"))
+        scienceButton.place(x=175, y=330)
+        science = Label(topic_label, text="Science", bg="#66b3ff", font="Cambria")
+        science.place(x=175, y=400)
 
 
-    gkButton = Button(topic_label, image=img6, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("GK"))
-    gkButton.place(x=175, y=445)
-    gk = Label(topic_label, text="Gk", bg="#66b3ff", font="Cambria")
-    gk.place(x=175, y=515)
+        gkButton = Button(topic_label, image=img6, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("GK"))
+        gkButton.place(x=175, y=445)
+        gk = Label(topic_label, text="Gk", bg="#66b3ff", font="Cambria")
+        gk.place(x=175, y=515)
 
-    labButton = Button(topic_label, image=img7, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Lab"))
-    labButton.place(x=500, y=100)
-    lab = Label(topic_label, text="Lab", bg="#66b3ff", font="Cambria")
-    lab.place(x=500, y=170)
+        labButton = Button(topic_label, image=img7, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Lab"))
+        labButton.place(x=500, y=100)
+        lab = Label(topic_label, text="Lab", bg="#66b3ff", font="Cambria")
+        lab.place(x=500, y=170)
 
-    architectureButton = Button(topic_label, image=img8, bg="#66b3ff", relief="raised", command= lambda : unpickle_fun("Architecture"))
-    architectureButton.place(x=500, y=215)
-    architecture = Label(topic_label, text="Architecture", bg="#66b3ff", font="Cambria")
-    architecture.place(x=500, y=285)
+        architectureButton = Button(topic_label, image=img8, bg="#66b3ff", relief="raised", command= lambda : unpickle_fun("Architecture"))
+        architectureButton.place(x=500, y=215)
+        architecture = Label(topic_label, text="Architecture", bg="#66b3ff", font="Cambria")
+        architecture.place(x=500, y=285)
 
-    programmingButton = Button(topic_label, image=img9, bg="#66b3ff", relief="raised", command= lambda : unpickle_fun("Programming"))
-    programmingButton.place(x=500, y=330)
-    programming = Label(topic_label, text="Programming", bg="#66b3ff", font="Cambria")
-    programming.place(x=500, y=400)
+        programmingButton = Button(topic_label, image=img9, bg="#66b3ff", relief="raised", command= lambda : unpickle_fun("Programming"))
+        programmingButton.place(x=500, y=330)
+        programming = Label(topic_label, text="Programming", bg="#66b3ff", font="Cambria")
+        programming.place(x=500, y=400)
 
-    politicsButton = Button(topic_label, image=img10, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Politics"))
-    politicsButton.place(x=500, y=445)
-    politics = Label(topic_label, text="Politics", bg="#66b3ff", font="Cambria")
-    politics.place(x=500, y=515)
+        politicsButton = Button(topic_label, image=img10, bg="#66b3ff", relief="raised", border=0, command= lambda : unpickle_fun("Politics"))
+        politicsButton.place(x=500, y=445)
+        politics = Label(topic_label, text="Politics", bg="#66b3ff", font="Cambria")
+        politics.place(x=500, y=515)
+
+    except BaseException as er9:
+        messagebox.showerror("Error in Start Function!", str(type(er9))[6:-1] + " : " + str(er9))
 
 # endregion
 
@@ -787,29 +808,33 @@ root_main.mainloop()
 # region 0) Create Database & Table (Sabin & Aditya).
 
 
+try:
 
-conn = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
+    conn = sqlite3.connect('Resource/2) Others/Database/Player Database.db')
 
-c = conn.cursor()
+    c = conn.cursor()
 
-c.execute(""" CREATE TABLE IF NOT EXISTS
-          information
-          (
-          Name text, 
-          Username text,
-          Password text,
-          Architecture integer, 
-          Lab integer,
-          Math integer,
-          Politics integer,
-          Programming integer,
-          Science integer,
-          Sport integer,
-          GK integer
-          )""")
+    c.execute(""" CREATE TABLE IF NOT EXISTS
+              information
+              (
+              Name text, 
+              Username text,
+              Password text,
+              Architecture integer, 
+              Lab integer,
+              Math integer,
+              Politics integer,
+              Programming integer,
+              Science integer,
+              Sport integer,
+              GK integer
+              )""")
 
-conn.commit()
-conn.close()
+    conn.commit()
+    conn.close()
+
+except BaseException as er10:
+    messagebox.showerror("Error in making Database!", str(type(er10))[6:-1] + " : " + str(er10))
 
 # endregion
 
