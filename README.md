@@ -10,4 +10,4 @@ Members:
            Aditya Bharati. 
            Abhinav Dev Bhatta. 
            Bishal Shrestha. 
-           Sabin Maharjan. (Leader)
+           ATOIsus: Sabin Maharjan. (Leader)
