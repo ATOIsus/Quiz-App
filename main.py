@@ -241,10 +241,6 @@ def newWindow1():
             r4['text'] = mathAnswers[indexes[ques]][3]
             ques += 1
         else:
-            # print(indexes)
-            # print(user_answer)
-            # these two lines were just developement code
-            # we don't need them
             pass
 
     def sportsSelected():
@@ -262,10 +258,6 @@ def newWindow1():
             r4['text'] = sportsAnswers[indexes[ques]][3]
             ques += 1
         else:
-            # print(indexes)
-            # print(user_answer)
-            # these two lines were just developement code
-            # we don't need them
             pass
 
     def scienceSelected():
@@ -283,10 +275,6 @@ def newWindow1():
             r4['text'] = scienceAnswers[indexes[ques]][3]
             ques += 1
         else:
-            # print(indexes)
-            # print(user_answer)
-            # these two lines were just developement code
-            # we don't need them
             pass
 
     def gkSelected():
@@ -304,10 +292,6 @@ def newWindow1():
             r4['text'] = gkAnswers[indexes[ques]][3]
             ques += 1
         else:
-            # print(indexes)
-            # print(user_answer)
-            # these two lines were just developement code
-            # we don't need them
             pass
 
     def labSelected():
@@ -325,10 +309,6 @@ def newWindow1():
             r4['text'] = labAnswers[indexes[ques]][3]
             ques += 1
         else:
-            # print(indexes)
-            # print(user_answer)
-            # these two lines were just developement code
-            # we don't need them
             pass
 
     def architectureSelected():
@@ -346,10 +326,6 @@ def newWindow1():
             r4['text'] = architectureAnswers[indexes[ques]][3]
             ques += 1
         else:
-            # print(indexes)
-            # print(user_answer)
-            # these two lines were just developement code
-            # we don't need them
             pass
 
     def programmingSelected():
@@ -367,10 +343,6 @@ def newWindow1():
             r4['text'] = programmingAnswers[indexes[ques]][3]
             ques += 1
         else:
-            # print(indexes)
-            # print(user_answer)
-            # these two lines were just developement code
-            # we don't need them
             pass
 
     def politicsSelected():
@@ -388,10 +360,6 @@ def newWindow1():
             r4['text'] = politicsAnswers[indexes[ques]][3]
             ques += 1
         else:
-            # print(indexes)
-            # print(user_answer)
-            # these two lines were just developement code
-            # we don't need them
             pass
 
     def mathClick():
@@ -1207,7 +1175,8 @@ labelRule = Label(
     root,
     text="""
     How this Quiz works?
-    This Quiz has a total of ___ questions
+    Once you press start, 8 icons will appear on the window 
+    Each icon contains a Quiz, having total of 10 questions related to the topic you've chosen
     You will have 30 seconds to answer each questions
     Once you click on an option, that will be the final answer
     So think before you answer
