@@ -8,6 +8,6 @@ Batch 30A.
 Members:
 
            Aditya Bharati. 
-           Abhinav Dev Bhatta. 
+           Hoaxn: Avinav Bhatta. 
            bis-hub: Bishal Shrestha. 
            ATOIsus: Sabin Maharjan. (Leader)
