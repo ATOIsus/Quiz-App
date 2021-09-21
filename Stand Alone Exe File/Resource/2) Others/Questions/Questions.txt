@@ -1,0 +1,269 @@
+Politics = (['When did Nepal join UN? ', ' 1955 ', ' 1984  ', ' 1948 ', ' 1976'],
+       ['In which script is Nepali written? ', ' Devanagari ', ' Brahmi ', ' Kharoshti ', ' Urdu'],
+       ['When was Tribhuvan University set up? ', ' 1959 ', ' 1952 ', ' 1944 ', ' 1937'],
+       ['Who was Nepal’s king in 1911-1955? ', ' Tribhuvan ', ' Birendra ', ' Mahendra ', ' Devendra'],
+       ['What is freedom of religion? ', ' You can practice any religion', ' Cannot practice a religion.   ',
+        ' You must choose a religion. ', ' You can’t choose the time you practice your religion.  ',
+        ' No one can practice a religion.'],
+       ['Who is in charge of the executive branch? ', ' The President.  ', ' The Prime Minister. ',
+        ' The Speaker of the House.  ', ' The Chief Justice.'],
+       ['Who vetoes bills? ', ' The President ', ' The Vice President ', ' The Senate ',
+        ' The House of Representatives'],
+       ['We elect a President for how many years? ', ' Four (4).  ', ' Two (2).  ', ' Eight (8).  ', ' Ten (10).'],
+       ['The idea of self-government is in the first three words of the Constitution. What are these words? ',
+        ' We the People. ', ' Congress shall make. ', ' We the British. ', ' We the Colonists.'],
+       ['What is the “rule of law”?  ', ' Everyone must follow the law. ',
+        ' Government does not have to follow the law. ', ' All laws must be the same in every state. ',
+        ' Everyone but the President must follow the law.'],
+       ['How old do citizens have to be to vote for President? ', ' Eighteen (18) or older  ',
+        ' Sixteen (16) or older.  ', ' Twenty-one (21) or older. ', ' Thirty-five (35) or older.'],
+       ['What does the judicial branch do? ', ' All of the above. ', ' Reviews laws. ', ' Resolves disputes. ',
+        ' Decides if a law goes against the Constitution.'],
+       ['What is an amendment? ', ' An addition (to the Constitution). ', ' The Preamble to the Constitution. ',
+        ' An introduction. ', ' The beginning of the Declaration of Independence.'],
+       ['What is the supreme law of the land? ', ' The Constitution. ', ' The local law. ',
+        ' The Emancipation Proclamation. ', ' The Declaration of Independence.'],
+       ['What is one right or freedom granted by the First Amendment? ', ' Speech. ', ' To vote. ', ' To bear arms. ',
+        ' Trial by jury.'], ['What did the Emancipation Proclamation do?  ', ' Freed slaves in most Southern states.  ',
+                             ' Ended World War I. ', ' Gave women the right to vote. ',
+                             ' Gave the United States independence from Great Britain.'],
+       ['How many amendments does the Constitution have?  ', ' 27  ', ' 18 ', ' 25 ', ' 17  '],
+       ['How many justices are on the Supreme Court? ', ' 9 ', ' 5 ', ' 12 ', ' 3'],
+       ['What does the President’s Cabinet do? ', ' Advises the president ', ' Selects the Vice President ',
+        ' Runs the government when the President travels ', ' Negotiates treaties with foreign nations'],
+       ['Name one branch or part of the government. ', ' Legislative.  ', ' State government.  ', ' Parliament. ',
+        ' United Nations.'])
+
+
+
+
+
+
+
+
+
+
+
+Science = ([ "Can you hear the sound behind you if you are travelling at the speed of sound ?", 
+          " Yes", " No"],
+                
+        [ "What quantity is velocity ?", 
+	  "Vector" , "Scalar" ,  "Both", "None"],
+
+        ["Water flows through a horizontal pipe at a constant volumetric rate. At a location where the cross sectional area decreases, the velocity of the fluid :",
+         "  Increases",  "  Decreases" , "  Stays the same"],
+
+        ["The word atom is from a Greek word meaning :",
+         "Indivisible", "Small",  "Unseen",  "Visible"],
+
+        ["Electric power is less expensive at night because :",
+         "There is less demand at night.", "More hydroelectric generation is brought on line at night.", "Pollution control is less stringent at night.",
+         "Power plants are more efficient at night."],
+
+        ["Seawater (i.e. saltwater) freezes at :",
+         "At a slightly lower temperature than fresh water." ,"The same temperature as fresh water.", "At a slightly higher temperature than fresh water." ,
+         "Seawater does not freeze."],
+
+        ["Nitrous oxide, commonly called laughing gas, has been a matter of concern to environmentalists recently because :",
+         "It is a greenhouse gas.", "It is thought to cause cancer at low concentrations.", "It produces photochemical smog." , "None of the above"],
+
+        ["Ozone in the upper atmosphere is produced from :",
+         "Photochemical reactions", "Lightning", "Electrical appliances on Earth", "Model fractals"],
+
+        ["The radioactive element most commonly detected in humans is :",
+         "Potassium-40","Cobalt-60", "Iodine-131", "Plutonium-238"],
+
+        ["Most commercial nuclear power plants worldwide are cooled by :",
+         "Water", "Sodium", "Mercury", "Helium"],
+
+        ["Spent fuel from a nuclear power plant cools down and loses most of its radioactivity through decay. In the first year, spent fuel loses about what percentage of its radioactivity ?",
+         "80 percent", "50 percent", "10 percent", "100 percent"],
+
+        ["What range of frequencies are usually referred to as audio frequencies for humans ?",
+         "20 to 20,000 Hertz", "0 to 20 Hertz", "200 to 200,000 Hertz", "10,000 to 30,000 Hertz"],
+
+        ["A device used to measure the amount of moisture in the atmosphere is called a :",
+         "Hygrometer", "Hydrometer", "Anemometer", "Barometer"],
+
+        ["The most suitable motor oil for use in a car in cold weather is :",
+          " A low viscosity oil", " A high viscosity oil", " A medium viscosity oil "],
+
+        ["The first animal launched into orbit was a :",
+         "Dog", "Mouse", "Monkey", "Chimpanzee"],
+
+        ["Thermal insulation is used to :",
+         "Reduce the flow of heat." ,"Stop the flow of heat.", "Absorb heat.", "reverse the heat flow direction."],
+
+        ["The most abundant organic molecule on the surface of the Earth is :",
+         "Cellulose", "Chitin", "DNA", "Hemoglobin"],
+
+        ["The sun makes up approximately what percent of matter in our solar system ?",
+         "99%", "17%", "50%", "85%"],
+
+        ["The image formed in a compound microscope is :",
+         " Inverted", " Erect"],
+
+        ["Which colour of light is deviated least : ",
+         "Red", "Blue", "Green", "Orange"]
+         )
+
+
+
+
+
+ lab = (['Which of the following is the use of id() function in python? ', ' Id returns the identity of the object ',
+         ' Every object doesn’t have a unique id ', ' All of the mentioned ', ' None of the mentioned'],
+        ['All keywords in Python are in ', ' None of the mentioned ', ' lower case ', ' Capitalized ', ' UPPER CASE'],
+        ['Which one of the following has the highest precedence in the expression? ', ' Parentheses ',
+         ' Multiplication ', ' Exponential ', ' Addition'],
+        ['What is the return type of function id? ', ' int ', ' bool ', ' dict ', ' float'],
+        ['Which of the following data types is not supported in python ? ', ' Slice ', ' Numbers ', ' String ',
+         ' List'],
+        ['Which Of The Following Keywords Mark The Beginning Of The Class Definition? ', ' class ', ' return ', ' def ',
+         ' All of the above'],
+        ['Select the reserved keyword in python: ', ' All of the above ', ' raise ', ' import ', ' else'],
+        ['The format function when applied on a string returns : ', ' str ', ' bool ', ' int ', ' list'],
+        ['Which statement is correct....? ', ' List is mutable & Tuple is immutable ',
+         ' List is immutable & Tuple is mutable ', ' Both are Mutable. ', ' Both are Immutable'],
+        ['What is the maximum possible length of an identifier? ', ' 31 Characters ', ' 63 characters ',
+         ' 79 characters ', ' 32 characters'],
+        ["Which one of the following is not a python's predefined data type? ", ' Class ', ' Dictionary ', ' Tuple ',
+         ' List'], ['What will be the output of 7^10 in python? ', ' 13 ', ' 15 ', ' 2 ', ' None of these'],
+        ['19 % 2 in python ', ' None of these  ', ' 17 ', ' 21 ', ' 2'],
+        ['Which of the following has more precedence? ', ' ()  ', ' + ', ' / ', ' –'],
+        ['Which is the special symbol used in python to add comments ? ', ' "#"  ', '  "//"  ', '  "/*...*/"  ',
+         '  "$" '],
+        ['Which options are correct to create an empty set in python? ', ' set()  ', '  ()  ', '  []  ', '  {}'],
+        ['How to create a frame in python? ', ' Frame = frame()  ', ' Frame = frame.new() ', ' Frame = new.window()   ',
+         ' Frame = window.new()'],
+        ['Tkinter tool in python provides the ', ' GUI ', ' OS Commands  ', ' Database  ', ' All of the above'],
+        ['Numpy in the python provides the ', ' Array ', ' Lambda function  ', ' Type casting  ', ' Function'],
+        ['Is list mutable ? ', ' Yes ', ' No '])
+
+
+
+
+
+
+Math = (['Which of the following is the set of positive integers? ', ' Infinite ', ' Subset ', ' Finite ', ' Empty'],
+        ["Which of the following is union of {'1', '2', '5'} and {'1', '2', '6'} ? ", " {'1' , '2', '5', '6'} ", " {'1', '2', '6', '1'} ", " {'1', '2', '1', '2'} ", " {'1', '5', '6', '3'}"],
+        ['Which of the following is complement of the set A? ', ' U – A  ', ' A – B ', ' A – U ', ' B – A'],
+	['The relation between sets A', ' B', ' C as shown by venn diagram is ', ' C is subset of B and B is subset of A ', ' A is subset of B and B is subset of C ', ' C is not a subset of A and A is subset of B ', ' None of These'],
+        ['Which of the following statement is false? ', ' (A U B)’ = A’ U B’  ', ' A X A = A ', ' A U A = A ', ' A – (B U C) = (A – B) U (A –C)'],
+	['If a set contains 3 elements then the number of subsets are? ', ' 8 ', ' 6 ', ' 3 ', ' 12'],
+        ['How many bytes are required to encode 2000 bits of data? ', ' 2 ', ' 8 ', ' 5 ', ' 32'],
+	['Floor (2.4) + Ceil (2.9) is equal to ', ' 5 ', ' 1 ', ' 6.3 ', ' 7'],
+        ['Which of the following is a collection of graph? ', ' Vertices and columns ', ' Row and column  ', ' Equation ', ' None of above'],
+	['Which of the following is a error correcting code? ', ' Hamming code ', ' Error deducting code ', ' Gray code ', ' None of the above'],
+	['The set of positive integers under the operation of ordinary multiplication is ', ' An Abelian group ', ' A group ', ' Not a group ', ' Not a monoid'],
+        ['The number of eight-bit strings beginning with either 111 or 101 is - ', ' 64 ', ' 128 ', ' 256 ', ' 312'],
+        ['Let A and B be two arbitrary events,  then ', ' P(AUB) not equal to P(A)+P(B) ', ' P(A X B) = P(A) X P (B) ', ' P(AUB) = P(A)+P(B) ', ' P(A/B) = P(A - B)+P(B)'],
+	['The sum of square of the first n natural numbers is given by ', ' n(n+1)(2n+1)/6 ', ' n(n-1)/2(2n+1) ', ' n2(n+1)(2n+1)/6 ', ' None of these'],
+	["The sequence '1 ', ' 1', ' 1', ' 1', ' 1' …. is ", ' Not absolutely summable ', ' Absolutely summable ', ' Can’t say ', ' None of These'],
+        ["Which of the following is cardinality of the set A = {' 1', ' 2', ' 3', ' 4', ' 6}? ", ' 5 ', ' 9 ', ' 6 ', ' 3'],
+        ['A matrix having many rows and one column is known as - ', ' Column matrix  ', ' Row matrix ', ' Diagonal matrix ', ' None of the above'],
+        ['Which of the following sentence is a mistake? ', ' You ', ' The earth is round'],
+	['Let A order (axb) and Border(cxd) be two matrices,  then if AB exists,  the order of AB is? ', ' axd ', ' bxc ', ' axb ', ' cxd'],
+	['If determinant of a matrix A is Zero then ', ' A is a Singular matrix ', ' A is a non Singular matrix ', ' Can’t say ', ' None of These'])
+
+
+
+
+
+
+Sport = (['This player scored the maximum goals in a single World Cup Competition? ', ' Just Fontaine ', ' Darius Vassell ', ' Terrill Davis ', ' Cesar Rodriguez'],
+        ['What was the name of the first World Cup trophy? ', ' Jules Rimet Trophy  ', ' Marshawn Lynch trophy ', ' Champion Football trophy ', ' Joan Gamper trophy'],
+        ['Messi was closest to which family member before they passed away when the player was 10. ', ' Grandmother ', ' niece ', ' aunt ', ' Grandfather'],
+        ['Which player scored the fastest hat-trick in the Premier League? ', ' Sadio mane ', ' Kun Aguero ', ' Frank Lampard ', ' DE Bruyne'],
+        ['Which country won the first ever World Cup in 1930? ', ' Uruguay ', ' Brazil ', ' Argentina ', ' Netherland'],
+        ['Messi has spent his entire professional career at Barcelona; but what was his schoolboy team? ', ' Newells Old Boys ', ' Boca Juniors ', ' Cruz Azul ', ' River Plate'],
+        ['RB Leipzig are otherwise known as...? ', ' The red bulls ', ' Ruise Balls ', ' RBL ', ' Leipzig'], 
+	['How many penalties are usually taken in a penalty-shootout? ', ' 5 ', ' 1 ', ' 3 ', ' 12'],
+        ["Messi has won a record number of Ballon d'Or awards - how many? ", ' 6 ', ' 4 ', ' 2 ', ' 7'], 
+	['How many minutes are usually played in football? ', ' 90 ', ' 60 ', ' 45 ', ' 120'],
+        ['Lionel Messi holds the record for most goals in a calendar year but how many did he score?', ' 91 ', ' 81 ', ' 101 ', ' 87'], 
+	['Which nation won the 1986 World Cup? ', ' Argentina ', ' Brazil ', ' West Germany ', ' Italy'],
+        ['Which team is known as the greatest rivalry of Barcelona? ', ' Real madrid ', ' PSG ', ' Liverpool ', ' Juventus'], 
+	['What year was Messi born? ', ' 1987 ', ' 1988 ', ' 1991 ', ' 1981'],
+        ['What is the highest number of goals that FC Barcelona has scored in a league season? ', ' 116 ', ' 111 ', ' 103 ', ' 111'], 
+	['Who has scored the most hat tricks in La Liga for Barcelona? ', ' Lionel Messi ', ' Iniesta ', ' Ronaldinho ', ' Suarez'],
+        ['How many Barcelona players have won the World Player of the Year award? ', ' 5 ', ' 2 ', ' 7 ', ' 4'], 
+	['Who was known as ‘Mad Dog’? ', ' Martin Allen ', ' Zlatan Ibrahimovic ', ' Suarez ', ' Pogba'],
+        ['What is Lionel Messi’s middle name? ', ' Andres ', ' Junior ', ' Cesar ', ' Rodriguez'], 
+	['Which country did the great footballer Diego Maradona represents? ', ' Argentina  ', ' Italy ', ' Colombia ', ' Brazil'])
+
+
+
+
+
+
+
+
+Architecture = (['Binary coded decimal (BCD) numbers express each digit is a ', ' Nibble ', ' Byte ', ' Bit All of these'],
+        ['ASCII code is an ', ' Alpha numeric code ', ' Cyclic code ', ' Numeric code ', ' Alphabet code'], 
+	['The decimal equivalent of binary number 0.0111 is ', ' 0.4375 ', ' 4.375 ', ' 0.5375 ', ' -0.4375'],
+        ['The two’s complement in binary system is useful for expressing ', ' Negative numbers ', ' None of these ', ' Both positive and negative numbers ', ' Positive numbers'],
+        ['The right most bit is the ____ and has the smallest positional weight. ', ' LSB', ' PSB ', ' MSB ', ' NSB'], 
+	['The speedup of a processor is estimated using which of the following parameters: ', ' Execution time in one and N processors', ' Cycles per instruction in one and N processors', ' None of the above', ' Throughput'],
+        ['The general structure of the VON NEUMANN machine consists of ', " ' Main memory', ' arithmetic and logic unit', ' control unit' ", " 'Input / Output ' ", " ' Cores', ' ALU', ' CPU', ' devices ' ", " ' Pipeline', ' main memory', ' motherboard' "],
+        ['Which type of topology is best suited for large businesses which must carefully control and coordinate the operation of distributed branch outlets? ', ' Hierarchical ', ' Star ', ' Ring ', ' Local area'],
+        ['Which of the following transmission directions listed is not a legitimate channel? ', ' Double Duplex ', ' Simplex ', ' Half Duplex ', ' Full Duplex'],
+        ['What kind of transmission medium is most appropriate to carry data in a computer network that is exposed to electrical interferences? ', ' Optical fiber ', ' Unshielded twisted pair ', ' Coaxial cable ', ' Microwave'],
+        ['The maximum length (in bytes) of an IPv4 datagram is? ', ' 65535 ', ' 512 ', ' 1024 ', ' 32'],
+        ['The IP network 192.168.50.0 is to be divided into 10 equal sized subnets. Which of the following subnet masks can be used for the above requirement? ', ' 255.255.255.0 ', ' 255.255.255 ', ' 255.255.0.0 ', ' 255.0.0.0'],
+        ['The length of an IPv6 address is? ', ' 128 bits ', ' 256 bits ', ' 32 bits ', ' 64 bits'], 
+	['Which of the following address belongs class A? ', ' 121.12.12.248 ', ' 129.12.12.248 ', ' 130.12.12.248 ', ' 128.12.12.248'], 
+	['Which of the following IP addresses can be used as a loop-back addresses? ', ' 127.0.0.1 ', ' 255.255.255.255 ', ' 0.255.255.255 ', ' 0.0.0.0'], 
+	['What IP address class allocates 8 bits for the host identification part? ', ' Class C ', ' Class D ', ' Class A ', ' Class B'], 
+	['How many versions available of IP? ', ' 4 version ', ' 2 version ', ' 1 version ', ' 6 version'], 
+	['TCP/IP model does not have ______ layer but OSI model have this layer. ', ' Session layer ', ' Transport layer ', ' Application layer ', ' Network layer'], 
+	['Transmission control protocol ___________ ', ' All of the mentioned ', ' Is a connection-oriented protocol ', ' Uses a three way handshake to establish a connection ', ' Receives data from application as a single stream'],
+        ['Which of the following are transport layer protocols used in networking? ', ' TCP and UDP ', ' UDP and HTTP ', ' TCP and FTP ', ' HTTP and FTP'])
+
+
+
+
+
+Programming = (['Is Python case sensitive when dealing with identifiers? ', ' Yes ', ' No ', ' Machine dependent ', ' None of the mentioned'],
+        ['What is the maximum possible length of an identifier? ', ' none of the mentioned ', ' 63 characters ', ' 79 characters ', ' 31 characters '],
+        ['Which of the following is an invalid variable? ', ' 1st_string ', ' my_string_1 ', ' foo ', ' _'],
+        ['Why are local variable names beginning with an underscore discouraged? ', ' They are used to indicate a private variables of a class ', ' They confuse the interpreter ', ' They are used to indicate global variables ', ' They slow down execution'],
+        ['Which of the following is invalid? ', ' None of the mentioned ', ' __a = 1 ', ' __str__ = 1 ', ' _a = 1'],
+        ['Which of the following is not a keyword? ', ' eval ', ' assert ', ' nonlocal ', ' pass'],
+        ['All keywords in Python are in _________ ', ' None of the mentioned ', ' UPPER CASE ', ' Capitalized ', ' Lower case '],
+        ['Which of the following is true for variable names in Python? ', ' Unlimited length ', ' All private members must have leading and trailing underscores ', ' Underscore and ampersand are the only two special characters allowed ', ' None of the mentioned'],
+        ['Which of the following is an invalid statement? ', ' a b c = 1000 2000 3000 ', ' abc = 1000, 2000 ', ' a, b, c = 1000, 2000, 3000 ', ' a_b_c = 1000, 2000, 3000'], 
+	['Which of the following cannot be a variable? ', ' in ', ' __init__ ', ' it ', ' on'], 
+	['What is the output of print 0.1 + 0.2 == 0.3? ', ' False ', ' True ', ' Machine dependent ', ' Error'],
+        ['Which of the following is not a complex number? ', ' k = 2 + 3l ', ' k = complex(2,  3) ', ' k = 2 + 3j ', ' k = 2 + 3J'], 
+	['What is the type of inf? ', ' Float ', ' Integer ', ' Boolean ', ' Complex'], ['What does ~4 evaluate to? ', ' -5 ', ' -4 ', ' -3 ', ' +3'], 
+	['What does ~~~~~~5 evaluate to? ', ' +5 ', ' -11 ', ' +11 ', ' -5'], 
+	['Which of the following is incorrect? ', ' x = 03964 ', ' x = 0x4f5 ', ' x = 19023 ', ' x = 0b101'], 
+	['What is the result of cmp( 3, 1)? ', ' 1 ', ' 0 ', ' True ', ' False'], 
+	['What is the result of round(0.5) – round(-0.5)? ', ' 2.0 ', ' 1.0 ', ' 0.0 ', ' None of the mentioned'], 
+	['Which of these about a set is not true? ', ' Immutable data type ', ' Allows duplicate values ', ' Data type with unordered values ', ' Mutable data type'],
+        ['Which of the following statements is used to create an empty set? ', ' set() ', ' { } ', ' [ ] ', ' ( )'])
+
+
+GK = (['Which of the following countries are associated most closely with Lassi? ', ' India and Pakistan  ', ' Sweden and Denmark ', ' Belgium and France  ', ' USA and Canada'],
+     ['What is a mistake? ', ' You  ', ' The world ', ' The prince ', ' The god'],
+     ['With which of the following leaders would you associate the Mongol Empire? ', ' Genghis Khan  ', ' Saladin ', ' Attila the Hun ', ' Alexander the Great'],
+     ['Against which country did Britain fight the 19th century Opium Wars? ', ' China  ', ' Germany ', ' Russia ', ' France'],
+     ['What was the codename for Nazi Germanys invasion of the Soviet Union in 1941? ', ' Barbarossa  ', ' Charlemagne ', ' Napoleon ', ' Attila'],
+     ['Which country, also known as Land Of The Morning Calm, is known as Hanguk by its inhabitants? ', ' South Korea ', ' Haiti ', ' Vietnam ', ' Kenya'],
+     ['In which district is Fungfung waterfall? ', ' Nuwakot ', ' Chitwan ', ' Khotang ', ' Lamjung'],
+     ['How many Heritages of Nepal is listed in the World Heritage Site? ', ' 10 ', ' 2 ', ' 9 ', ' 7'],
+     ['How much percentage of Nepal’s total land is cultivated for Farming? ', ' 17.97%  ', ' 19.23% ', ' 1% ', ' 45% '],
+     ['How many business ways have been opened by Nepal and India? ', ' 27 ', ' 21 ', ' 54 ', ' 3'],
+     ['How many years did the Gopal dynasty rule in Nepal? ', ' 521 ', ' 435 ', ' 69 ', ' 511'],
+     ['Who is the first martyr of Nepal? ', ' Lakhan Thapa  ', ' Shukraraj Shastri ', ' Dashrath Chand ', ' Gangalal Shrestha'],
+     ['How many states are there in Nepal at present? ', ' 7 ', ' 4 ', ' 6 ', ' 9'],
+     ['Which is the largest province of Nepal in terms of population? ', ' Province 3 ', ' Province 5 ', ' Province 1 ', ' Province 4'],
+     ['In which province is Kathmandu in? ', ' Province 3 ', ' Province 5 ', ' Province 8 ', ' Province 6'],
+     ['Which is the tallest mountain in the world? ', ' Mt. Everest ', ' Mt. Lhotse ', ' K2 ', ' Mt. Makalu'],
+     ['Which is the world’s smallest country? ', ' Vatican City  ', ' Monaco ', ' Nauru ', ' Tuvalu'],
+     ['Which planet is closest to Planet Earth? ', ' Venus ', ' Earth  ', ' Mars ', ' Mercury'],
+     ['On which day of the year is the Sun closest to the Earth? ', ' January 4th  ', ' December 19 ', ' August 8 ', ' November 2'],
+     ['Which country produces maximum aluminium in the world? ', ' China ', ' USA ', ' Chile ', ' Nauru'])
+
+
